@@ -1,0 +1,22 @@
+machine:
+  ruby:
+    version: ruby-2.4.1
+
+dependencies:
+  pre:
+    - gem install bundler
+
+test:
+  override:
+    - bundle exec rake spec:models
+
+deployment:
+  staging:
+    branch: master
+    commands:
+      - heroku maintenance:on --app staging-voipx
+      - heroku scale worker=0 --app staging-voipx
+      - git push git@heroku.com:staging-voipx.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app staging-voipx
+      - heroku scale worker=x --app staging-voipx
+      - heroku maintenance:off --app staging-voipx
