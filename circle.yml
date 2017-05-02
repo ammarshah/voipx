@@ -16,6 +16,7 @@ deployment:
     commands:
       - heroku maintenance:on --app staging-voipx
       - heroku scale worker=0 --app staging-voipx
+      - figaro heroku:set -e staging --app staging-voipx
       - git push git@heroku.com:staging-voipx.git $CIRCLE_SHA1:master
       - heroku run rake db:migrate --app staging-voipx
       - heroku scale worker=x --app staging-voipx
