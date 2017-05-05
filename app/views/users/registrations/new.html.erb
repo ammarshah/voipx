@@ -3,8 +3,24 @@
     <h3>Sign up</h3>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, :autofocus => true, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :country %>
+      <%= f.text_field :country, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :telephone_no %>
+      <%= f.text_field :telephone_no, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :mobile_no %>
+      <%= f.text_field :mobile_no, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :email %>
