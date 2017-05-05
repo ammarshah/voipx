@@ -1,1 +1,4 @@
+<% if user_signed_in? %>
+  <p class="float-right">Signed in as: <%= current_user.email %></p>
+<% end %>
 <h3>Voipx Homepage</h3>
