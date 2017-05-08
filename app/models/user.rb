@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   # Validations
-  validates_presence_of :first_name, :last_name, :telephone_no, :mobile_no, :country
+  validates_presence_of :first_name, :last_name, :telephone_no, :mobile_no
 end
