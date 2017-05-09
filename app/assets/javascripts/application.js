@@ -15,3 +15,5 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require_tree .
+
+//= require rails_script
