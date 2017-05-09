@@ -12,15 +12,17 @@
     </div>
     <div class="form-group">
       <%= f.label :country_code %>
-      <%= f.country_select :country_code, { include_blank: 'Select a country' }, { class: 'form-control' } %>
-    </div>
-    <div class="form-group">
-      <%= f.label :telephone_no %>
-      <%= f.text_field :telephone_no, class: 'form-control' %>
+      <%= f.select :country_code, [], {}, { class: 'form-control' } %>
     </div>
     <div class="form-group">
       <%= f.label :mobile_no %>
       <%= f.text_field :mobile_no, class: 'form-control' %>
+      <span id="valid-msg" class="hide">✓ Valid</span>
+      <span id="error-msg" class="hide">Invalid number</span>
+    </div>
+    <div class="form-group">
+      <%= f.label :telephone_no %>
+      <%= f.text_field :telephone_no, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :email %>

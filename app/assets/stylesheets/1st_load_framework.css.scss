@@ -1,6 +1,7 @@
 // import the CSS framework
 // Do not use *= require in Sass or your other stylesheets will not be able to access the Bootstrap mixins and variables.
 @import "bootstrap";
+@import "intlTelInput";
 
 // make all images responsive by default
 img {
@@ -81,3 +82,7 @@ section {
   @extend .btn-primary;
   @extend .btn-sm;
 }
+.hide { display: none; }
+#valid-msg { color: #00C900; }
+#error-msg { color: red; }
+input.error { border: 1px solid #FF7C7C; }
