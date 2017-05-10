@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require intlTelInput
 //= require libphonenumber/utils
+//= require rails_script
 //= require_tree .
