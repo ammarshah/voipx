@@ -1,0 +1,12 @@
+.authform
+  h3 Sign up
+  .form-group
+    = radio_button_tag(:account_type, "individual", :checked => true)
+    label for="account_type_individual" Individual
+    |   
+    = radio_button_tag(:account_type, "company")
+    label for="account_type_company" Company
+
+  = render partial: "individual_account_form_fields"
+
+  = render partial: "company_account_form_fields"

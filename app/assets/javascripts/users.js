@@ -66,4 +66,13 @@ $(document).ready(function () { // document ready
     telInput.val(telInput.intlTelInput("getNumber"));
   });
 
+  
+  $('input[name=account_type]').click(function(){
+    type = $('input[name=account_type]:checked').val();    
+    $(".signup_form").hide();
+    $("." + type + "_account_form").show();
+  });
+
+  
+
 }); // document ready END
