@@ -3,9 +3,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    build_resource({})
+    resource.build_company
+    yield resource if block_given?
+    respond_with resource
+  end
 
   # POST /resource
   # def create
@@ -40,12 +43,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
+    # devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
+    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
+      user_params.permit(:email, :password, :password_confirmation, :first_name, :last_name, company_attributes: [:id, :name, :location, :website, :phone_no, :_destroy])
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :telephone_no, :mobile_no, :country_code])
+    # devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :telephone_no, :mobile_no, :country_code])
+    devise_parameter_sanitizer.permit(:account_update) do |user_params|
+      user_params.permit(:email, :password, :password_confirmation, :current_password, :first_name, :last_name, :telephone_no, :mobile_no, :country_code, company_attributes: [:id, :name, :location, :website, :phone_no, :_destroy])
+    end
   end
 
   # The path used after sign up.
