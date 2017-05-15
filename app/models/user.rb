@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   rolify
+
+  attr_accessor :account_type
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
@@ -13,7 +16,9 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :company, reject_if: :all_blank
 
+  after_initialize :set_default_account_type
   after_create :assign_role
+
 
   private
   def is_a_company_admin?
@@ -27,5 +32,9 @@ class User < ApplicationRecord
     else
       add_role(:user)
     end
+  end
+
+  def set_default_account_type
+    self.account_type ||= "individual"
   end
 end
