@@ -1,4 +1,4 @@
-<div class="authform">
+<div class="authform col-sm-6">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
     <h3>Sign up</h3>
     <%= devise_error_messages! %>
@@ -10,6 +10,40 @@
       <%= f.label :last_name %>
       <%= f.text_field :last_name, class: 'form-control' %>
     </div>
+    <div class="form-group">
+      <div class="btn-group signup" data-toggle="buttons">
+        <%= f.label :account_type, class: "btn btn-primary #{ 'active' if resource.account_type == 'individual' }" do %>
+          I am an Individual
+          <%= f.radio_button :account_type, "individual", class: 'form-control' %>
+        <% end %>
+        <%= f.label :account_type, class: "btn btn-primary #{ 'active' if resource.account_type == 'company' }" do %>
+          I am a Company
+          <%= f.radio_button :account_type, "company", class: 'form-control' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div id="company_fields" class="<%= 'hide' if resource.account_type == 'individual' %>">
+      <%= f.fields_for :company do |c| %>
+        <div class="form-group">
+          <%= c.label :name, "Company name" %>
+          <%= c.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= c.label :location, "Company location" %>
+          <%= c.text_field :location, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= c.label :website, "Company website" %>
+          <%= c.text_field :website, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= c.label :phone_no, "Company phone no" %>
+          <%= c.text_field :phone_no, class: 'form-control' %>
+        </div>
+      <% end %>      
+    </div>
+
     <div class="form-group">
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>

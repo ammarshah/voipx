@@ -66,4 +66,19 @@ $(document).ready(function () { // document ready
     telInput.val(telInput.intlTelInput("getNumber"));
   });
 
+  var reset_company_fields = function() {
+    $("#company_fields div.form-group input[type=text]").each(function() {
+      this.value = "";
+    });
+  };
+
+  $('.signup input[type=radio]').on('change', function() {
+    reset_company_fields();
+    if (this.value === 'individual') {
+      $('#company_fields').addClass('hide');
+    } else {
+      $('#company_fields').removeClass('hide');
+    }
+  });
+
 }); // document ready END
