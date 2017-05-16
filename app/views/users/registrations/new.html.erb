@@ -23,22 +23,22 @@
       </div>
     </div>
 
-    <div id="company_fields" class="hide">
+    <div id="company_fields" class="<%= 'hide' if resource.account_type == 'individual' %>">
       <%= f.fields_for :company do |c| %>
         <div class="form-group">
-          <%= c.label :name %>
+          <%= c.label :name, "Company name" %>
           <%= c.text_field :name, class: 'form-control' %>
         </div>
         <div class="form-group">
-          <%= c.label :location %>
+          <%= c.label :location, "Company location" %>
           <%= c.text_field :location, class: 'form-control' %>
         </div>
         <div class="form-group">
-          <%= c.label :website %>
+          <%= c.label :website, "Company website" %>
           <%= c.text_field :website, class: 'form-control' %>
         </div>
         <div class="form-group">
-          <%= c.label :phone_no %>
+          <%= c.label :phone_no, "Company phone no" %>
           <%= c.text_field :phone_no, class: 'form-control' %>
         </div>
       <% end %>      
