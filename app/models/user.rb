@@ -14,7 +14,7 @@ class User < ApplicationRecord
   # Associations
   belongs_to :company, optional: true
 
-  accepts_nested_attributes_for :company, reject_if: :is_an_individual?
+  accepts_nested_attributes_for :company, reject_if: :is_an_individual?, allow_destroy: true
 
   # Callbacks
   after_initialize :set_default_account_type
