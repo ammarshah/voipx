@@ -72,6 +72,7 @@ $(document).ready(function () { // document ready
     });
   };
 
+  // toggle company fields on signup form
   $('.signup input[type=radio]').on('change', function() {
     reset_company_fields();
     if (this.value === 'individual') {
@@ -80,5 +81,38 @@ $(document).ready(function () { // document ready
       $('#company_fields').removeClass('hide');
     }
   });
+
+  // options for easyAutocomplete initialization
+  var options = {
+    url: "/companies.json",
+
+    getValue: "name",
+
+    template: {
+      type: "description",
+      fields: {
+        description: "website"
+      }
+    },
+
+    list: {
+      match: {
+        enabled: true
+      },
+      sort: {
+        enabled: true
+      },
+      onSelectItemEvent: function() {
+        var value = $("#user_company_attributes_name").getSelectedItemData().id;
+
+        $("#user_company_id").val(value).trigger("change");
+      }
+    },
+
+    theme: "plate-dark"
+  };
+
+  // init easyAutocomplete
+  $("#user_company_attributes_name").easyAutocomplete(options);
 
 }); // document ready END
