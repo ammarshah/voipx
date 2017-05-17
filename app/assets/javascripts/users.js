@@ -81,4 +81,27 @@ $(document).ready(function () { // document ready
     }
   });
 
+  var options = {
+    url: "/companies.json",
+
+    getValue: "name",
+
+    template: {
+      type: "description",
+      fields: {
+        description: "website"
+      }
+    },
+
+    list: {
+      match: {
+        enabled: true
+      }
+    },
+
+    theme: "plate-dark"
+  };
+
+  $("#user_company_attributes_name").easyAutocomplete(options);
+
 }); // document ready END

@@ -7,4 +7,6 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
 
+  resources :companies, only: [:index]
+
 end
