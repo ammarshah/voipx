@@ -98,6 +98,14 @@ $(document).ready(function () { // document ready
     list: {
       match: {
         enabled: true
+      },
+      sort: {
+        enabled: true
+      },
+      onSelectItemEvent: function() {
+        var value = $("#user_company_attributes_name").getSelectedItemData().id;
+
+        $("#user_company_id").val(value).trigger("change");
       }
     },
 
