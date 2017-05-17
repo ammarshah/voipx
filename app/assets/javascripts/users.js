@@ -72,6 +72,7 @@ $(document).ready(function () { // document ready
     });
   };
 
+  // toggle company fields on signup form
   $('.signup input[type=radio]').on('change', function() {
     reset_company_fields();
     if (this.value === 'individual') {
@@ -81,6 +82,7 @@ $(document).ready(function () { // document ready
     }
   });
 
+  // options for easyAutocomplete initialization
   var options = {
     url: "/companies.json",
 
@@ -102,6 +104,7 @@ $(document).ready(function () { // document ready
     theme: "plate-dark"
   };
 
+  // init easyAutocomplete
   $("#user_company_attributes_name").easyAutocomplete(options);
 
 }); // document ready END
