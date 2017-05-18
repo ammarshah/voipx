@@ -33,7 +33,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       else
         resource.company || resource.build_company
       end
-      # resource.company || resource.build_company # retain company fields values on validation fail
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource
