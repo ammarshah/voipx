@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   # Validations
   validates_presence_of :first_name, :last_name
+  validate              :email_with_company_website, unless: :is_an_individual?
 
   # Associations
   belongs_to :company, optional: true
@@ -58,5 +59,36 @@ class User < ApplicationRecord
 
   def set_default_account_type
     self.account_type ||= "individual"
+  end
+
+  def company_website_domain(company)
+    website = company.website
+    uri = Addressable::URI.parse(website)
+    host = uri.host.downcase
+    host = host.start_with?('www.') ? host[4..-1] : host
+    host.split('.').first
+  end
+
+  def email_domain
+    self.email.gsub(/.+@([^.]+).+/, '\1')
+  end
+
+  def email_with_company_website
+    if self.email.present?
+      if self.company.present?
+        return if !self.company.valid? && self.company.errors.include?(:website)
+        company = self.company
+      else
+        return if !self.selected_company_id.present?
+        company = Company.find_by_id(self.selected_company_id)
+      end
+
+      if company_website_domain(company) == email_domain
+        return true
+      else
+        errors.add(:base, "Use your official email address. e.g : someone@" + company_website_domain(company) + ".com")
+        return false
+      end
+    end
   end
 end
