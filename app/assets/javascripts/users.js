@@ -103,8 +103,22 @@ $(document).ready(function () { // document ready
         enabled: true
       },
       onChooseEvent: function() {
-        var value = $("#user_company_attributes_name").getSelectedItemData().id;
-        $("#user_selected_company_id").val(value);
+        // get company data
+        var company_id = $("#user_company_attributes_name").getSelectedItemData().id;
+        var company_website = $("#user_company_attributes_name").getSelectedItemData().website;
+        var company_location = $("#user_company_attributes_name").getSelectedItemData().location;
+        var company_phone_no = $("#user_company_attributes_name").getSelectedItemData().phone_no;
+        
+        // insert company data in appropriate fields
+        $("#user_selected_company_id").val(company_id);
+        $("#user_company_attributes_website").val(company_website);
+        $("#user_company_attributes_location").val(company_location);
+        $("#user_company_attributes_phone_no").val(company_phone_no);
+
+        // disable fields
+        $("#user_company_attributes_website").prop('readonly', true);
+        $("#user_company_attributes_location").prop('readonly', true);
+        $("#user_company_attributes_phone_no").prop('readonly', true);
       }
     },
 
@@ -115,8 +129,25 @@ $(document).ready(function () { // document ready
   $("#user_company_attributes_name").easyAutocomplete(options);
 
   // invokes function when company name input field changes
-  $('#user_company_attributes_name').bind('input', function() { 
-    $("#user_selected_company_id").val(''); // clear selected_company_id value each time text changes, so that we'd know if it's a new company or an existing one
+  $('#user_company_attributes_name').bind('input', function() {
+    // clear company fields value each time text changes
+    $("#user_selected_company_id").val(''); // so that we'd know if it's a new company or an existing one
+    $("#user_company_attributes_website").val('');
+    $("#user_company_attributes_location").val('');
+    $("#user_company_attributes_phone_no").val('');
+
+    // if value is empty
+    if (this.value === "") {
+      // disable fields
+      $("#user_company_attributes_website").prop('readonly', true);
+      $("#user_company_attributes_location").prop('readonly', true);
+      $("#user_company_attributes_phone_no").prop('readonly', true);
+    } else {
+      // enable fields
+      $("#user_company_attributes_website").prop('readonly', false);
+      $("#user_company_attributes_location").prop('readonly', false);
+      $("#user_company_attributes_phone_no").prop('readonly', false);
+    }
   });
 
 }); // document ready END

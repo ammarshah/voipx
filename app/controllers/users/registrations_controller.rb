@@ -27,7 +27,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
-      resource.company || resource.build_company # retain company fields values on validation fail
+      # retain company fields values on validation fail
+      if resource.selected_company_id.present? && resource.company.nil?
+        resource.company = Company.find_by_id(resource.selected_company_id)
+      else
+        resource.company || resource.build_company
+      end
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource

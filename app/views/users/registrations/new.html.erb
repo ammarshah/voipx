@@ -31,16 +31,16 @@
           <%= f.hidden_field :selected_company_id, class: 'form-control' %>
         </div>
         <div class="form-group">
-          <%= c.label :location, "Company location" %>
-          <%= c.text_field :location, class: 'form-control' %>
+          <%= c.label :website, "Company website" %>
+          <%= c.text_field :website, readonly: true, class: 'form-control' %>
         </div>
         <div class="form-group">
-          <%= c.label :website, "Company website" %>
-          <%= c.text_field :website, class: 'form-control' %>
+          <%= c.label :location, "Company location" %>
+          <%= c.text_field :location, readonly: true, class: 'form-control' %>
         </div>
         <div class="form-group">
           <%= c.label :phone_no, "Company phone no" %>
-          <%= c.text_field :phone_no, class: 'form-control' %>
+          <%= c.text_field :phone_no, readonly: true, class: 'form-control' %>
         </div>
       <% end %>      
     </div>
