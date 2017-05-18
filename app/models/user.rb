@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   rolify
 
-  attr_accessor :account_type # Just a virtual attribute to check if it's a company signup or an individual
+  attr_accessor :account_type         # Just a virtual attribute to check if it's a company signup or an individual
+  attr_accessor :selected_company_id  # Just a virtual attribute to temporary store/retrieve company id and then assign it to actual company_id column in before_create callback
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -21,6 +22,7 @@ class User < ApplicationRecord
 
   # Callbacks
   after_initialize :set_default_account_type
+  before_create :assign_company, if: :company_already_exists?
   after_create :assign_role
 
 
@@ -35,11 +37,15 @@ class User < ApplicationRecord
   end
 
   def company_already_exists?
-    self.company_id.nil? ? false : true
+    self.selected_company_id.blank? ? false : true
   end
 
   def this_the_case
     is_an_individual? || company_already_exists?
+  end
+
+  def assign_company
+    self.company_id = self.selected_company_id    
   end
 
   def assign_role

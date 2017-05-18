@@ -4,7 +4,7 @@ class Company < ApplicationRecord
 
   # Validations
   validates_presence_of :name, :location, :website, :phone_no
-  validate :name_uniqueness_with_slug
+  validate              :uniqueness_of_name_with_slug
 
   # Callbacks
   before_create :generate_slug
@@ -18,7 +18,7 @@ class Company < ApplicationRecord
     self.slug = strip_name_like_a_boss
   end
 
-  def name_uniqueness_with_slug
+  def uniqueness_of_name_with_slug
     stripped_name = strip_name_like_a_boss
     if self.class.exists?(slug: stripped_name)
       errors.add(:name, "already exists.")
