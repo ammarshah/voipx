@@ -5,6 +5,7 @@ class Company < ApplicationRecord
   # Validations
   validates_presence_of :name, :location, :website, :phone_no
   validate              :uniqueness_of_name_with_slug
+  validates             :website, url: true
 
   # Callbacks
   before_create :generate_slug
