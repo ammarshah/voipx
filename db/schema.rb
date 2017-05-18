@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515105158) do
+ActiveRecord::Schema.define(version: 20170517171820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20170515105158) do
     t.string   "phone_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "slug"
+    t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
   end
 
   create_table "roles", force: :cascade do |t|

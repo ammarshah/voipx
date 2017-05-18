@@ -102,10 +102,9 @@ $(document).ready(function () { // document ready
       sort: {
         enabled: true
       },
-      onSelectItemEvent: function() {
+      onChooseEvent: function() {
         var value = $("#user_company_attributes_name").getSelectedItemData().id;
-
-        $("#user_company_id").val(value).trigger("change");
+        $("#user_selected_company_id").val(value);
       }
     },
 
@@ -114,5 +113,10 @@ $(document).ready(function () { // document ready
 
   // init easyAutocomplete
   $("#user_company_attributes_name").easyAutocomplete(options);
+
+  // invokes function when company name input field changes
+  $('#user_company_attributes_name').bind('input', function() { 
+    $("#user_selected_company_id").val(''); // clear selected_company_id value each time text changes, so that we'd know if it's a new company or an existing one
+  });
 
 }); // document ready END
