@@ -12,11 +12,11 @@
     </div>
     <div class="form-group">
       <%= f.label :country_code %>
-      <%= f.select :country_code, [], {}, { class: 'form-control' } %>
+      <%= f.select :country_code, [], {}, { class: 'form-control country_code_easyautocomplete' } %>
     </div>
     <div class="form-group">
       <%= f.label :mobile_no %>
-      <%= f.text_field :mobile_no, class: 'form-control' %>
+      <%= f.text_field :mobile_no, class: 'form-control mobile_no_easyautocomplete' %>
       <span id="valid-msg" class="hide">✓ Valid</span>
       <span id="error-msg" class="hide">Invalid number</span>
     </div>
