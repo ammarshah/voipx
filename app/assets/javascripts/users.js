@@ -47,12 +47,12 @@ $(document).ready(function () { // document ready
         $("#user_selected_company_id").val(company_id);
         $("#user_company_attributes_website").val(company_website);
         $("#user_company_attributes_location").val(company_location);
-        $("#user_company_attributes_phone_no").val(company_phone_no);
+        $("#user_company_attributes_phone_no").intlTelInput("setNumber", company_phone_no); // used intlTelInput to format number
 
         // disable fields
-        $("#user_company_attributes_website").prop('readonly', true);
-        $("#user_company_attributes_location").prop('readonly', true);
-        $("#user_company_attributes_phone_no").prop('readonly', true);
+        $("#user_company_attributes_website").prop('disabled', true);
+        $("#user_company_attributes_location").prop('disabled', true);
+        $("#user_company_attributes_phone_no").prop('disabled', true);
       }
     },
 
@@ -73,14 +73,14 @@ $(document).ready(function () { // document ready
     // if value is empty
     if (this.value === "") {
       // disable fields
-      $("#user_company_attributes_website").prop('readonly', true);
-      $("#user_company_attributes_location").prop('readonly', true);
-      $("#user_company_attributes_phone_no").prop('readonly', true);
+      $("#user_company_attributes_website").prop('disabled', true);
+      $("#user_company_attributes_location").prop('disabled', true);
+      $("#user_company_attributes_phone_no").prop('disabled', true);
     } else {
       // enable fields
-      $("#user_company_attributes_website").prop('readonly', false);
-      $("#user_company_attributes_location").prop('readonly', false);
-      $("#user_company_attributes_phone_no").prop('readonly', false);
+      $("#user_company_attributes_website").prop('disabled', false);
+      $("#user_company_attributes_location").prop('disabled', false);
+      $("#user_company_attributes_phone_no").prop('disabled', false);
     }
   });
 
