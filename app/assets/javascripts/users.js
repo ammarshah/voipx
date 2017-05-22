@@ -1,71 +1,5 @@
 $(document).ready(function () { // document ready
-
-  // get the country data from the plugin
-  var countryData = $.fn.intlTelInput.getCountryData(),
-    telInput = $("#user_mobile_no"),
-    addressDropdown = $("#user_country_code"),
-    errorMsg = $("#error-msg"),
-    validMsg = $("#valid-msg");
-
-  // init plugin
-  telInput.intlTelInput({
-    formatOnInit: true,
-    separateDialCode: true,
-    initialCountry: "auto",
-    geoIpLookup: function(callback) {
-      $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
-        var countryCode = (resp && resp.country) ? resp.country : "";
-        callback(countryCode);
-      });
-    }
-  });
-
-  // populate the country dropdown
-  $.each(countryData, function(i, country) {
-    addressDropdown.append($("<option></option>").attr("value", country.iso2).text(country.name));
-  });
-
-  // set it's initial value
-  var initialCountry = telInput.intlTelInput("getSelectedCountryData").iso2;
-  addressDropdown.val(initialCountry);
-
-  // listen to the telephone input for changes
-  telInput.on("countrychange", function(e, countryData) {
-    addressDropdown.val(countryData.iso2);
-  });
-
-  // listen to the address dropdown for changes
-  addressDropdown.change(function() {
-    telInput.intlTelInput("setCountry", $(this).val());
-  });
-
-  var reset = function() {
-    telInput.removeClass("error");
-    errorMsg.addClass("hide");
-    validMsg.addClass("hide");
-  };
-
-  // on blur: validate
-  telInput.blur(function() {
-    reset();
-    if ($.trim(telInput.val())) {
-      if (telInput.intlTelInput("isValidNumber")) {
-        validMsg.removeClass("hide");
-      } else {
-        telInput.addClass("error");
-        errorMsg.removeClass("hide");
-      }
-    }
-  });
-
-  // on keyup / change flag: reset
-  telInput.on("keyup change", reset);
-
-  // submitting the full international number when in nationalMode or separateDialCode set to true
-  $("form").submit(function() {
-    telInput.val(telInput.intlTelInput("getNumber"));
-  });
-
+  
   var reset_company_fields = function() {
     $("#company_fields div.form-group input[type=text]").each(function() {
       this.value = "";
@@ -113,12 +47,12 @@ $(document).ready(function () { // document ready
         $("#user_selected_company_id").val(company_id);
         $("#user_company_attributes_website").val(company_website);
         $("#user_company_attributes_location").val(company_location);
-        $("#user_company_attributes_phone_no").val(company_phone_no);
+        $("#user_company_attributes_phone_no").intlTelInput("setNumber", company_phone_no); // used intlTelInput to format number
 
         // disable fields
-        $("#user_company_attributes_website").prop('readonly', true);
-        $("#user_company_attributes_location").prop('readonly', true);
-        $("#user_company_attributes_phone_no").prop('readonly', true);
+        $("#user_company_attributes_website").prop('disabled', true);
+        $("#user_company_attributes_location").prop('disabled', true);
+        $("#user_company_attributes_phone_no").prop('disabled', true);
       }
     },
 
@@ -139,14 +73,14 @@ $(document).ready(function () { // document ready
     // if value is empty
     if (this.value === "") {
       // disable fields
-      $("#user_company_attributes_website").prop('readonly', true);
-      $("#user_company_attributes_location").prop('readonly', true);
-      $("#user_company_attributes_phone_no").prop('readonly', true);
+      $("#user_company_attributes_website").prop('disabled', true);
+      $("#user_company_attributes_location").prop('disabled', true);
+      $("#user_company_attributes_phone_no").prop('disabled', true);
     } else {
       // enable fields
-      $("#user_company_attributes_website").prop('readonly', false);
-      $("#user_company_attributes_location").prop('readonly', false);
-      $("#user_company_attributes_phone_no").prop('readonly', false);
+      $("#user_company_attributes_website").prop('disabled', false);
+      $("#user_company_attributes_location").prop('disabled', false);
+      $("#user_company_attributes_phone_no").prop('disabled', false);
     }
   });
 

@@ -32,15 +32,17 @@
         </div>
         <div class="form-group">
           <%= c.label :website, "Company website" %>
-          <%= c.text_field :website, readonly: true, placeholder: "http://www.example.com", class: 'form-control' %>
+          <%= c.text_field :website, placeholder: "http://www.example.com", readonly: true, class: 'form-control' %>
         </div>
         <div class="form-group">
           <%= c.label :location, "Company location" %>
-          <%= c.text_field :location, readonly: true, class: 'form-control' %>
+          <%= c.select :location, [], {}, { class: 'form-control country_code_easyautocomplete' } %>
         </div>
         <div class="form-group">
           <%= c.label :phone_no, "Company phone no" %>
-          <%= c.text_field :phone_no, readonly: true, class: 'form-control' %>
+          <%= c.text_field :phone_no, readonly: true, class: 'form-control mobile_no_easyautocomplete' %>
+          <span id="valid-msg" class="hide">✓ Valid</span>
+          <span id="error-msg" class="hide">Invalid number</span>
         </div>
       <% end %>      
     </div>
