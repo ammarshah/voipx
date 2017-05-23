@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   }
 
   resources :companies, only: [:index]
+  resources :users,     only: [:show, :edit, :update]
 
 end

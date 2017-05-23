@@ -18,6 +18,7 @@ gem 'intl-tel-input-rails'
 gem 'rails_script', '~> 2.0'
 gem "rolify"
 gem "validate_url"
+gem 'simple_form'
 group :development, :test do
   gem 'byebug', platform: :mri
 end

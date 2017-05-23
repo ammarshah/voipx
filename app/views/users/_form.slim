@@ -1,0 +1,35 @@
+br
+br
+= simple_form_for(@user, html: { role: 'form' }) do |f|
+  = f.error_notification
+
+  h3 Personal Details:
+  .form-inputs
+    = f.input :name
+    = f.input :email, input_html: { disabled: true } 
+    = f.input :position
+    = f.input :about
+    = f.input :photo, as: :file
+    = f.input :cover, as: :file
+
+  h3 Contact Details:
+  .form-inputs
+    = f.input :skype
+    = f.input :phone
+    = f.input :country_code
+
+  h3 Social Media Profile Links:
+  .form-inputs
+    = f.input :facebook_url
+    = f.input :twitter_url
+    = f.input :linkedin_url  
+
+  .form-actions
+    = f.button :submit
+
+br
+br
+br
+br
+
+

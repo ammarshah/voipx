@@ -5,6 +5,9 @@ ul.navbar-nav.mr-auto
 ul.navbar-nav.pull-right
   - if user_signed_in?
     li.nav-item
+      = link_to 'Profile', user_path, class: 'nav-link'
+
+    li.nav-item
       = link_to 'Edit account', edit_user_registration_path, class: 'nav-link'
 
     li.nav-item
