@@ -9,9 +9,24 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Paperclip
+  has_attached_file :photo, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }, default_url: "/images/:style/missing-profile-photo.png"
+
+  has_attached_file :cover, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }, default_url: "/images/:style/missing-cover-photo.png"
+
   # Validations
   validates_presence_of :name
   validate              :email_with_company_website, unless: :is_an_individual?
+  validates_attachment  :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
+  validates_attachment  :cover, content_type: { content_type: /\Aimage\/.*\Z/ }
 
   # Associations
   belongs_to :company, optional: true

@@ -19,6 +19,8 @@ gem 'rails_script', '~> 2.0'
 gem "rolify"
 gem "validate_url"
 gem 'simple_form'
+gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk', '~> 2.3.0'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
