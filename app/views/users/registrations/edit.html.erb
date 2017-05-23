@@ -3,26 +3,8 @@
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :country_code %>
-      <%= f.select :country_code, [], {}, { class: 'form-control country_code_easyautocomplete' } %>
-    </div>
-    <div class="form-group">
-      <%= f.label :mobile_no %>
-      <%= f.text_field :mobile_no, class: 'form-control mobile_no_easyautocomplete' %>
-      <span id="valid-msg" class="hide">✓ Valid</span>
-      <span id="error-msg" class="hide">Invalid number</span>
-    </div>
-    <div class="form-group">
-      <%= f.label :telephone_no %>
-      <%= f.text_field :telephone_no, class: 'form-control' %>
-    </div>
-    <div class="form-group">
       <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
@@ -53,3 +35,6 @@
   <p>Unhappy? We'll be sad to see you go.</p>
   <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
 </div>
+
+<br>
+<br>
