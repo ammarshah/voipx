@@ -3,12 +3,8 @@
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, class: 'form-control' %>
+      <%= f.label :name %>
+      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :country_code %>
@@ -53,7 +49,7 @@
   <% end %>
 </div>
 <div class="authform">
-<h3>Cancel Account</h3>
-<p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+  <h3>Cancel Account</h3>
+  <p>Unhappy? We'll be sad to see you go.</p>
+  <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
 </div>

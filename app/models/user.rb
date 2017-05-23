@@ -10,7 +10,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   # Validations
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :name
   validate              :email_with_company_website, unless: :is_an_individual?
 
   # Associations
