@@ -9,7 +9,9 @@ br
     = f.input :email, input_html: { disabled: true } 
     = f.input :position
     = f.input :about, label: "About me"
+    = image_tag @user.photo.url(:thumb) if @user.photo.present?
     = f.input :photo, as: :file
+    = image_tag @user.cover.url(:thumb) if @user.cover.present?
     = f.input :cover, as: :file
 
   h3 Contact Details:

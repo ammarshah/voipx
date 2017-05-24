@@ -1,4 +1,83 @@
-= link_to "Edit Profile", edit_user_path, class: "btn btn-primary", style: "float: right"
+.col-lg-12
+  .cover-photo
+    img alt="Cover Photo" src="#{@user.cover.url}" 
+  .profile-photo
+    img.rounded-circle alt="Profile Photo" src="#{@user.photo.url(:square)}"
 
-h2 My Profile
+  br
+  = link_to "Edit Profile", edit_user_path, class: "btn btn-primary", style: "float: right" if current_user == @user
+  h2 #{ current_user == @user ? "My Profile" : "Profile" }
 
+br
+br
+
+.col-lg-12
+  .row
+    .col-lg-4
+      h4 Personal Details
+    .col-lg-8
+      p
+      | Name: 
+      b
+        = @user.try(:name)
+      
+      p
+      | Email: 
+      b
+        = @user.try(:email)
+      
+      p
+      | Position: 
+      b
+        = @user.try(:position)
+      
+      p
+      | About me: 
+      b
+        = @user.try(:about)
+br
+br
+
+  .row
+    .col-lg-4
+      h4 Contact Details
+    .col-lg-8
+      p
+      | Skype: 
+      b
+        = @user.try(:skype)
+
+      p
+      | Phone: 
+      b
+        = @user.try(:phone)
+
+      p
+      | Country: 
+      b
+        = @user.try(:country_name)
+
+br
+br
+  .row
+    .col-lg-4
+      h4 Social Media Profile Links
+    .col-lg-8
+      p
+      | Facebook: 
+      b
+        = @user.try(:facebook_url)
+      
+      p
+      | Twitter: 
+      b
+        = @user.try(:twitter_url)
+      
+      p
+      | LinkedIn: 
+      b
+        = @user.try(:linkedin_url)
+
+br
+br
+br

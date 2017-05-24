@@ -14,13 +14,13 @@ class User < ApplicationRecord
     thumb: '100x100>',
     square: '200x200#',
     medium: '300x300>'
-  }, default_url: "/images/:style/missing-profile-photo.png"
+  }, default_url: "/missing-images/:style/missing-profile.png"
 
   has_attached_file :cover, styles: {
     thumb: '100x100>',
     square: '200x200#',
     medium: '300x300>'
-  }, default_url: "/images/:style/missing-cover-photo.png"
+  }, default_url: "/missing-images/:style/missing-cover.jpg"
 
   # Validations
   validates_presence_of :name
@@ -41,6 +41,10 @@ class User < ApplicationRecord
   before_create :assign_company, if: :company_already_exists?
   after_create :assign_role
 
+  def country_name
+    country = ISO3166::Country[country_code]
+    country.translations[I18n.locale.to_s] || country.name
+  end
 
   private
   def is_an_individual?
