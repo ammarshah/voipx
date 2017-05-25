@@ -95,6 +95,7 @@ input.error {
   border: 1px solid #FF7C7C;
 }
 .cover-photo img {
+  object-fit: cover;
   width: 100%;
   height: 380px;
 }
