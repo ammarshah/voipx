@@ -24,6 +24,8 @@ class User < ApplicationRecord
 
   # Validations
   validates_presence_of :name
+  validates_presence_of :country_code, on: :update
+  validates             :facebook_url, :twitter_url, :linkedin_url, url: { allow_blank: true }
   validate              :email_with_company_website, unless: :is_an_individual?
   validates_attachment  :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
   validates_attachment  :cover, content_type: { content_type: /\Aimage\/.*\Z/ }

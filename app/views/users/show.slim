@@ -35,6 +35,10 @@ br
       | About me: 
       b
         = @user.try(:about)
+      p
+      | Company: 
+      b
+
   br
   br
 
@@ -66,17 +70,17 @@ br
       p
       | Facebook: 
       b
-        = @user.try(:facebook_url)
+        = link_to nil, @user.try(:facebook_url), target: '_blank' if @user.facebook_url
       
       p
       | Twitter: 
       b
-        = @user.try(:twitter_url)
+        = link_to nil, @user.try(:twitter_url), target: '_blank' if @user.twitter_url
       
       p
       | LinkedIn: 
       b
-        = @user.try(:linkedin_url)
+        = link_to nil, @user.try(:linkedin_url), target: '_blank' if @user.linkedin_url
 
 br
 br
