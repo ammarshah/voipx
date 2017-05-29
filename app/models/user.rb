@@ -41,22 +41,12 @@ class User < ApplicationRecord
   # Callbacks
   # after_initialize :set_default_account_type
   # before_create :assign_company, if: :company_already_exists?
-  after_create :assign_role
+  after_update :assign_company_admin_role, if: :company_id_changed?
 
   def country_name
     return if country_code.blank?
     country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
-  end
-
-  def adding_company?
-    return false if self.company.blank?
-
-    if self.company.new_record?
-      return true
-    else
-      return false
-    end
   end
 
   private
@@ -82,13 +72,23 @@ class User < ApplicationRecord
   #   self.company_id = self.selected_company_id    
   # end
 
-  def assign_role
+  def assign_company_admin_role
     if is_a_company_admin?
       add_role(:company_admin)
     else
-      add_role(:user)
+      return
     end
-  end 
+  end
+
+  def adding_company?
+    return false if self.company.blank?
+
+    if self.company.new_record?
+      return true
+    else
+      return false
+    end
+  end
 
   def company_website_domain(company)
     website = company.website
