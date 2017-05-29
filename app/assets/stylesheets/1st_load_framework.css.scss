@@ -105,3 +105,18 @@ input.error {
   top: 35%;
   left: 4%;
 }
+hr {
+  width: 100%;
+  color: black;
+  height: 1px;
+  background-color: black;
+}
+div.has-error input, div.has-error select {
+  border: 1px solid red;
+}
+div.has-error span.help-block {
+  color: red;
+}
+div p.help-block {
+  color: #31708f;
+}

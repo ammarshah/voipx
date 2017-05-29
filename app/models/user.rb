@@ -24,9 +24,9 @@ class User < ApplicationRecord
 
   # Validations
   validates_presence_of :name
-  validates_presence_of :country_code, on: :update
+  # validates_presence_of :country_code, on: :update
   validates             :facebook_url, :twitter_url, :linkedin_url, url: { allow_blank: true }
-  validate              :email_with_company_website, unless: :is_an_individual?
+  validate              :email_with_company_website, if: :adding_company?
   validates_attachment  :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
   validates_attachment  :cover, content_type: { content_type: /\Aimage\/.*\Z/ }
 
@@ -35,41 +35,52 @@ class User < ApplicationRecord
 
   # Nested Attributes for company
   accepts_nested_attributes_for :company,
-    reject_if: :this_the_case, 
+    reject_if: :all_blank, 
     allow_destroy: true
 
   # Callbacks
-  after_initialize :set_default_account_type
-  before_create :assign_company, if: :company_already_exists?
+  # after_initialize :set_default_account_type
+  # before_create :assign_company, if: :company_already_exists?
   after_create :assign_role
 
   def country_name
-    return if country_code.nil?
+    return if country_code.blank?
     country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
   end
 
-  private
-  def is_an_individual?
-    self.account_type == 'individual' ? true : false
+  def adding_company?
+    return false if self.company.blank?
+
+    if self.company.new_record?
+      return true
+    else
+      return false
+    end
   end
+
+  private
+  # def is_an_individual?
+  #   false
+  #   # self.account_type == 'individual' ? true : false
+  # end
 
   def is_a_company_admin?
     return false if company.nil?
     company.users.count == 1 ? true : false
   end
 
-  def company_already_exists?
-    self.selected_company_id.blank? ? false : true
-  end
+  # def company_already_exists?
+  #   self.selected_company_id.blank? ? false : true
+  # end
 
-  def this_the_case
-    is_an_individual? || company_already_exists?
-  end
+  # def this_the_case
+  #   company_already_exists?
+  # end
 
-  def assign_company
-    self.company_id = self.selected_company_id    
-  end
+  # def assign_company
+  #   self.company_id = self.selected_company_id    
+  # end
 
   def assign_role
     if is_a_company_admin?
@@ -77,11 +88,7 @@ class User < ApplicationRecord
     else
       add_role(:user)
     end
-  end
-
-  def set_default_account_type
-    self.account_type ||= "individual"
-  end
+  end 
 
   def company_website_domain(company)
     website = company.website
@@ -108,7 +115,7 @@ class User < ApplicationRecord
       if company_website_domain(company) == email_domain
         return true
       else
-        errors.add(:base, "Use your official email address. e.g : someone@" + company_website_domain(company) + ".com")
+        errors.add(:email, "Use your official email address. e.g : someone@" + company_website_domain(company) + ".com")
         return false
       end
     end

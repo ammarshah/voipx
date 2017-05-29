@@ -6,19 +6,62 @@ br
   h3 Personal Details:
   .form-inputs
     = f.input :name
-    = f.input :email, input_html: { disabled: true } 
     = f.input :position
     = f.input :about, label: "About me"
     = image_tag @user.photo.url(:thumb) if @user.photo.present?
     = f.input :photo, as: :file
     = image_tag @user.cover.url(:thumb) if @user.cover.present?
     = f.input :cover, as: :file
+  
+  br
+  hr
+  br
+
+  - if @user.company.persisted?
+    h3 Company details: 
+    .form-inputs
+      p
+      | Name: 
+      b
+        = @user.company.name
+      p
+      | Location: 
+      b
+        = @user.company.country_name
+      p
+      | Phone: 
+      b
+        = @user.company.phone_no
+      p
+      | Website: 
+      b
+        = @user.company.website
+  - else
+    p.lead.text-center#add-company style="color: #31708f;"
+      strong Are you part of a company?
+    h3 Add Company:
+    p Leave these fields blank if you don't want to add a company.
+    .form-inputs
+      = f.simple_fields_for :company do |c|
+        = c.input :name, required: false
+        = c.input :location, as: :country, required: false
+        = c.input :phone_no, required: false
+        = c.input :website, required: false, placeholder: "http://www.yourcompany.com"
+        = f.input :email, label: "Work email", hint: "Note: Your primary email will be replaced with your work email."
+  
+  br
+  hr
+  br
 
   h3 Contact Details:
   .form-inputs
     = f.input :skype
     = f.input :phone
-    = f.input :country_code
+    = f.input :country_code, label: "Country"
+
+  br
+  hr
+  br
 
   h3 Social Media Profile Links:
   .form-inputs
