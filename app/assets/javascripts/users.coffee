@@ -22,4 +22,5 @@ class App.Users extends App.Base
 
 
   edit: =>
+    new Utility.EasyAutocomplete
     return
