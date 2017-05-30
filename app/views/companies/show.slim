@@ -7,92 +7,36 @@
   br
   = link_to "Edit Company Profile", edit_company_path, class: "btn btn-primary", style: "float: right" if current_user.company == @company && current_user.has_role?(:company_admin)
   h2 #{ current_user.company == @company ? "My Company Profile" : "Company Profile" }
-  
 
-  br
-  h2.lead.text-center Work in progress...
+br
+hr
+br
 
-
-/ br
-/ br
-
-/ .col-lg-12
-/   .row
-/     .col-lg-4
-/       h4 Personal Details
-/     .col-lg-8
-/       p
-/       | Name: 
-/       b
-/         = @company.try(:name)
+.col-lg-12
+  .row
+    .col-lg-4
+      h4 Company Details
+    .col-lg-8
+      p
+      | Name: 
+      b
+        = link_to @company.name, company_path(@company)
       
-/       p
-/       | Email: 
-/       b
-/         = @company.try(:email)
+      p
+      | Location: 
+      b
+        = @company.country_name
       
-/       p
-/       | Position: 
-/       b
-/         = @company.try(:position)
+      p
+      | Phone: 
+      b
+        = @company.try(:phone_no)
       
-/       p
-/       | About me: 
-/       b
-/         = @company.try(:about)
-/       p
-/       | Company: 
-/       - if @company.company
-/         b
-/           / TODO: Change it to link_to to company#show
-/           = @company.company.name
-/       - else
-/         - if current_user == @company
-/           = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
+      p
+      | Website: 
+      b
+        = link_to nil, @company.website, target: '_blank'
 
-/   br
-/   br
-
-/   .row
-/     .col-lg-4
-/       h4 Contact Details
-/     .col-lg-8
-/       p
-/       | Skype: 
-/       b
-/         = @company.try(:skype)
-
-/       p
-/       | Phone: 
-/       b
-/         = @company.try(:phone)
-
-/       p
-/       | Country: 
-/       b
-/         = @company.try(:country_name)
-
-/   br
-/   br
-/   .row
-/     .col-lg-4
-/       h4 Social Media Profile Links
-/     .col-lg-8
-/       p
-/       | Facebook: 
-/       b
-/         = link_to nil, @company.try(:facebook_url), target: '_blank' if @company.facebook_url
-      
-/       p
-/       | Twitter: 
-/       b
-/         = link_to nil, @company.try(:twitter_url), target: '_blank' if @company.twitter_url
-      
-/       p
-/       | LinkedIn: 
-/       b
-/         = link_to nil, @company.try(:linkedin_url), target: '_blank' if @company.linkedin_url
-
-/ br
-/ br
-/ br
+br
+br
+br

@@ -9,6 +9,7 @@
   h2 #{ current_user == @user ? "My Profile" : "Profile" }
 
 br
+hr
 br
 
 .col-lg-12
@@ -45,6 +46,7 @@ br
           = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
 
   br
+  hr
   br
 
   .row
@@ -67,7 +69,9 @@ br
         = @user.try(:country_name)
 
   br
+  hr
   br
+
   .row
     .col-lg-4
       h4 Social Media Profile Links

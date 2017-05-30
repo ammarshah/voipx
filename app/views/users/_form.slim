@@ -36,7 +36,7 @@ br
           = c.input :website, required: false, placeholder: "http://www.yourcompany.com"
         = f.input :email, label: "Work email", hint: "Note: Your primary email will be replaced with your work email."
   - else
-    h3 Company details: 
+    h3 Company Details: 
     .form-inputs
       p
       | Name: 
@@ -53,7 +53,7 @@ br
       p
       | Website: 
       b
-        = link_to nil, @user.company.try(:website), target: '_blank'
+        = link_to nil, @user.company.website, target: '_blank'
   
   br
   hr
