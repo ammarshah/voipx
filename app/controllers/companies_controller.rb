@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show]
+  before_action :set_company, only: [:show, :edit]
 
   def index
     @companies = Company.all
@@ -8,6 +8,9 @@ class CompaniesController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
   end
 
 
