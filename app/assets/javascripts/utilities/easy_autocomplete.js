@@ -1,22 +1,6 @@
 Utility.EasyAutocomplete = (function() {
   function EasyAutocomplete() {
 
-    var reset_company_fields = function() {
-      $("#company_fields div.form-group input[type=text]").each(function() {
-        this.value = "";
-      });
-    };
-
-    // toggle company fields on signup form
-    $('.signup input[type=radio]').on('change', function() {
-      reset_company_fields();
-      if (this.value === 'individual') {
-        $('#company_fields').addClass('hide');
-      } else {
-        $('#company_fields').removeClass('hide');
-      }
-    });
-
     // options for easyAutocomplete initialization
     var options = {
       url: "/companies.json",
@@ -48,7 +32,8 @@ Utility.EasyAutocomplete = (function() {
           $("#user_selected_company_id").val(company_id);
           $("#user_company_attributes_website").val(company_website);
           $("#user_company_attributes_location").val(company_location);
-          $("#user_company_attributes_phone_no").intlTelInput("setNumber", company_phone_no); // used intlTelInput to format number
+          $("#user_company_attributes_phone_no").val(company_phone_no);
+          // $("#user_company_attributes_phone_no").intlTelInput("setNumber", company_phone_no); // used intlTelInput to format number
 
           // disable fields
           $("#user_company_attributes_website").prop('disabled', true);

@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   rolify
 
-  attr_accessor :account_type         # Just a virtual attribute to check if it's a company signup or an individual
   attr_accessor :selected_company_id  # Just a virtual attribute to temporary store/retrieve company id and then assign it to actual company_id column in before_create callback
   
   # Include default devise modules. Others available are:
@@ -35,12 +34,12 @@ class User < ApplicationRecord
 
   # Nested Attributes for company
   accepts_nested_attributes_for :company,
-    reject_if: :all_blank, 
+    reject_if: :reject_company, 
     allow_destroy: true
 
   # Callbacks
-  # after_initialize :set_default_account_type
-  # before_create :assign_company, if: :company_already_exists?
+  after_create :assign_role
+  before_update :assign_company, if: :company_already_exists?
   after_update :assign_company_admin_role, if: :company_id_changed?
 
   def country_name
@@ -55,35 +54,39 @@ class User < ApplicationRecord
   #   # self.account_type == 'individual' ? true : false
   # end
 
+  def reject_company(attributes)
+    all_company_fields_blank?(attributes) || company_already_exists?
+  end
+
+  def all_company_fields_blank?(attributes)
+    attributes['name'].blank? && attributes['location'].blank? && attributes['website'].blank? && attributes['phone_no'].blank?
+  end
+
   def is_a_company_admin?
     return false if company.nil?
     company.users.count == 1 ? true : false
   end
 
-  # def company_already_exists?
-  #   self.selected_company_id.blank? ? false : true
-  # end
+  def company_already_exists?
+    self.selected_company_id.blank? ? false : true
+  end
 
-  # def this_the_case
-  #   company_already_exists?
-  # end
+  def assign_company
+    self.company_id = self.selected_company_id    
+  end
 
-  # def assign_company
-  #   self.company_id = self.selected_company_id    
-  # end
+  def assign_role
+    add_role(:user)
+  end
 
   def assign_company_admin_role
-    if is_a_company_admin?
-      add_role(:company_admin)
-    else
-      return
-    end
+    add_role(:company_admin) if is_a_company_admin?
   end
 
   def adding_company?
-    return false if self.company.blank?
+    return false if self.company.blank? && self.selected_company_id.blank?
 
-    if self.company.new_record?
+    if self.selected_company_id.present? || self.company.new_record?
       return true
     else
       return false
