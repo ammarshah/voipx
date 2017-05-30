@@ -1,0 +1,42 @@
+.col-lg-12
+  .cover-photo
+    img alt="Cover Photo" src="/missing-images/original/missing-cover.jpg" 
+  .profile-photo
+    img.rounded-circle alt="Profile Photo" src="/missing-images/square/missing-profile.png"
+
+  br
+  = link_to "Edit Company Profile", edit_company_path, class: "btn btn-primary", style: "float: right" if current_user.company == @company && current_user.has_role?(:company_admin)
+  h2 #{ current_user.company == @company ? "My Company Profile" : "Company Profile" }
+
+br
+hr
+br
+
+.col-lg-12
+  .row
+    .col-lg-4
+      h4 Company Details
+    .col-lg-8
+      p
+      | Name: 
+      b
+        = link_to @company.name, company_path(@company)
+      
+      p
+      | Location: 
+      b
+        = @company.country_name
+      
+      p
+      | Phone: 
+      b
+        = @company.try(:phone_no)
+      
+      p
+      | Website: 
+      b
+        = link_to nil, @company.website, target: '_blank'
+
+br
+br
+br

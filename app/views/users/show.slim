@@ -9,6 +9,7 @@
   h2 #{ current_user == @user ? "My Profile" : "Profile" }
 
 br
+hr
 br
 
 .col-lg-12
@@ -39,13 +40,13 @@ br
       | Company: 
       - if @user.company
         b
-          / TODO: Change it to link_to to company#show
-          = @user.company.name
+          = link_to @user.company.name, company_path(@user.company)
       - else
         - if current_user == @user
           = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
 
   br
+  hr
   br
 
   .row
@@ -68,7 +69,9 @@ br
         = @user.try(:country_name)
 
   br
+  hr
   br
+
   .row
     .col-lg-4
       h4 Social Media Profile Links
