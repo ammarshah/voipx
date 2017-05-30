@@ -37,7 +37,13 @@ br
         = @user.try(:about)
       p
       | Company: 
-      b
+      - if @user.company
+        b
+          / TODO: Change it to link_to to company#show
+          = @user.company.name
+      - else
+        - if current_user == @user
+          = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
 
   br
   br

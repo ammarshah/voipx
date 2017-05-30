@@ -6,12 +6,21 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user.company || @user.build_company
   end
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User profile was successfully updated.'
+      added_company = params[:user][:company_attributes].present? && @user.company_id.present?
+      flash[:notice] = added_company ? I18n.t("devise.registrations.update_needs_confirmation") : 'Your profile was successfully updated.'
+      redirect_to @user
     else
+      # retain company fields values on validation fail
+      if @user.selected_company_id.present? && @user.company.nil?
+        @user.company = Company.find_by_id(@user.selected_company_id)
+      else
+        @user.company || @user.build_company
+      end
       render :edit
     end
   end
@@ -24,6 +33,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :position, :about, :photo, :cover, :skype, :phone, :country_code, :facebook_url, :twitter_url, :linkedin_url)
+      params.require(:user).permit(:name, :position, :about, :photo, :cover, :skype, :phone, :country_code, :facebook_url, :twitter_url, :linkedin_url, :company_id, :email, :selected_company_id, company_attributes: [:name, :location, :website, :phone_no])
     end
 end

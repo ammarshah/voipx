@@ -4,11 +4,17 @@ class Company < ApplicationRecord
 
   # Validations
   validates_presence_of :name, :location, :website, :phone_no
-  validate              :uniqueness_of_name_with_slug
+  validate              :uniqueness_of_name_with_slug, on: :create
   validates             :website, url: true
 
   # Callbacks
   before_create :generate_slug
+
+  def country_name
+    return if location.blank?
+    country = ISO3166::Country[location]
+    country.translations[I18n.locale.to_s] || country.name
+  end
 
   private
   def strip_name_like_a_boss
