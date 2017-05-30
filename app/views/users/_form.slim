@@ -41,7 +41,7 @@ br
       p
       | Name: 
       b
-        = @user.company.name
+        = link_to @user.company.name, company_path(@user.company)
       p
       | Location: 
       b
@@ -53,7 +53,7 @@ br
       p
       | Website: 
       b
-        = @user.company.website
+        = link_to nil, @user.company.try(:website), target: '_blank'
   
   br
   hr

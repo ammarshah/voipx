@@ -39,8 +39,7 @@ br
       | Company: 
       - if @user.company
         b
-          / TODO: Change it to link_to to company#show
-          = @user.company.name
+          = link_to @user.company.name, company_path(@user.company)
       - else
         - if current_user == @user
           = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
