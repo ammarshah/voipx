@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :verify_user, only: [:edit, :update]
 
   def show
   end
@@ -29,6 +30,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def verify_user
+      redirect_to root_path, notice: "You are not authorized to access this page." unless current_user == @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
