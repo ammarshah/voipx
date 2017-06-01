@@ -48,12 +48,11 @@ class User < ApplicationRecord
     country.translations[I18n.locale.to_s] || country.name
   end
 
-  private
-  # def is_an_individual?
-  #   false
-  #   # self.account_type == 'individual' ? true : false
-  # end
+  def is_company_admin_of company
+    self.company == company && self.has_role?(:company_admin) ? true : false
+  end
 
+  private
   def reject_company(attributes)
     all_company_fields_blank?(attributes) || company_already_exists?
   end
