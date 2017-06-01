@@ -3,7 +3,7 @@ class Company < ApplicationRecord
   has_many :users, dependent: :destroy
 
   # Validations
-  validates_presence_of :name, :location, :website, :phone_no
+  validates_presence_of :name, :country_code, :website, :phone_no
   validate              :uniqueness_of_name_with_slug, on: :create
   validates             :website, url: true
 
@@ -11,8 +11,8 @@ class Company < ApplicationRecord
   before_create :generate_slug
 
   def country_name
-    return if location.blank?
-    country = ISO3166::Country[location]
+    return if country_code.blank?
+    country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
   end
 

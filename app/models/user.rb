@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def all_company_fields_blank?(attributes)
-    attributes['name'].blank? && attributes['location'].blank? && attributes['website'].blank? && attributes['phone_no'].blank?
+    attributes['name'].blank? && attributes['country_code'].blank? && attributes['website'].blank? && attributes['phone_no'].blank?
   end
 
   def is_a_company_admin?
