@@ -19,12 +19,12 @@ br
   - user = User.find_by_id(@user.id)
   - if user.company_id.blank?
     p.lead.text-center#add-company style="color: #31708f;"
-      strong Are you part of a company?
+      strong Would you like to add your company?
     h3 Add Company:
     p Leave these fields blank if you don't want to add a company.
     .form-inputs
       = f.simple_fields_for :company do |c|
-        = c.input :name, required: false
+        = c.input :name, required: false, label: "Company Name"
         = f.input :selected_company_id, as: :hidden
         - if @user.selected_company_id.present?
           = c.input :country_code, label: "Country", required: false, disabled: true
