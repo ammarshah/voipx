@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def all_company_fields_blank?(attributes)
-    attributes['name'].blank? && attributes['location'].blank? && attributes['website'].blank? && attributes['phone_no'].blank?
+    attributes['name'].blank? && attributes['country_code'].blank? && attributes['website'].blank? && attributes['phone_no'].blank?
   end
 
   def is_a_company_admin?
@@ -97,11 +97,13 @@ class User < ApplicationRecord
     uri = Addressable::URI.parse(website)
     host = uri.host.downcase
     host = host.start_with?('www.') ? host[4..-1] : host
-    host.split('.').first
+    # host.split('.').first
+    return host
   end
 
   def email_domain
-    self.email.gsub(/.+@([^.]+).+/, '\1')
+    # self.email.gsub(/.+@([^.]+).+/, '\1')
+    self.email.split('@').second
   end
 
   def email_with_company_website
@@ -117,7 +119,7 @@ class User < ApplicationRecord
       if company_website_domain(company) == email_domain
         return true
       else
-        errors.add(:email, "Use your official email address. e.g : someone@" + company_website_domain(company) + ".com")
+        errors.add(:email, "Use your official email address. e.g : someone@" + company_website_domain(company))
         return false
       end
     end
