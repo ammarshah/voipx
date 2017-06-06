@@ -20,21 +20,31 @@ br
   - if user.company_id.blank?
     p.lead.text-center#add-company style="color: #31708f;"
       strong Would you like to add your company?
-    h3 Add Company:
-    p Leave these fields blank if you don't want to add a company.
-    .form-inputs
-      = f.simple_fields_for :company do |c|
-        = c.input :name, required: false, label: "Company Name"
-        = f.input :selected_company_id, as: :hidden
-        - if @user.selected_company_id.present?
-          = c.input :country_code, label: "Country", required: false, disabled: true
-          = c.input :phone_no, label: "Phone", required: false, disabled: true
-          = c.input :website, required: false, placeholder: "http://www.yourcompany.com", disabled: true
-        - else
-          = c.input :country_code, label: "Country", required: false
-          = c.input :phone_no, label: "Phone", required: false
-          = c.input :website, required: false, placeholder: "http://www.yourcompany.com"
-        = f.input :email, label: "Work email", hint: "Note: Your primary email will be replaced with your work email once it is confirmed."
+    div.text-center
+      .btn-group.add_company_bool data-toggle="buttons" 
+        = f.label :add_company_bool, class: "btn btn-primary #{ 'active' if @user.add_company_bool == true }" do |a|
+          | Yes
+          = f.radio_button :add_company_bool, true, class: 'form-control'
+        = f.label :add_company_bool, class: "btn btn-primary #{ 'active' if @user.add_company_bool == false }" do |a|
+          | No
+          = f.radio_button :add_company_bool, false, class: 'form-control'
+
+    div#company_fields class="#{ 'hide' if @user.add_company_bool == false }"
+      h3 Add Company:
+      p Leave these fields blank if you don't want to add a company.
+      .form-inputs
+        = f.simple_fields_for :company do |c|
+          = c.input :name, required: false, label: "Company Name"
+          = f.input :selected_company_id, as: :hidden
+          - if @user.selected_company_id.present?
+            = c.input :country_code, label: "Country", required: false, disabled: true
+            = c.input :phone_no, label: "Phone", required: false, disabled: true
+            = c.input :website, required: false, placeholder: "http://www.yourcompany.com", disabled: true
+          - else
+            = c.input :country_code, label: "Country", required: false
+            = c.input :phone_no, label: "Phone", required: false
+            = c.input :website, required: false, placeholder: "http://www.yourcompany.com"
+          = f.input :email, label: "Work email", hint: "Note: Your primary email will be replaced with your work email once it is confirmed."
   - else
     h3 Company Details: 
     .form-inputs
