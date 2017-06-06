@@ -2,6 +2,7 @@ class User < ApplicationRecord
   rolify
 
   attr_accessor :selected_company_id  # Just a virtual attribute to temporary store/retrieve company id and then assign it to actual company_id column in before_create callback
+  attribute :add_company_bool, :boolean, default: false # Just a virtual attribute to persist 'would you like to add your company' boolean attr value on edit user profile page.
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -53,13 +54,17 @@ class User < ApplicationRecord
   end
 
   private
-  def reject_company(attributes)
-    all_company_fields_blank?(attributes) || company_already_exists?
+  def reject_company
+    self.add_company_bool == false || company_already_exists?
   end
 
-  def all_company_fields_blank?(attributes)
-    attributes['name'].blank? && attributes['country_code'].blank? && attributes['website'].blank? && attributes['phone_no'].blank?
-  end
+  # def reject_company(attributes)
+  #   all_company_fields_blank?(attributes) || company_already_exists?
+  # end
+
+  # def all_company_fields_blank?(attributes)
+  #   attributes['name'].blank? && attributes['country_code'].blank? && attributes['website'].blank? && attributes['phone_no'].blank?
+  # end
 
   def is_a_company_admin?
     return false if company.nil?
