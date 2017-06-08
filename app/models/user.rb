@@ -25,7 +25,7 @@ class User < ApplicationRecord
   # Validations
   validates_presence_of :name
   # validates_presence_of :country_code, on: :update
-  validates             :facebook_url, :twitter_url, :linkedin_url, url: { allow_blank: true }
+  # validates             :facebook_url, :twitter_url, :linkedin_url, url: { allow_blank: true }
   validate              :email_with_company_website, if: :adding_company?
   validates_attachment  :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
   validates_attachment  :cover, content_type: { content_type: /\Aimage\/.*\Z/ }
@@ -47,6 +47,18 @@ class User < ApplicationRecord
     return if country_code.blank?
     country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
+  end
+
+  def facebook_url_with_protocol
+    "https://wwww.facebook.com/#{self[:facebook_url]}"
+  end
+
+  def twitter_url_with_protocol
+    "https://www.twitter.com/#{self[:twitter_url]}"
+  end
+
+  def linkedin_url_with_protocol
+    "https://www.linkedin.com/in/#{self[:linkedin_url]}"
   end
 
   def is_company_admin_of company
