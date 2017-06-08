@@ -39,11 +39,15 @@ br
           - if @user.selected_company_id.present?
             = c.input :country_code, label: "Country", required: false, disabled: true
             = c.input :phone_no, label: "Phone", required: false, disabled: true
-            = c.input :website, required: false, placeholder: "http://www.yourcompany.com", disabled: true
+            = c.input :website, required: false, wrapper: :horizontal_input_group do
+              span.input-group-addon http://
+              = c.input_field :website, placeholder: "www.yourcompany.com", disabled: true, class: "form-control"
           - else
             = c.input :country_code, label: "Country", required: false
             = c.input :phone_no, label: "Phone", required: false
-            = c.input :website, required: false, placeholder: "http://www.yourcompany.com"
+            = c.input :website, required: false, wrapper: :horizontal_input_group do
+              span.input-group-addon http://
+              = c.input_field :website, placeholder: "www.yourcompany.com", class: "form-control"
           = f.input :email, label: "Work email", hint: "Note: Your primary email will be replaced with your work email once it is confirmed."
   - else
     h3 Company Details: 
