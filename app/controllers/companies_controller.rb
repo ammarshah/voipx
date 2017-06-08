@@ -25,6 +25,10 @@ class CompaniesController < ApplicationController
       @company = Company.find(params[:id])
     end
 
+    def company_params
+      params.require(:company).permit(:country_code, :phone_no)
+    end
+
     def verify_company_admin
       redirect_to root_path, notice: "You are not authorized to access this page." unless current_user.is_company_admin_of(@company)
     end

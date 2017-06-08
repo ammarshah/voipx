@@ -5,6 +5,18 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
+  config.wrappers :horizontal_input_group, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.use :label, class: 'control-label'
+ 
+      b.wrapper tag: 'div', class: 'input-group' do |append|
+        append.use :input, class: 'form-control'
+      end
+      b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+  
   config.wrappers :default, class: :input,
     hint_class: :field_with_hint, error_class: :field_with_errors do |b|
     ## Extensions enabled by default

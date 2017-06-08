@@ -98,7 +98,7 @@ class User < ApplicationRecord
   end
 
   def company_website_domain(company)
-    website = company.website
+    website = "http://#{company.website}"
     uri = Addressable::URI.parse(website)
     host = uri.host.downcase
     host = host.start_with?('www.') ? host[4..-1] : host

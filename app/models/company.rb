@@ -5,10 +5,14 @@ class Company < ApplicationRecord
   # Validations
   validates_presence_of :name, :country_code, :website, :phone_no
   validate              :uniqueness_of_name_with_slug, on: :create
-  validates             :website, url: true
+  validate              :website_validator, if: 'website.present?'
 
   # Callbacks
   before_create :generate_slug
+
+  def website_with_protocol
+    "http://#{self[:website]}"
+  end
 
   def country_name
     return if country_code.blank?
@@ -33,5 +37,14 @@ class Company < ApplicationRecord
     else
       return true
     end
+  end
+
+  def website_validator
+    errors.add(:website, "is not a valid URL") unless website_valid?
+  end
+
+  def website_valid?
+    company_website = "http://#{self.website}"
+    !!company_website.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix) # found regex here: https://stackoverflow.com/a/43360816/4640611
   end
 end
