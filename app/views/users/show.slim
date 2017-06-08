@@ -79,17 +79,17 @@ br
       p
       | Facebook: 
       b
-        = link_to nil, @user.try(:facebook_url), target: '_blank' if @user.facebook_url
+        = link_to nil, @user.try(:facebook_url_with_protocol), target: '_blank' if @user.facebook_url
       
       p
       | Twitter: 
       b
-        = link_to nil, @user.try(:twitter_url), target: '_blank' if @user.twitter_url
+        = link_to nil, @user.try(:twitter_url_with_protocol), target: '_blank' if @user.twitter_url
       
       p
       | LinkedIn: 
       b
-        = link_to nil, @user.try(:linkedin_url), target: '_blank' if @user.linkedin_url
+        = link_to nil, @user.try(:linkedin_url_with_protocol), target: '_blank' if @user.linkedin_url
 
 br
 br

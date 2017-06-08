@@ -67,7 +67,7 @@ br
       p
       | Website: 
       b
-        = link_to nil, @user.company.website, target: '_blank'
+        = link_to nil, @user.company.website_with_protocol, target: '_blank'
   
   br
   hr
@@ -85,9 +85,17 @@ br
 
   h3 Social Media Profile Links:
   .form-inputs
-    = f.input :facebook_url
-    = f.input :twitter_url
-    = f.input :linkedin_url  
+    = f.input :facebook_url, label: false, wrapper: :horizontal_input_group do
+      span.input-group-addon https://facebook.com/
+      = f.input_field :facebook_url, placeholder: "Facebook Username", class: "form-control"
+
+    = f.input :twitter_url, label: false, wrapper: :horizontal_input_group do
+      span.input-group-addon @
+      = f.input_field :twitter_url, placeholder: "Twitter Handle", class: "form-control"
+
+    = f.input :linkedin_url, label: false, wrapper: :horizontal_input_group do
+      span.input-group-addon https://linkedin.com/in/
+      = f.input_field :linkedin_url, placeholder: "LinkedIn Username", class: "form-control"
 
   .form-actions
     = f.button :submit, "Save", class: "btn btn-primary btn-lg"
