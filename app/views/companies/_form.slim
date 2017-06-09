@@ -1,0 +1,29 @@
+br
+br
+= simple_form_for(@company, html: { role: 'form' }) do |f|
+  = f.error_notification
+
+  h3 Details:
+  .form-inputs
+    = f.input :name, label: "Company Name", disabled: true, required: false
+    = f.input :website, required: false, wrapper: :horizontal_input_group do
+      span.input-group-addon http://
+      = f.input_field :website, disabled: true, class: "form-control"
+    = f.input :phone_no, label: "Phone Number", required: false
+    = f.input :overview
+    = f.input :since, label: "Operating Since"
+
+  h3 Location:
+  .form-inputs
+    = f.input :street_address, label: "Street Address", required: false
+    = f.input :state, label: "State/County", required: false
+    = f.input :postal_code, required: false
+    = f.input :country_code, label: "Country", required: false
+
+  .form-actions
+    = f.button :submit, "Save", class: "btn btn-primary btn-lg"
+
+br
+br
+br
+br

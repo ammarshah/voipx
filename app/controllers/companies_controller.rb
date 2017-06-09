@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
-  before_action :set_company, only: [:show, :edit]
+  before_action :set_company, only: [:show, :edit, :update]
   before_action :verify_company_admin, only: [:edit, :update]
 
   def index
@@ -16,7 +16,13 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    
+    respond_to do |format|
+      if @company.update(company_params)
+        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+      else
+        format.html { render :edit }
+      end
+    end
   end
 
 
@@ -26,10 +32,13 @@ class CompaniesController < ApplicationController
     end
 
     def company_params
-      params.require(:company).permit(:country_code, :phone_no)
+      params.require(:company).permit(:country_code, :phone_no, :street_address, :state, :postal_code, :overview, :since)
     end
 
     def verify_company_admin
-      redirect_to root_path, notice: "You are not authorized to access this page." unless current_user.is_company_admin_of(@company)
+      unless current_user.is_company_admin_of(@company)
+        binding.pry
+        redirect_to root_path, notice: "You are not authorized to access this page."
+      end
     end
 end

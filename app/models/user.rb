@@ -62,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def is_company_admin_of company
-    self.company == company && self.has_role?(:company_admin) ? true : false
+    self.company == company && self.has_role?(:company_admin)
   end
 
   private
