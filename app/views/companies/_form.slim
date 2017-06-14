@@ -46,6 +46,37 @@ br
       = r.input :name, placeholder: "Report Name", label: false
       = r.input :document, as: :file, label: false, hint: "Only files with jpg, jpeg, png, pdf, docx extensions would be uploaded."
 
+  h3 References:
+  table.table
+    thead.thead-default
+      tr
+        th Contact Person
+        th Company Name
+        th Website
+        th Email
+        th Phone
+    tbody
+      = f.simple_fields_for :references do |ref|
+        tr
+          td
+            = ref.input :contact_person, label: false
+          td
+            = ref.input :name, label: false
+          td
+            = ref.input :website, label: false
+          td
+            = ref.input :email, label: false
+          td
+            = ref.input :phone, label: false
+
+  /.form-inputs
+    = f.simple_fields_for :references do |ref|
+      = ref.input :contact_person, label: false
+      = ref.input :name, label: false
+      = ref.input :website, label: false
+      = ref.input :email, label: false
+      = ref.input :phone, label: false
+
   .form-actions
     = f.button :submit, "Save", class: "btn btn-primary btn-lg"
 
