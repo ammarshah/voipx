@@ -13,6 +13,11 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    if @company.references.nil?
+      3.times { @company.references.build }
+    else
+      (3-@company.references.count).times { @company.references.build }
+    end
   end
 
   def update
@@ -32,7 +37,7 @@ class CompaniesController < ApplicationController
     end
 
     def company_params
-      params.require(:company).permit(:logo, :country_code, :phone_no, :street_address, :state, :postal_code, :overview, :since, reports_attributes: [:id , :name, :document, :_destroy])
+      params.require(:company).permit(:logo, :country_code, :phone_no, :street_address, :state, :postal_code, :overview, :since, reports_attributes: [:id, :name, :document, :_destroy], references_attributes: [:id, :contact_person, :name, :website, :email, :phone, :_destroy])
     end
 
     def verify_company_admin
