@@ -1,0 +1,55 @@
+br
+br
+= simple_form_for(@company, html: { role: 'form' }) do |f|
+  = f.error_notification
+
+  h3 Details:
+  .form-inputs
+    = image_tag @company.logo.url(:thumb) if @company.logo.present?
+    = f.input :logo, as: :file
+    = f.input :name, label: "Company Name", disabled: true, required: false
+    = f.input :website, required: false, wrapper: :horizontal_input_group do
+      span.input-group-addon http://
+      = f.input_field :website, disabled: true, class: "form-control"
+    = f.input :phone_no, label: "Phone Number", required: false
+    = f.input :overview
+    = f.input :since, label: "Operating Since"
+
+  h3 Location:
+  .form-inputs
+    = f.input :street_address, label: "Street Address", required: false
+    = f.input :state, label: "State/County", required: false
+    = f.input :postal_code, required: false
+    = f.input :country_code, label: "Country", required: false
+
+  h3 D&B:
+  - if @company.reports.any?
+    table.table
+      thead.thead-default
+        tr
+          th Title
+          th Report
+          th Upload At
+          th Action
+      tbody
+        - @company.reports.each do |report|
+          tr
+            th scope="row" #{report.name}
+            td #{report.document.original_filename}
+            td #{report.created_at.strftime("%d %B %y")}
+            td
+              = link_to "Delete", company_report_path(@company, report), data: { confirm: "Are you sure you want to delete this document?" }, method: :delete
+
+  .form-inputs
+    h6 Upload Report
+    = f.simple_fields_for :reports, @company.reports.build do |r|
+      = r.input :name, placeholder: "Report Name", label: false
+      = r.input :document, as: :file, label: false, hint: "Only files with jpg, jpeg, png, pdf, docx extensions would be uploaded."
+
+  .form-actions
+    = f.button :submit, "Save", class: "btn btn-primary btn-lg"
+
+br
+br
+br
+br
