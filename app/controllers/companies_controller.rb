@@ -32,7 +32,7 @@ class CompaniesController < ApplicationController
     end
 
     def company_params
-      params.require(:company).permit(:logo, :country_code, :phone_no, :street_address, :state, :postal_code, :overview, :since)
+      params.require(:company).permit(:logo, :country_code, :phone_no, :street_address, :state, :postal_code, :overview, :since, reports_attributes: [:id , :name, :document, :_destroy])
     end
 
     def verify_company_admin

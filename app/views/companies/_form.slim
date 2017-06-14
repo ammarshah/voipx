@@ -22,6 +22,30 @@ br
     = f.input :postal_code, required: false
     = f.input :country_code, label: "Country", required: false
 
+  h3 D&B:
+  - if @company.reports.any?
+    table.table
+      thead.thead-default
+        tr
+          th Title
+          th Report
+          th Upload At
+          th Action
+      tbody
+        - @company.reports.each do |report|
+          tr
+            th scope="row" #{report.name}
+            td #{report.document.original_filename}
+            td #{report.created_at.strftime("%d %B %y")}
+            td
+              = link_to "Delete", company_report_path(@company, report), data: { confirm: "Are you sure you want to delete this document?" }, method: :delete
+
+  .form-inputs
+    h6 Upload Report
+    = f.simple_fields_for :reports, @company.reports.build do |r|
+      = r.input :name, placeholder: "Report Name", label: false
+      = r.input :document, as: :file, label: false, hint: "Only files with jpg, jpeg, png, pdf, docx extensions would be uploaded."
+
   .form-actions
     = f.button :submit, "Save", class: "btn btn-primary btn-lg"
 

@@ -8,6 +8,7 @@ class Company < ApplicationRecord
 
   # Associations
   has_many :users, dependent: :destroy
+  has_many :reports, dependent: :destroy
 
   # Validations
   validates_presence_of :name, :country_code, :website, :phone_no
@@ -17,6 +18,8 @@ class Company < ApplicationRecord
 
   # Callbacks
   before_create :generate_slug
+
+  accepts_nested_attributes_for :reports, reject_if: :all_blank, allow_destroy: true
 
   def website_with_protocol
     "http://#{self[:website]}"
