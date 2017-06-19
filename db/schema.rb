@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614110344) do
+ActiveRecord::Schema.define(version: 20170615100906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20170614110344) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
+  end
+
+  create_table "companies_products", id: false, force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.integer "product_id", null: false
+    t.index ["company_id", "product_id"], name: "index_companies_products_on_company_id_and_product_id", using: :btree
+    t.index ["product_id", "company_id"], name: "index_companies_products_on_product_id_and_company_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|

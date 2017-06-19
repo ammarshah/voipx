@@ -10,6 +10,7 @@ class Company < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :reports, dependent: :destroy
   has_many :references, dependent: :destroy
+  has_and_belongs_to_many :products
 
   # Validations
   validates_presence_of :name, :country_code, :website, :phone_no

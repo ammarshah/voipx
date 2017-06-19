@@ -22,6 +22,11 @@ br
     = f.input :postal_code, required: false
     = f.input :country_code, label: "Country", required: false
 
+  h3 Products:
+  .form-inputs
+    = f.collection_check_boxes :product_ids, Product.all, :id, :name
+
+
   .jumbotron
     .container
       p style="color:red;" This information will remain PRIVATE, and it will only be shown to other companies after you approve their request for access.
