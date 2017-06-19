@@ -10,6 +10,8 @@ class Company < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :reports, dependent: :destroy
   has_many :references, dependent: :destroy
+  has_and_belongs_to_many :products
+  has_many :other_products, dependent: :destroy
 
   # Validations
   validates_presence_of :name, :country_code, :website, :phone_no
@@ -22,6 +24,7 @@ class Company < ApplicationRecord
 
   accepts_nested_attributes_for :reports, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :references, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :other_products, reject_if: :all_blank, allow_destroy: true
 
   def website_with_protocol
     "http://#{self[:website]}"
