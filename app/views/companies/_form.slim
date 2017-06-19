@@ -25,6 +25,12 @@ br
   h3 Products:
   .form-inputs
     = f.collection_check_boxes :product_ids, Product.all, :id, :name
+    - @company.other_products.each do |op|
+      p - #{op.name}
+    / Other Product
+    = f.simple_fields_for :other_products, @company.other_products.build do |op|
+      h6 Other: 
+      = op.input :name, placeholder: "Product name", label: false
 
 
   .jumbotron
