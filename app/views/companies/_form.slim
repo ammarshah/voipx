@@ -22,6 +22,13 @@ br
     = f.input :postal_code, required: false
     = f.input :country_code, label: "Country", required: false
 
+  h3 Trade Countries
+  .row
+    .col-md-6
+      p Buy:
+      .form-inputs
+        = f.input :buying_country_ids, collection: Country.all, input_html: { multiple: true, class: "chosen", data: { placeholder: "Select Buying Countries" } }, label: false
+
   h3 Products:
   .form-inputs
     = f.collection_check_boxes :product_ids, Product.all, :id, :name

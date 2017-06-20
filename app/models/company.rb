@@ -12,6 +12,11 @@ class Company < ApplicationRecord
   has_many :references, dependent: :destroy
   has_and_belongs_to_many :products
   has_many :other_products, dependent: :destroy
+  has_and_belongs_to_many(:buying_countries,
+    class_name: "Country",
+    join_table: "buying_countries",
+    foreign_key: "company_id",
+    association_foreign_key: "country_id")
 
   # Validations
   validates_presence_of :name, :country_code, :website, :phone_no
