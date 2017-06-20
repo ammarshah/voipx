@@ -17,6 +17,11 @@ class Company < ApplicationRecord
     join_table: "buying_countries",
     foreign_key: "company_id",
     association_foreign_key: "country_id")
+  has_and_belongs_to_many(:selling_countries,
+    class_name: "Country",
+    join_table: "selling_countries",
+    foreign_key: "company_id",
+    association_foreign_key: "country_id")
 
   # Validations
   validates_presence_of :name, :country_code, :website, :phone_no
