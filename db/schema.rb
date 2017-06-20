@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619012107) do
+ActiveRecord::Schema.define(version: 20170620100037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "buying_countries", id: false, force: :cascade do |t|
+    t.integer "country_id", null: false
+    t.integer "company_id", null: false
+    t.index ["country_id", "company_id"], name: "index_buying_countries_on_country_id_and_company_id", using: :btree
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -40,6 +46,16 @@ ActiveRecord::Schema.define(version: 20170619012107) do
     t.integer "product_id", null: false
     t.index ["company_id", "product_id"], name: "index_companies_products_on_company_id_and_product_id", using: :btree
     t.index ["product_id", "company_id"], name: "index_companies_products_on_product_id_and_company_id", using: :btree
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "alpha2"
+    t.string   "alpha3"
+    t.string   "phone_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "other_products", force: :cascade do |t|
@@ -88,6 +104,12 @@ ActiveRecord::Schema.define(version: 20170619012107) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
+  end
+
+  create_table "selling_countries", id: false, force: :cascade do |t|
+    t.integer "country_id", null: false
+    t.integer "company_id", null: false
+    t.index ["country_id", "company_id"], name: "index_selling_countries_on_country_id_and_company_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
