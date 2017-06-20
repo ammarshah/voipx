@@ -21,6 +21,7 @@ gem "validate_url"
 gem 'simple_form'
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3.0'
+gem 'chosen-rails'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
