@@ -1,7 +1,11 @@
-## Create Roles
+## Add Roles
 roles = CreateRolesService.new.call
 puts 'CREATED ROLES: ' << roles.join(', ')
 
-## Create Products
+## Add Products
 products = CreateProductsService.new.call
 puts 'CREATED PRODUCTS: ' << products.join(', ')
+
+## Add Countries
+countries = CreateCountriesService.new.call
+puts 'CREATED Countries: ' << countries.join(', ')
