@@ -2,7 +2,7 @@
   .cover-photo
     img alt="Cover Photo" src="/missing-images/original/missing-cover.jpg" 
   .profile-photo
-    img.rounded-circle alt="Profile Photo" src="/missing-images/square/missing-profile.png"
+    img.rounded-circle alt="Profile Photo" src="#{@company.logo.url(:square)}"
 
   br
   = link_to "Edit Company Profile", edit_company_path, class: "btn btn-primary", style: "float: right" if current_user.is_company_admin_of(@company)
@@ -15,27 +15,78 @@ br
 .col-lg-12
   .row
     .col-lg-4
-      h4 Company Details
+      h4 Details
     .col-lg-8
       p
-      | Name: 
+      | Company Name: 
       b
         = link_to @company.name, company_path(@company)
-      
-      p
-      | Country: 
-      b
-        = @company.country_name
-      
-      p
-      | Phone: 
-      b
-        = @company.try(:phone_no)
       
       p
       | Website: 
       b
         = link_to nil, @company.website_with_protocol, target: '_blank'
+      
+      p
+      | Phone: 
+      b
+        = @company.try(:phone_no)
+
+      p
+      | Overview: 
+      b
+        = @company.overview
+
+      p
+      | Operating Since: 
+      b
+        = @company.since
+
+  br
+  hr
+  br
+
+  .row
+    .col-lg-4
+      h4 Location
+    .col-lg-8
+      p
+      | Street Address: 
+      b
+        = @company.street_address
+
+      p
+      | State: 
+      b
+        = @company.state
+
+      p
+      | Postal Code: 
+      b
+        = @company.postal_code
+
+      p
+      | Country: 
+      b
+        = @company.country_name
+
+  br
+  hr
+  br
+
+  .row
+    .col-lg-4
+      h4 Products
+    .col-lg-8
+      ul.list-group
+        - if @company.products.any? || @company.other_products.any?
+          - @company.products.each do |product|
+            li.list-group-item #{product.name}
+          - @company.other_products.each do |other_product|
+            li.list-group-item #{other_product.name}
+        - else
+          span No products added yet.
+
 
 br
 br
