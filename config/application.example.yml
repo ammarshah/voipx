@@ -1,0 +1,42 @@
+# this file is just to get an idea of what evn vars are required to be added in application.yml
+#  you should simply copy and paste the content of this file into application.yml and change values of each env var.
+
+development:
+  GMAIL_USERNAME: ---
+  GMAIL_PASSWORD: ---
+  DOMAIN_NAME: ---
+  SECRET_KEY_BASE: ---
+  AWS_BUCKET: ---
+  AWS_ACCESS_KEY: ---
+  AWS_SECRET_KEY: ---
+  AWS_REGION: ---
+
+test:
+  GMAIL_USERNAME: ---
+  GMAIL_PASSWORD: ---
+  DOMAIN_NAME: ---
+  SECRET_KEY_BASE: ---
+
+staging:
+  GMAIL_USERNAME: ---
+  GMAIL_PASSWORD: ---
+  DOMAIN_NAME: ---
+  SECRET_KEY_BASE: ---
+  RAILS_SERVE_STATIC_FILES: ---
+  AWS_BUCKET: ---
+  AWS_ACCESS_KEY: ---
+  AWS_SECRET_KEY: ---
+  AWS_REGION: ---
+  RAILS_LOG_TO_STDOUT: ---
+
+production:
+  GMAIL_USERNAME: ---
+  GMAIL_PASSWORD: ---
+  DOMAIN_NAME: ---
+  SECRET_KEY_BASE: ---
+  RAILS_SERVE_STATIC_FILES: ---
+  AWS_BUCKET: ---
+  AWS_ACCESS_KEY: ---
+  AWS_SECRET_KEY: ---
+  AWS_REGION: ---
+  RAILS_LOG_TO_STDOUT: ---
