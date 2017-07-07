@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Code:
+  = @breakout.code
+p
+  strong Destination:
+  = @breakout.destination
+p
+  strong Parent:
+  = @breakout.parent_id
+
+= link_to 'Edit', edit_breakout_path(@breakout)
+'  |
+= link_to 'Back', breakouts_path

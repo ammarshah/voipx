@@ -11,5 +11,5 @@ Rails.application.routes.draw do
     resources :reports, only: [:destroy]
   end
   resources :users,     only: [:show, :edit, :update]
-
+  resources :breakouts
 end

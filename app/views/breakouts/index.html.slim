@@ -1,0 +1,25 @@
+h1 Listing breakouts
+
+table
+  thead
+    tr
+      th Code
+      th Destination
+      th Parent
+      th
+      th
+      th
+
+  tbody
+    - @breakouts.each do |breakout|
+      tr
+        td = breakout.code
+        td = breakout.destination
+        td = breakout.parent_id
+        td = link_to 'Show', breakout
+        td = link_to 'Edit', edit_breakout_path(breakout)
+        td = link_to 'Destroy', breakout, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Breakout', new_breakout_path

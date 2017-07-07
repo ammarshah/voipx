@@ -1,0 +1,10 @@
+= simple_form_for(@breakout) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :code
+    = f.input :destination
+    = f.input :parent_id
+
+  .form-actions
+    = f.button :submit
