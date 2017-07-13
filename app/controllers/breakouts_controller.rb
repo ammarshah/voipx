@@ -5,7 +5,7 @@ class BreakoutsController < ApplicationController
   # GET /breakouts
   # GET /breakouts.json
   def index
-    @breakouts = Breakout.all.order(:id)
+    @breakouts = Breakout.order(:id).page params[:page]
   end
 
   # GET /breakouts/1

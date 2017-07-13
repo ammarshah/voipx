@@ -1,5 +1,6 @@
-h1 Listing breakouts (#{@breakouts.size})
-
+h1 Listing breakouts (#{@breakouts.total_count})
+br
+= paginate @breakouts
 table.table.table-bordered.table-inverse
   thead.thead-default
     tr
@@ -23,6 +24,8 @@ table.table.table-bordered.table-inverse
         / td.text-sm-center = link_to 'Edit', edit_breakout_path(breakout)
         / td.text-sm-center = link_to 'Destroy', breakout, data: { confirm: 'Are you sure?' }, method: :delete
 
+= paginate @breakouts
+br
 br
 
 / = link_to 'New Breakout', new_breakout_path
