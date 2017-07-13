@@ -1,24 +1,24 @@
-h1 Listing breakouts
+h1 Listing breakouts (#{@breakouts.size})
 
-table
-  thead
+table.table.table-bordered.table-inverse
+  thead.thead-default
     tr
-      th Code
-      th Destination
-      th Parent
-      th
-      th
-      th
+      th.text-sm-center ID
+      th.text-sm-center Code
+      th.text-sm-center Destination
+      th.text-sm-center Parent
+      th.text-sm-center colspan="3" Actions
 
   tbody
     - @breakouts.each do |breakout|
       tr
-        td = breakout.code
-        td = breakout.destination
-        td = breakout.parent_id
-        td = link_to 'Show', breakout
-        td = link_to 'Edit', edit_breakout_path(breakout)
-        td = link_to 'Destroy', breakout, data: { confirm: 'Are you sure?' }, method: :delete
+        td.text-sm-center = breakout.id
+        td.text-sm-center = breakout.code
+        td.text-sm-center = breakout.destination
+        td.text-sm-center = breakout.parent_id
+        td.text-sm-center = link_to 'Show', breakout
+        td.text-sm-center = link_to 'Edit', edit_breakout_path(breakout)
+        td.text-sm-center = link_to 'Destroy', breakout, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
