@@ -10,6 +10,8 @@ class App.Breakouts extends App.Base
 
 
   index: =>
+    $('.breakout_parent_input').bind 'input', ->
+      $(this).closest('form').submit()
     return
 
 

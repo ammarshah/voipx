@@ -17,5 +17,6 @@
 //= require intlTelInput
 //= require libphonenumber/utils
 //= require chosen-jquery
+//= require toastr
 //= require rails_script
 //= require_tree .

@@ -45,6 +45,7 @@ class BreakoutsController < ApplicationController
       if @breakout.update(breakout_params)
         format.html { redirect_to @breakout, notice: 'Breakout was successfully updated.' }
         format.json { render :show, status: :ok, location: @breakout }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @breakout.errors, status: :unprocessable_entity }
