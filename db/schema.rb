@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707113021) do
+ActiveRecord::Schema.define(version: 20170721063049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 20170707113021) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
+  create_table "routes", force: :cascade do |t|
+    t.integer  "purchase_type"
+    t.float    "price"
+    t.integer  "quality_type"
+    t.integer  "breakout_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["breakout_id"], name: "index_routes_on_breakout_id", using: :btree
+  end
+
   create_table "selling_countries", id: false, force: :cascade do |t|
     t.integer "country_id", null: false
     t.integer "company_id", null: false
@@ -179,4 +189,5 @@ ActiveRecord::Schema.define(version: 20170707113021) do
 
   add_foreign_key "other_products", "companies"
   add_foreign_key "references", "companies"
+  add_foreign_key "routes", "breakouts"
 end
