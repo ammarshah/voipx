@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   end
   resources :users,     only: [:show, :edit, :update]
   resources :breakouts, only: [:index, :update]
+  get 'dashboard', to: 'dashboard#index'
 end
