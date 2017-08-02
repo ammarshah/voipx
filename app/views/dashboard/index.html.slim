@@ -1,2 +1,25 @@
-p.float-right Signed in as: #{current_user.email}
-h3 Dashboard index
+#dashboard
+  h2 Route Dashboard
+  br
+  br
+
+  = simple_form_for @route, html: {class: 'form-inline justify-content-center'} do |f|
+    .form-group
+      = f.select :purchase_type, Route.purchase_types.keys.map {|c| ["I want to #{c.humanize}", c]}, {include_blank: "Buy/Sell"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
+      
+      label.sr-only for="route_name"  Route Name
+      input#route_name.form-control.mb-2.mr-sm-2.mb-sm-0 placeholder="Enter Route Name" type="text"
+      
+      label.sr-only for="breakout"  Breakout
+      input#breakout.form-control.mb-2.mr-sm-2.mb-sm-0 placeholder="Enter Breakout" type="text"
+      = f.input :breakout_id, as: :hidden
+
+      label.sr-only for="route_price"  Route Price
+      .input-group.mb-2.mr-sm-2.mb-sm-0
+        .input-group-addon $
+        = f.input :price, class: 'form-control', placeholder: '0.00001', label: false, wrapper: false
+      
+      = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Select Route Type"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
+      
+      = f.submit "ADD", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
+      button.btn.btn-primary.mb-2.mr-sm-2.mb-sm-0 type="button" RESET

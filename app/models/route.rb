@@ -7,6 +7,6 @@ class Route < ApplicationRecord
   validates_numericality_of :price
 
   # Enum declarations
-  enum purchase_type: [:buy, :sell]
-  enum quality_type: [:cli, :non_cli]
+  enum purchase_types: [:buy, :sell]
+  enum quality_types: [:cli, :non_cli]
 end
