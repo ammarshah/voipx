@@ -10,6 +10,16 @@ class App.Dashboard extends App.Base
 
 
   index: =>
+    
+    $('#reset-btn').click ->
+      # reset route form fields
+      $('#route_name').val('');
+      $('#breakout').val('');
+      $('#route_price').val('');
+      $('#route_purchase_type').val('');
+      $('#route_quality_type').val('');
+      $('#route_breakout_id').val('');
+
     return
 
 

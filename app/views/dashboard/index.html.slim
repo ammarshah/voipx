@@ -22,4 +22,4 @@
       = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Select Route Type"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
       
       = f.submit "ADD", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
-      button.btn.btn-primary.mb-2.mr-sm-2.mb-sm-0 type="button" RESET
+      button.btn.btn-primary.mb-2.mr-sm-2.mb-sm-0 type="button" id="reset-btn" RESET
