@@ -25,6 +25,8 @@ gem 'chosen-rails'
 gem "roo", "~> 2.7.0"
 gem 'toastr-rails'
 gem 'kaminari'
+gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
