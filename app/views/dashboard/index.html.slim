@@ -8,10 +8,10 @@
       = f.select :purchase_type, Route.purchase_types.keys.map {|c| ["I want to #{c.humanize}", c]}, {include_blank: "Buy/Sell"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
       
       label.sr-only for="route_name"  Route Name
-      = autocomplete_field_tag 'route_name', '', autocomplete_breakout_destination_dashboard_index_path, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Route Name'
-      
+      = autocomplete_field_tag 'route_name', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#breakout'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Route Name'
+
       label.sr-only for="breakout"  Breakout
-      = autocomplete_field_tag 'breakout', '', autocomplete_breakout_code_dashboard_index_path, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Breakout'
+      = autocomplete_field_tag 'breakout', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_name'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Breakout'
       = f.input :breakout_id, as: :hidden
 
       label.sr-only for="route_price"  Route Price
