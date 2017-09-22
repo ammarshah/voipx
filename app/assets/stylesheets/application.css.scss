@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require chosen
+ *= require toastr
+ *= require jquery-ui
  *= require_tree .
  *= require_self
  */

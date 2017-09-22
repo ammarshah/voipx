@@ -1,0 +1,31 @@
+h1 Listing breakouts (#{@breakouts.total_count})
+br
+= paginate @breakouts
+table.table.table-bordered.table-inverse
+  thead.thead-default
+    tr
+      th.text-sm-center ID
+      th.text-sm-center Code
+      th.text-sm-center Destination
+      th.text-sm-center Parent
+      / th.text-sm-center colspan="3" Actions
+
+  tbody
+    - @breakouts.each do |breakout|
+      tr
+        td.text-sm-center = breakout.id
+        td.text-sm-center = breakout.code
+        td.text-sm-center = breakout.destination
+        td.text-sm-center
+          = simple_form_for breakout, remote: true do |f|
+            = f.input_field :parent_id, label: false, as: :string, id: false, class: 'breakout_parent_input'
+
+        / td.text-sm-center = link_to 'Show', breakout
+        / td.text-sm-center = link_to 'Edit', edit_breakout_path(breakout)
+        / td.text-sm-center = link_to 'Destroy', breakout, data: { confirm: 'Are you sure?' }, method: :delete
+
+= paginate @breakouts
+br
+br
+
+/ = link_to 'New Breakout', new_breakout_path

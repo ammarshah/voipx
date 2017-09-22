@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620100037) do
+ActiveRecord::Schema.define(version: 20170922155303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "breakouts", force: :cascade do |t|
+    t.string   "code"
+    t.string   "destination"
+    t.integer  "parent_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["code"], name: "index_breakouts_on_code", unique: true, using: :btree
+    t.index ["destination"], name: "index_breakouts_on_destination", using: :btree
+  end
 
   create_table "buying_countries", id: false, force: :cascade do |t|
     t.integer "country_id", null: false
@@ -106,6 +116,18 @@ ActiveRecord::Schema.define(version: 20170620100037) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
+  create_table "routes", force: :cascade do |t|
+    t.integer  "purchase_type"
+    t.float    "price"
+    t.integer  "quality_type"
+    t.integer  "breakout_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+    t.index ["breakout_id"], name: "index_routes_on_breakout_id", using: :btree
+    t.index ["user_id"], name: "index_routes_on_user_id", using: :btree
+  end
+
   create_table "selling_countries", id: false, force: :cascade do |t|
     t.integer "country_id", null: false
     t.integer "company_id", null: false
@@ -170,4 +192,6 @@ ActiveRecord::Schema.define(version: 20170620100037) do
 
   add_foreign_key "other_products", "companies"
   add_foreign_key "references", "companies"
+  add_foreign_key "routes", "breakouts"
+  add_foreign_key "routes", "users"
 end

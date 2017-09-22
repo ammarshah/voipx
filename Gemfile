@@ -22,6 +22,11 @@ gem 'simple_form'
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3.0'
 gem 'chosen-rails'
+gem "roo", "~> 2.7.0"
+gem 'toastr-rails'
+gem 'kaminari'
+gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
 group :development, :test do
   gem 'byebug', platform: :mri
 end

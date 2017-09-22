@@ -1,0 +1,56 @@
+#dashboard
+  h2 Route Dashboard
+  br
+  br
+
+  = simple_form_for @route, html: {class: 'form-inline justify-content-center'} do |f|
+    .form-group
+      = f.select :purchase_type, Route.purchase_types.keys.map {|c| ["I want to #{c.humanize}", c]}, {include_blank: "Buy/Sell"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
+      
+      label.sr-only for="route_name"  Route Name
+      = autocomplete_field_tag 'route_name', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#breakout'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Route Name'
+
+      label.sr-only for="breakout"  Breakout
+      = autocomplete_field_tag 'breakout', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_name'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Breakout'
+      = f.input :breakout_id, as: :hidden
+
+      label.sr-only for="route_price"  Route Price
+      .input-group.mb-2.mr-sm-2.mb-sm-0
+        .input-group-addon $
+        = f.input :price, class: 'form-control', placeholder: '0.00001', label: false, wrapper: false
+      
+      = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Select Route Type"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
+      
+      = f.submit "ADD", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
+      button.btn.btn-primary.mb-2.mr-sm-2.mb-sm-0 type="button" id="reset-btn" RESET
+br
+br
+br
+br
+br
+br
+.row
+  /.col-md-12
+    p Select any route to see the matches.
+
+  .col-md-6
+    table.table.table-sm.table-bordered.table-hover
+      thead.thead-inverse
+        tr
+          th Routes
+          th Breakouts
+          th Price
+          th Type
+          th Buy/Sell
+      tbody
+        - if @my_routes.any?
+          - @my_routes.each do |route|
+            tr
+              td #{route.breakout.destination}
+              td #{route.breakout.code}
+              td $#{route.price}
+              td #{route.quality_type.upcase}
+              td #{route.purchase_type.humanize}
+        - else
+          tr
+            td colspan="5" Please add routes to see matches
