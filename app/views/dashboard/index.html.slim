@@ -43,10 +43,14 @@ br
           th Type
           th Buy/Sell
       tbody
-        - @my_routes.each do |route|
+        - if @my_routes.any?
+          - @my_routes.each do |route|
+            tr
+              td #{route.breakout.destination}
+              td #{route.breakout.code}
+              td $#{route.price}
+              td #{route.quality_type.upcase}
+              td #{route.purchase_type.humanize}
+        - else
           tr
-            td #{route.breakout.destination}
-            td #{route.breakout.code}
-            td $#{route.price}
-            td #{route.quality_type.upcase}
-            td #{route.purchase_type.humanize}
+            td colspan="5" Please add routes to see matches
