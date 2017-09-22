@@ -5,5 +5,6 @@ class DashboardController < ApplicationController
   
   def index
     @route = Route.new
+    @my_routes = current_user.routes.includes(:breakout)
   end
 end

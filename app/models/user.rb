@@ -32,6 +32,7 @@ class User < ApplicationRecord
 
   # Associations
   belongs_to :company, optional: true
+  has_many :routes
 
   # Nested Attributes for company
   accepts_nested_attributes_for :company,
