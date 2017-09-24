@@ -30,9 +30,6 @@ br
 br
 br
 .row
-  /.col-md-12
-    p Select any route to see the matches.
-
   .col-md-6
     table.table.table-sm.table-bordered.table-hover
       thead.thead-inverse
@@ -45,7 +42,7 @@ br
       tbody
         - if @my_routes.any?
           - @my_routes.each do |route|
-            tr
+            tr.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
               td #{route.breakout.destination}
               td #{route.breakout.code}
               td $#{route.price}
@@ -54,3 +51,14 @@ br
         - else
           tr
             td colspan="5" Please add routes to see matches
+
+  .col-md-6
+    table.table.table-sm.table-bordered.table-hover
+      thead.thead-inverse
+        tr
+          th Matched Routes
+          th Price
+          th#buyer_seller_type Buyer/Seller
+      tbody#matched_routes
+        tr
+          td colspan="5" Please select any of your added route to see matches

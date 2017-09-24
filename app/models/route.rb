@@ -10,4 +10,9 @@ class Route < ApplicationRecord
   # Enum declarations
   enum purchase_type: [:buy, :sell]
   enum quality_type: [:cli, :non_cli]
+
+  def self.get_matches(destination, breakout, price, purchase_type, quality_type)
+    # TODO
+    self.all
+  end
 end

@@ -1,0 +1,13 @@
+<% routes.each do |route| %>
+  <tr>
+    <td>
+      <%= route.breakout.destination %>
+    </td>
+    <td>
+      <%= route.purchase_type.humanize + 'ing at $' + route.price.to_s %>
+    </td>
+    <td>
+      <%= route.user.name %>
+    </td>
+  </tr>
+<% end %>

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [] do
     get :autocomplete_breakout_code, on: :collection
     get :autocomplete_breakout_destination, on: :collection
+    post :match_route, on: :collection
   end
   resources :routes, only: [:new, :create]
   
