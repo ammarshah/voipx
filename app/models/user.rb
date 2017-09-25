@@ -9,6 +9,9 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Mailboxer
+  acts_as_messageable
+
   # Paperclip
   has_attached_file :photo, styles: {
     thumb: '100x100>',
@@ -43,6 +46,14 @@ class User < ApplicationRecord
   after_create :assign_role
   before_update :assign_company, if: :company_already_exists?
   after_update :assign_company_admin_role, if: :company_id_changed?
+
+  def mailboxer_name
+    self.name
+  end
+
+  def mailboxer_email(object)
+    self.email
+  end
 
   def country_name
     return if country_code.blank?

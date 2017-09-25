@@ -6,6 +6,7 @@ html
       = content_for?(:title) ? yield(:title) : 'Voipx'
     meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Voipx'}"
     == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
+    == stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     == csrf_meta_tags
   body

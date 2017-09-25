@@ -1,0 +1,15 @@
+<div class="media">
+  <a href="<%= url_for(conversation.originator) %>">
+    <img class="d-flex mr-3" src="<%= conversation.originator.photo.url(:thumb) %>" alt="..." height="64" width="64">
+  </a>
+  <div class="media-body">
+    <h5 class="mt-0">
+      <%= conversation.originator.name %> <br>
+      <small class="text-muted"><b>Subject: </b><i><%= conversation.subject %></i></small><br>
+      <small class="text-muted"><b>Date: </b><i><%= conversation.messages.last.created_at.strftime("%A, %b %d, %Y at %I:%M%p") %></i></small>
+    </h5>
+    <%= truncate conversation.messages.last.body, length: 145 %>
+    <%= link_to "View", conversation_path(conversation), class: "btn btn-outline-primary btn-sm pull-right" %>
+    <div class="spacer"></div>
+  </div>
+</div>
