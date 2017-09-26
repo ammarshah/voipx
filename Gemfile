@@ -27,6 +27,7 @@ gem 'toastr-rails'
 gem 'kaminari'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
+gem 'mailboxer'
 group :development, :test do
   gem 'byebug', platform: :mri
 end

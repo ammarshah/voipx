@@ -1,0 +1,22 @@
+<ul class="nav nav-pills flex-column">
+  <li class="nav-item">
+    <%= link_to mailbox_inbox_path, class: "nav-link #{active_page(:inbox)}" do  %>
+        <span class="badge badge-pill badge-danger pull-right"><%=unread_messages_count%></span>
+        <em class="fa fa-inbox fa-lg"></em>
+        <span>Inbox</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to mailbox_sent_path, class: "nav-link #{active_page(:sent)}" do %>
+        <em class="fa fa-paper-plane-o fa-lg"></em>
+        <span>Sent</span>
+    <% end %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to mailbox_trash_path, class: "nav-link #{active_page(:trash)}" do %>
+        <em class="fa fa-trash-o fa-lg"></em>
+        <span>Trash</span>
+    <% end %>
+  </li>
+</ul>
