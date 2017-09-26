@@ -1,7 +1,7 @@
 <%= form_for :conversation, url: :conversations, html: { class: "" } do |f| %>
     <div class="form-group">
-      <%= f.label :recipients %>
-      <%= f.select(:recipients, User.all.collect {|p| [ p.name, p.id ] }, {}, { class: "chosen-select form-control" })%>
+      <%= f.label :recipient %>
+      <%= f.select(:recipient, User.where.not(id: current_user.id).collect {|p| [ p.name, p.id ] }, {}, { class: "form-control" })%>
     </div>
     <div class="form-group">
       <%= f.label :subject %>
