@@ -1,9 +1,11 @@
 ul.navbar-nav.mr-auto
-  li.nav-item.active
-    = link_to 'Home', root_path, class: 'nav-link'
+  / li.nav-item.active
+  /   = link_to 'Home', root_path, class: 'nav-link'
 
 ul.navbar-nav.pull-right
   - if user_signed_in?
+    li.nav-item
+      = link_to 'Dashboard', root_path, class: 'nav-link'
     li.nav-item
       = link_to "Messages", mailbox_inbox_path, class: 'nav-link'
     li.nav-item

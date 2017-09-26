@@ -1,6 +1,73 @@
-nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
-  button.navbar-toggler.navbar-toggler-right aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
-    span.navbar-toggler-icon
-  a.navbar-brand href="/"  Voipx
-  #navbarSupportedContent.collapse.navbar-collapse
-    = render 'layouts/navigation_links'
+<nav class="navbar navbar-light bg-faded">
+  
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  / Brand Logo -- START
+  <ul class="nav navbar-nav mx-auto">
+    <li class="nav-item">
+      = link_to(image_tag("logo.png"), root_path)
+    </li>
+  </ul>
+  / Brand Logo -- END
+
+  / <span class="navbar-text">&nbsp;</span>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <div class="row">
+      <div class="spacer"></div>
+
+      / Nav links -- START
+      <div class="col-md-6">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="/">Home
+          </li>
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="#">Features</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="#">Pricing</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+      / Nav links -- END
+
+      / Search form -- START
+      <div class="col-md-6">
+        <form class="form-inline pull-right">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+      / Search form -- END
+
+    </div>
+  </div>
+</nav>
+
+
+/ TODO: Move it to a separate partial, possibly inside '_nav_links_for_auth.slim'
+- if user_signed_in?
+  nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse
+    ul.nav.navbar-nav.mx-auto
+      li.nav-item
+        = link_to 'DASHBOARD', dashboard_path, class: 'nav-link sub-nav-color-voipx'
+      li.nav-item
+        = link_to 'SEARCH', "javascript:void(0)", class: 'nav-link sub-nav-color-voipx'
+      li.nav-item
+        = link_to 'CONTACTS', "javascript:void(0)", class: 'nav-link sub-nav-color-voipx'
+      li.nav-item
+        = link_to 'MESSAGES', mailbox_inbox_path, class: 'nav-link sub-nav-color-voipx'
+      li.nav-item
+        = link_to 'FAVORITES', "javascript:void(0)", class: 'nav-link sub-nav-color-voipx'
+      li.nav-item.dropdown
+        <a class="nav-link dropdown-toggle sub-nav-color-voipx" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="#{current_user.photo.url(:thumb)}" width="25%" height="25%"></a>
+        .dropdown-menu
+          = link_to "Profile", user_path(current_user), class: 'dropdown-item sub-nav-color-voipx'
+          .dropdown-divider
+          = link_to "Sign out", destroy_user_session_path, method: 'delete', class: 'dropdown-item sub-nav-color-red'

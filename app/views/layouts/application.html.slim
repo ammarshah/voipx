@@ -3,8 +3,9 @@ html
   head
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     title
-      = content_for?(:title) ? yield(:title) : 'Voipx'
-    meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Voipx'}"
+      = content_for?(:title) ? yield(:title) : 'VoIPx - Main'
+    meta name="description" content="#{content_for?(:description) ? yield(:description) : 'VoIPx - Main'}"
+    link rel="icon" type="image/png" href="#{asset_path('favicon.png')}"
     == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
     == stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
@@ -12,8 +13,8 @@ html
   body
     header
       == render 'layouts/navigation'
-    main[role="main"]
       == render 'layouts/messages'
+    main[role="main"]
       == yield
 
     = include_rails_script
