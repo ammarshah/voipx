@@ -1,8 +1,8 @@
 <% @receipts.each do |receipt| %>
     <% message = receipt.message %>
     <div class="media">
-      <a href="<%= url_for(conversation.originator) %>">
-        <img class="d-flex mr-3" src="<%= conversation.originator.photo.url(:thumb) %>" alt="..." height="64" width="64">
+      <a href="<%= url_for(message.sender) %>">
+        <img class="d-flex mr-3" src="<%= message.sender.photo.url(:thumb) %>" alt="..." height="64" width="64">
       </a>
       <div class="media-body">
         <h5 class="mt-0">

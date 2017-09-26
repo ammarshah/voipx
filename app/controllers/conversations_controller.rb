@@ -5,8 +5,8 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    recipients = User.where(id: conversation_params[:recipients])
-    conversation = current_user.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
+    recipient = User.where(id: conversation_params[:recipient])
+    conversation = current_user.send_message(recipient, conversation_params[:body], conversation_params[:subject]).conversation
     flash[:notice] = "Your message was successfully sent!"
     redirect_to conversation_path(conversation)
   end
@@ -38,7 +38,7 @@ class ConversationsController < ApplicationController
   private
 
   def conversation_params
-    params.require(:conversation).permit(:subject, :body, recipients:[])
+    params.require(:conversation).permit(:subject, :body, :recipient)
   end
 
   def message_params
