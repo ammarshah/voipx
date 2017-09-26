@@ -9,5 +9,12 @@
     <td>
       <%= route.user.name %>
     </td>
+    <td>
+      <% purchase_sentence = route.purchase_type.humanize + 'ing at $' + route.price.to_s %>
+      <% subject = route.breakout.destination + ' (' + route.breakout.code + ')' + ' - ' + route.quality_type.upcase + ' - ' + purchase_sentence %>
+      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#messageModal" data-recipient="<%= route.user.id%>" data-subject="<%= subject %>" data-profile-url="<%= url_for(route.user) %>" data-photo-url="<%= route.user.photo.url(:thumb) %>" data-name="<%= route.user.name %>" data-purchase-sentence="<%= purchase_sentence %>" data-destination="<%= route.breakout.destination %>" data-breakout="<%= route.breakout.code %>" data-price="<%= route.price %>" data-quality-type="<%= route.quality_type.upcase %>" >
+        Message
+      </button>
+    </td>
   </tr>
 <% end %>

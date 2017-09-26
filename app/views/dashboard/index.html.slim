@@ -22,7 +22,7 @@
       = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Select Route Type"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
       
       = f.submit "ADD", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
-      button.btn.btn-primary.mb-2.mr-sm-2.mb-sm-0 type="button" id="reset-btn" RESET
+      button.btn.btn-secondary.mb-2.mr-sm-2.mb-sm-0 type="button" id="reset-btn" RESET
 br
 br
 br
@@ -59,6 +59,10 @@ br
           th Matched Routes
           th Price
           th#buyer_seller_type Buyer/Seller
+          th Actions
       tbody#matched_routes
         tr
           td colspan="5" Please select any of your added route to see matches
+
+
+== render "shared/message_modal"
