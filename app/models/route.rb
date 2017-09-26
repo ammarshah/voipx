@@ -12,7 +12,10 @@ class Route < ApplicationRecord
   enum quality_type: [:cli, :non_cli]
 
   def self.get_matches(destination, breakout, price, purchase_type, quality_type)
-    # TODO
-    self.all
+    if purchase_type == "buy"
+      self.where('(purchase_type= ? AND price <= ?)', 1, price.to_f)
+    else
+      self.where('(purchase_type= ? AND price >= ?)', 0, price.to_f)
+    end
   end
 end
