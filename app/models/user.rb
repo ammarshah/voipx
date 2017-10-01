@@ -26,7 +26,7 @@ class User < ApplicationRecord
   }, default_url: "/missing-images/:style/missing-cover.jpg"
 
   # Validations
-  validates_presence_of :name
+  validates_presence_of :first_name, :last_name
   # validates_presence_of :country_code, on: :update
   # validates             :facebook_url, :twitter_url, :linkedin_url, url: { allow_blank: true }
   validate              :email_with_company_website, if: :adding_company?
@@ -46,6 +46,10 @@ class User < ApplicationRecord
   after_create :assign_role
   before_update :assign_company, if: :company_already_exists?
   after_update :assign_company_admin_role, if: :company_id_changed?
+
+  def name
+    self.first_name + " " + self.last_name if self.first_name and self.last_name
+  end
 
   def mailboxer_name
     self.name

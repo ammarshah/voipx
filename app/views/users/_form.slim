@@ -5,7 +5,8 @@ br
 
   h3 Personal Details:
   .form-inputs
-    = f.input :name
+    = f.input :first_name
+    = f.input :last_name
     = f.input :position
     = f.input :about, label: "About me"
     = image_tag @user.photo.url(:thumb) if @user.photo.present?
