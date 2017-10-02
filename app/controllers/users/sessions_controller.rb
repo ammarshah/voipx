@@ -24,7 +24,7 @@ class Users::SessionsController < Devise::SessionsController
   # end
   def after_sign_in_path_for(resource)
     if resource.sign_in_count == 1
-      edit_user_path(resource)
+      edit_user_path(resource, is_first_login: "yes")
     else
       dashboard_path
     end

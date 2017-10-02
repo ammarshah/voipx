@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @first_login = true if params[:is_first_login]
     @user.company || @user.build_company
   end
 
