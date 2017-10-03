@@ -1,1 +1,12 @@
-toastr.success('Breakout updated.');
+<% if @breakout.errors.any? %>
+  toastr.error('\
+                <ul>\
+                  <% @breakout.errors.full_messages.each do |msg| %>\
+                    <li><%= msg %></li>\
+                  <% end %>\
+                </ul>\
+              ')
+
+<% else %>
+  toastr.success('Breakout updated.');
+<% end %>
