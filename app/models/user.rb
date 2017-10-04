@@ -125,15 +125,6 @@ class User < ApplicationRecord
     end
   end
 
-  def company_website_domain(company)
-    website = "http://#{company.website}"
-    uri = Addressable::URI.parse(website)
-    host = uri.host.downcase
-    host = host.start_with?('www.') ? host[4..-1] : host
-    # host.split('.').first
-    return host
-  end
-
   def email_domain
     # self.email.gsub(/.+@([^.]+).+/, '\1')
     self.email.split('@').second
@@ -149,10 +140,10 @@ class User < ApplicationRecord
         company = Company.find_by_id(self.selected_company_id)
       end
 
-      if company_website_domain(company) == email_domain
+      if Company.website_domain(company) == email_domain
         return true
       else
-        errors.add(:email, "Use your official email address. e.g : someone@" + company_website_domain(company))
+        errors.add(:email, "Use your official email address. e.g : someone@" + Company.website_domain(company))
         return false
       end
     end
