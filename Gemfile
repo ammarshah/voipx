@@ -28,6 +28,7 @@ gem 'kaminari'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem 'mailboxer'
+gem 'sendinblue'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
