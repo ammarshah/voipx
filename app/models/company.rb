@@ -65,8 +65,21 @@ class Company < ApplicationRecord
     end
   end
 
+  def self.website_domain(company)
+    website = "http://#{company.website}"
+    uri = Addressable::URI.parse(website)
+    host = uri.host.downcase
+    host = host.start_with?('www.') ? host[4..-1] : host
+    # host.split('.').first
+    return host
+  end
+
   def website_validator
-    errors.add(:website, "is not a valid URL") unless website_valid?
+    if website_valid?
+      errors.add(:website, "You can't use " + self.website + " as your website") if EmailProviderDomain.pluck(:name).include?(Company.website_domain(self))
+    else
+      errors.add(:website, "is not a valid URL")
+    end
   end
 
   def website_valid?
