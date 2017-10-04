@@ -7,7 +7,7 @@ class Company < ApplicationRecord
   }, default_url: "/missing-images/:style/missing-profile.png"
 
   # Associations
-  has_many :users, dependent: :destroy
+  has_many :users, dependent: :nullify
   has_many :reports, dependent: :destroy
   has_many :references, dependent: :destroy
   has_and_belongs_to_many :products
