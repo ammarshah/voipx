@@ -19,7 +19,7 @@
       <div class="spacer"></div>
 
       / Nav links -- START
-      <div class="col-md-6">
+      <div class="col-md-4">
         <ul class="list-inline">
           <li class="list-inline-item">
             <a class="nav-link btn btn-outline-primary" href="/">Home
@@ -38,11 +38,23 @@
       / Nav links -- END
 
       / Search form -- START
-      <div class="col-md-6">
-        <form class="form-inline pull-right">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+      <div class="col-md-8">
+        = simple_form_for :search_navbar, url: search_path, html: {class: 'form-inline pull-right'} do |f|
+          .form-group
+            = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control mr-sm-2', style: "width: 139px"}
+            
+            = autocomplete_field_tag 'search_navbar[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_navbar_breakout'}, class: 'form-control mr-sm-2', placeholder: 'Route Name', style: "width: 115px"
+
+            = autocomplete_field_tag 'search_navbar[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_navbar_destination'}, class: 'form-control mr-sm-2', placeholder: 'Breakout', style: "width: 90px"
+
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon $
+              = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.01', style: "width: 81px"}, label: false, wrapper: false
+            
+            = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {}, {class: 'form-control mr-sm-2', style: "width: 70px"}
+
+            = button_tag '', class: 'btn btn-outline-secondary' do
+              i.fa.fa-search.fa-lg
       </div>
       / Search form -- END
 

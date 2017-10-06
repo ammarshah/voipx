@@ -9,8 +9,11 @@ class DashboardController < ApplicationController
   end
 
   def match_route
-    destination, breakout, price, purchase_type, quality_type = params[:destination], params[:breakout], params[:price], params[:purchase_type], params[:quality_type]
-
-    @routes = Route.get_matches(destination, breakout, price, purchase_type, quality_type)
+    @routes = Route.get_matches(search_params)
   end
+
+  private
+    def search_params
+      params.require(:route).permit(:destination, :breakout, :price, :purchase_type, :quality_type)
+    end
 end
