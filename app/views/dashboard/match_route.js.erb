@@ -1,4 +1,7 @@
 $("#matched_routes").html('Fetching results...');
-$("#buyer_seller_type").html('<%= @routes.first.purchase_type.humanize %>er');
-
-$("#matched_routes").html("<%= escape_javascript render(partial: 'matched_routes_row', locals: {routes: @routes}) %>");
+<% if @routes.any? %>
+  $("#buyer_seller_type").html('<%= @routes.first.purchase_type.humanize %>er');
+  $("#matched_routes").html("<%= escape_javascript render(partial: 'matched_routes_row', locals: {routes: @routes}) %>");
+<% else %>
+  $("#matched_routes").html('No matches found');
+<% end %>

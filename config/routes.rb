@@ -33,4 +33,7 @@ Rails.application.routes.draw do
       post :untrash
     end
   end
+
+  get 'search', to: 'search#index'
+  post 'search', to: 'search#index'
 end
