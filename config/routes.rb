@@ -35,5 +35,4 @@ Rails.application.routes.draw do
   end
 
   get 'search', to: 'search#index'
-  post 'search', to: 'search#index'
 end

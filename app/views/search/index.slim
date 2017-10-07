@@ -1,0 +1,55 @@
+#center-content
+  h2 Search Routes
+  br
+  br
+
+  = simple_form_for :search, url: search_path, method: :get, html: {class: 'form-inline justify-content-center'} do |f|
+    .form-group
+      = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {selected: params[:search].try(:[], :purchase_type)}, {class: 'form-control mr-sm-2'}
+      
+      = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_breakout'}, class: 'form-control mr-sm-2', placeholder: 'Route Name'
+
+      = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_destination'}, class: 'form-control mr-sm-2', placeholder: 'Breakout'
+
+      .input-group.mb-2.mr-sm-2.mb-sm-0
+        .input-group-addon $
+        = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.01', value: params[:search].try(:[], :price)}, label: false, wrapper: false
+      
+      = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {selected: params[:search].try(:[], :quality_type)}, {class: 'form-control mr-sm-2'}
+
+      = f.submit "Show Matches", name: nil, class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
+br
+br
+br
+br
+br
+br
+.row
+  .col-md-12
+    table.table.table-sm.table-bordered.table-hover
+      thead.thead-inverse
+        tr
+          th Routes
+          th Breakouts
+          th Price
+          th Type
+          th Buy/Sell
+          th User Profile
+      tbody
+        - if defined?(@routes)
+          - if @routes.any?
+            - @routes.each do |route|
+              tr
+                td #{route.breakout.destination}
+                td #{route.breakout.code}
+                td $#{route.price}
+                td #{route.quality_type.upcase}
+                td #{route.purchase_type.humanize}
+                td
+                  = link_to route.user.name, user_path(route.user), target: "_blank"
+          - else
+            tr
+              td colspan="6" No matches found
+        - else
+          tr
+            td colspan="6" Please search to see matches
