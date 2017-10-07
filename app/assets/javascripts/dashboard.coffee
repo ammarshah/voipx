@@ -13,8 +13,8 @@ class App.Dashboard extends App.Base
     
     $('#reset-btn').click ->
       # reset route form fields
-      $('#route_name').val('');
-      $('#breakout').val('');
+      $('#route_destination').val('');
+      $('#route_breakout').val('');
       $('#route_price').val('');
       $('#route_purchase_type').val('');
       $('#route_quality_type').val('');
