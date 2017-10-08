@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   autocomplete :breakout, :destination, extra_data: [:code]
   
   def index
-    @route = Route.new
+    @route = current_user.routes.build
     @my_routes = current_user.routes.includes(:breakout)
   end
 
