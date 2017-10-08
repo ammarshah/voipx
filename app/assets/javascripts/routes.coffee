@@ -23,4 +23,5 @@ class App.Routes extends App.Base
 
 
   edit: =>
+    new Utility.DashboardControls
     return

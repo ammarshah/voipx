@@ -20,6 +20,7 @@ br
           th Price
           th Type
           th Buy/Sell
+          th Actions
       tbody
         - if @my_routes.any?
           - @my_routes.each do |route|
@@ -29,6 +30,9 @@ br
               td $#{route.price}
               td #{route.quality_type.upcase}
               td #{route.purchase_type.humanize}
+              td
+                = link_to edit_route_path(route) do
+                  i.fa.fa-pencil aria-hidden="true"
         - else
           tr
             td colspan="5" Please add routes to see matches
