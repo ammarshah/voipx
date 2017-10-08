@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get :autocomplete_breakout_destination, on: :collection
     post :match_route, on: :collection
   end
-  resources :routes, only: [:create, :edit, :update]
+  resources :routes, only: [:create, :edit, :update, :destroy]
   
   # mailbox folder routes
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox

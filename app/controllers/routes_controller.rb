@@ -1,7 +1,7 @@
 class RoutesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_route, only: [:edit, :update]
-  before_action :verify_user, only: [:edit, :update]
+  before_action :set_route, only: [:edit, :update, :destroy]
+  before_action :verify_user, only: [:edit, :update, :destroy]
 
   def create
     @route = current_user.routes.new(route_params)
@@ -26,6 +26,13 @@ class RoutesController < ApplicationController
       else
         format.html { render :edit }
       end
+    end
+  end
+
+  def destroy
+    @route.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboard_path, notice: 'Route was successfully destroyed.' }
     end
   end
 

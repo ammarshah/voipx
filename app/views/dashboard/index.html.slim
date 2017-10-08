@@ -33,6 +33,9 @@ br
               td
                 = link_to edit_route_path(route) do
                   i.fa.fa-pencil aria-hidden="true"
+                |
+                = link_to route, class: 'pull-right', data: { confirm: 'Are you sure?' }, method: :delete do
+                  i.fa.fa-trash aria-hidden="true"
         - else
           tr
             td colspan="5" Please add routes to see matches
