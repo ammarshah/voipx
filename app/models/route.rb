@@ -21,13 +21,61 @@ class Route < ApplicationRecord
   enum purchase_type: [:buy, :sell]
   enum quality_type: [:cli, :non_cli]
 
-  def self.get_matches(search_params)
-    destination, breakout, price, purchase_type, quality_type = search_params[:destination], search_params[:breakout], search_params[:price], search_params[:purchase_type], search_params[:quality_type]
+
+  def self.filter_finder(finder)
+    where.not(user: finder)
+  end
+
+  def self.filter_breakout_or_destinations(breakout = nil, destinations = [])
+    return all if (breakout.blank? and destinations.blank?)
     
-    if purchase_type == "buy"
-      self.where('(purchase_type= ? AND price <= ?)', 1, price.to_f)
+    if breakout.blank?
+      where(breakout: destinations)
     else
-      self.where('(purchase_type= ? AND price >= ?)', 0, price.to_f)
+      where(breakout: breakout)
     end
+  end
+
+  def self.filter_purchase_type(purchase_type)
+    case purchase_type
+    when "buy", "sell"
+      where.not(purchase_type: purchase_type)
+    else # when 'any'
+      where(purchase_type: ["buy", "sell"])
+    end
+  end
+
+  def self.filter_quality_type(quality_type)
+    case quality_type
+    when "cli", "non_cli"
+      where(quality_type: quality_type)
+    else # when 'any'
+      where(quality_type: ["cli", "non_cli"])
+    end
+  end
+
+  def self.filter_price(price = nil, purchase_type)
+    return all if price.blank?
+
+    case purchase_type
+    when "buy"
+      where('price <= ?', price.to_f)
+    when "sell"
+      where('price >= ?', price.to_f)
+    else # when 'any'
+      where('(purchase_type = ? AND price <= ?) OR (purchase_type = ? AND price >= ?)',
+            purchase_types["sell"], price.to_f,
+            purchase_types["buy"], price.to_f)
+    end
+  end
+
+  def self.get_matches(search_params, finder = nil)
+    destinations, breakout, purchase_type, quality_type, price = Breakout.where("destination ILIKE ?", "%#{search_params[:destination]}%"), Breakout.find_by_code(search_params[:breakout]), search_params[:purchase_type], search_params[:quality_type], search_params[:price]
+
+    self.filter_finder(finder)
+        .filter_breakout_or_destinations(breakout, destinations)
+        .filter_purchase_type(purchase_type)
+        .filter_quality_type(quality_type)
+        .filter_price(price, purchase_type)
   end
 end

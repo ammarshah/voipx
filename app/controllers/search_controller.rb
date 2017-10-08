@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
-  def index 
-    @routes = Route.get_matches(search_params) if params[:search]
+  def index
+    @routes = Route.get_matches(search_params, current_user) if params[:search]
   end
 
   private
