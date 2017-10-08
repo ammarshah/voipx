@@ -8,10 +8,10 @@
     = f.select :purchase_type, Route.purchase_types.keys.map {|c| ["I want to #{c.humanize}", c]}, {include_blank: "Buy/Sell"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
     
     label.sr-only for="route_destination"  Route Name
-    = autocomplete_field_tag 'route[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Route Name'
+    = autocomplete_field_tag 'route[destination]', @route.breakout.try(:destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Route Name'
 
     label.sr-only for="route_breakout"  Breakout
-    = autocomplete_field_tag 'route[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Breakout'
+    = autocomplete_field_tag 'route[breakout]', @route.breakout.try(:code), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Breakout'
     = f.input :breakout_id, as: :hidden
 
     label.sr-only for="route_price"  Route Price
@@ -21,5 +21,9 @@
             
     = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Select Route Type"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
     
-    = f.submit "ADD", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
-    button.btn.btn-secondary.mb-2.mr-sm-2.mb-sm-0 type="button" id="reset-btn" RESET
+    - if @route.persisted?
+      = f.submit "UPDATE", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
+      = link_to "CANCEL", dashboard_path(), class: "btn btn-secondary mb-2 mr-sm-2 mb-sm-0"
+    - else
+      = f.submit "ADD", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'
+      button.btn.btn-secondary.mb-2.mr-sm-2.mb-sm-0 type="button" id="reset-btn" RESET
