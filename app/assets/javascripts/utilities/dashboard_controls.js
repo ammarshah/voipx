@@ -7,7 +7,20 @@ Utility.DashboardControls = (function() {
       $('#route_price').val('');
       $('#route_purchase_type').val('');
       $('#route_quality_type').val('');
-      return $('#route_breakout_id').val('');
+      $('#route_breakout_id').val('');
+      return
+    });
+
+    $("#route_breakout").on("input propertychange",function(){
+      $('#route_destination').val('');
+      $('#route_breakout_id').val('');
+      return
+    });
+
+    $("#route_destination").on("input propertychange",function(){
+      $('#route_breakout').val('');
+      $('#route_breakout_id').val('');
+      return
     });
 
     $('.match_route').click(function() {
@@ -22,7 +35,8 @@ Utility.DashboardControls = (function() {
           quality_type: dataset.qualityType
         }
       };
-      return $.post('/dashboard/match_route', data);
+      $.post('/dashboard/match_route', data);
+      return
     });
 
     $('#messageModal').on('shown.bs.modal', function(e) {
@@ -46,7 +60,8 @@ Utility.DashboardControls = (function() {
       $("#match_price").html(price);
       $("#match_quality_type").html(quality_type);
       $("#conversation_recipient").val(recipient_id);
-      return $("#conversation_subject").val(subject);
+      $("#conversation_subject").val(subject);
+      return
     });
 
     $('#send_message').click(function() {
