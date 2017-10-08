@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      route:
+        purchase_type: ""
+        quality_type: ""
+        breakout: ""
+        price: ""

@@ -18,6 +18,7 @@ class App.Routes extends App.Base
 
 
   new: =>
+    new Utility.DashboardControls
     return
 
 

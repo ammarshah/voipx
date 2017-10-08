@@ -8,7 +8,8 @@ class RoutesController < ApplicationController
       if @route.save
         format.html { redirect_to dashboard_path, notice: 'Route was successfully added.' }
       else
-        format.html { redirect_to dashboard_path, alert: 'Route was not added due to some errors.' }
+        @my_routes = current_user.routes.includes(:breakout) # when rendering a different conrtroller's action, we need to pass all the required variable in that view
+        format.html { render 'dashboard/index' }
       end
     end
   end

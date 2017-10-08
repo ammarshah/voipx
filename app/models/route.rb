@@ -1,11 +1,21 @@
 class Route < ApplicationRecord
   # Associations
-  belongs_to :breakout
+  belongs_to :breakout, optional: true # This `optional: true` parameter is just to avoid default belongs_to association error message 'must exist' from rails.
+                                       # Because we have specified our own validation for presence of breakout below and skipped all attribute names from validation error messages in en.yml locale file.
   belongs_to :user
 
   # Validations
-  validates_presence_of :purchase_type, :price, :quality_type
-  validates_numericality_of :price
+  validates :purchase_type, presence: {message: 'Please specify if you are buying or selling this route'}
+  validates :quality_type, presence: {message: 'Please select a route type'}
+  validates :price,
+                  presence:     {message: 'Please enter a price'},
+                  numericality: {
+                                  greater_than_or_equal_to: 0.001,
+                                  less_than_or_equal_to: 9.999,
+                                  message: 'Price must be a number from 0.001 to 9.999'
+                                }
+  validates :breakout, presence: {message: 'Please enter a Route or a Breakout and select one from a list that appears'} # custom validation message for belongs_to association defined above with `optional: true` paramater, which was obviously not required.
+
 
   # Enum declarations
   enum purchase_type: [:buy, :sell]
