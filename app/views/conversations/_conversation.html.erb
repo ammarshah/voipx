@@ -1,14 +1,24 @@
 <div class="media">
-  <a href="<%= url_for(conversation.originator) %>">
-    <img class="d-flex mr-3" src="<%= conversation.originator.photo.url(:thumb) %>" alt="..." height="64" width="64">
+  <% the_other_recipient = conversation.recipients.reject {|p| p.id == current_user.id}.last %>
+  <% my_messages = conversation.messages.select {|message| message.sender_id == current_user.id} %>
+  <a href="<%= url_for(the_other_recipient) %>">
+    <img class="d-flex mr-3" src="<%= the_other_recipient.photo.url(:thumb) %>" alt="..." height="64" width="64">
   </a>
   <div class="media-body">
     <h5 class="mt-0">
-      <%= conversation.originator.name %> <br>
+      <%= the_other_recipient.name %> <br>
       <small class="text-muted"><b>Subject: </b><i><%= conversation.subject %></i></small><br>
-      <small class="text-muted"><b>Date: </b><i><%= conversation.messages.last.created_at.strftime("%A, %b %d, %Y at %I:%M%p") %></i></small>
+      <% if params[:action] == "sent" %>
+        <small class="text-muted"><b>Date: </b><i><%= my_messages.last.created_at.strftime("%A, %b %d, %Y at %I:%M%p") %></i></small>
+      <% else %>  
+        <small class="text-muted"><b>Date: </b><i><%= conversation.messages.last.created_at.strftime("%A, %b %d, %Y at %I:%M%p") %></i></small>
+      <% end %>
     </h5>
-    <%= truncate conversation.messages.last.body, length: 145 %>
+    <% if params[:action] == "sent" %>
+      <%= truncate my_messages.last.body, length: 145 %>
+    <% else %>
+      <%= truncate conversation.messages.last.body, length: 145 %>
+    <% end %>
     <%= link_to "View", conversation_path(conversation), class: "btn btn-outline-primary btn-sm pull-right" %>
     <div class="spacer"></div>
   </div>
