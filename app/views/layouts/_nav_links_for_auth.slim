@@ -1,25 +1,18 @@
-ul.navbar-nav.mr-auto
-  / li.nav-item.active
-  /   = link_to 'Home', root_path, class: 'nav-link'
-
-ul.navbar-nav.pull-right
-  - if user_signed_in?
+nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse
+  ul.nav.navbar-nav.mx-auto
     li.nav-item
-      = link_to 'Dashboard', root_path, class: 'nav-link'
+      = link_to 'DASHBOARD', dashboard_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item
-      = link_to "Messages", mailbox_inbox_path, class: 'nav-link'
+      = link_to 'SEARCH', search_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item
-      = link_to 'Profile', user_path(current_user), class: 'nav-link'
-
-    / li.nav-item
-      = link_to 'Edit account', edit_user_registration_path, class: 'nav-link'
-
+      = link_to 'CONTACTS', "javascript:void(0)", class: 'nav-link sub-nav-color-voipx'
+    li.nav-item#unread-messages-count
+      = link_to "MESSAGES (#{unread_messages_count})", mailbox_inbox_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item
-      = link_to 'Sign out', destroy_user_session_path, :method=>'delete', class: 'nav-link'
-
-  - else
-    li.nav-item
-      = link_to 'Sign in', new_user_session_path, class: 'nav-link'
-
-    li.nav-item
-      = link_to 'Sign up', new_user_registration_path, class: 'nav-link'
+      = link_to 'FAVORITES', "javascript:void(0)", class: 'nav-link sub-nav-color-voipx'
+    li.nav-item.dropdown
+      <a class="nav-link dropdown-toggle sub-nav-color-voipx" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="#{current_user.photo.url(:thumb)}" width="25%" height="25%"></a>
+      .dropdown-menu
+        = link_to "Profile", user_path(current_user), class: 'dropdown-item sub-nav-color-voipx'
+        .dropdown-divider
+        = link_to "Sign out", destroy_user_session_path, method: 'delete', class: 'dropdown-item sub-nav-color-red'

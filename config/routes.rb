@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get :autocomplete_breakout_code, on: :collection
     get :autocomplete_breakout_destination, on: :collection
     post :match_route, on: :collection
+    get :unread_messages_count, on: :collection
   end
   resources :routes, only: [:create, :edit, :update, :destroy]
   

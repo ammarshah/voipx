@@ -12,6 +12,10 @@ class DashboardController < ApplicationController
     @routes = Route.get_matches(search_params, current_user)
   end
 
+  def unread_messages_count
+    render partial: "layouts/nav_links_for_auth"
+  end
+
   private
     def search_params
       params.require(:route).permit(:destination, :breakout, :price, :purchase_type, :quality_type)
