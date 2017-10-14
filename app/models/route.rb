@@ -22,18 +22,27 @@ class Route < ApplicationRecord
   enum quality_type: [:cli, :non_cli]
 
 
-  def self.filter_finder(finder)
-    where.not(user: finder)
-  end
-
-  def self.filter_breakout_or_destinations(breakout = nil, destinations = [])
+  def self.filter_breakout_or_destinations(breakout = nil, destinations = [], purchase_type)
     return all if (breakout.blank? and destinations.blank?)
     
     if breakout.blank?
       where(breakout: destinations)
     else
-      where(breakout: breakout)
+      case purchase_type
+      when "buy"
+        where('(purchase_type = ? AND breakout_id IN (?))', purchase_types["sell"], breakout.me_and_my_parents)
+      when "sell"
+        where('(purchase_type = ? AND breakout_id IN (?))', purchase_types["buy"], breakout.me_and_my_children)
+      else # when 'any'
+        where('(purchase_type = ? AND breakout_id IN (?)) OR (purchase_type = ? AND breakout_id IN (?))',
+            purchase_types["buy"], breakout.me_and_my_children,
+            purchase_types["sell"], breakout.me_and_my_parents)
+      end
     end
+  end
+
+  def self.filter_finder(finder)
+    where.not(user: finder)
   end
 
   def self.filter_purchase_type(purchase_type)
@@ -72,8 +81,8 @@ class Route < ApplicationRecord
   def self.get_matches(search_params, finder = nil)
     destinations, breakout, purchase_type, quality_type, price = Breakout.where("destination ILIKE ?", "%#{search_params[:destination]}%"), Breakout.find_by_code(search_params[:breakout]), search_params[:purchase_type], search_params[:quality_type], search_params[:price]
 
-    self.filter_finder(finder)
-        .filter_breakout_or_destinations(breakout, destinations)
+    self.filter_breakout_or_destinations(breakout, destinations, purchase_type)
+        .filter_finder(finder)
         .filter_purchase_type(purchase_type)
         .filter_quality_type(quality_type)
         .filter_price(price, purchase_type)

@@ -9,4 +9,36 @@ class Breakout < ApplicationRecord
 
   # Associations
   has_many :routes, dependent: :destroy
+
+  def me_and_my_parents
+    me_and_my_parents = []
+    me_and_my_parents << self # include myself
+    parent_id = self.parent_id
+
+    until parent_id.nil?
+      parent = Breakout.find_by_id(parent_id)
+      me_and_my_parents << parent # add each parent of mine
+      parent_id = parent.parent_id
+    end
+
+    me_and_my_parents
+  end
+
+  def me_and_my_children
+    me_and_my_children = []
+    me_and_my_children << self # include myself
+
+    children = Breakout.where(parent_id: self.id).to_a
+
+    children.each do |child|
+      me_and_my_children << child # add each child/grandchild of mine
+      
+      grandchildren = Breakout.where(parent_id: child.id)
+      grandchildren.each do |grandchild|
+        children << grandchild
+      end
+    end
+
+    me_and_my_children
+  end
 end
