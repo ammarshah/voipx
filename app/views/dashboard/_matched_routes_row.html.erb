@@ -7,7 +7,7 @@
       <%= route.purchase_type.humanize + 'ing at $' + route.price.to_s %>
     </td>
     <td>
-      <%= route.user.name %>
+      <%= link_to route.user.name, user_path(route.user), target: "_blank" %>
     </td>
     <td>
       <% purchase_sentence = route.purchase_type.humanize + 'ing at $' + route.price.to_s %>
