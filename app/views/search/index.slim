@@ -13,7 +13,7 @@
 
       .input-group.mb-2.mr-sm-2.mb-sm-0
         .input-group-addon $
-        = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.01', value: params[:search].try(:[], :price)}, label: false, wrapper: false
+        = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001', value: params[:search].try(:[], :price)}, label: false, wrapper: false
       
       = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {selected: params[:search].try(:[], :quality_type)}, {class: 'form-control mr-sm-2'}
 
