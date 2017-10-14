@@ -5,8 +5,8 @@ $ ->
     no_results_text: 'No results matched'
     width: '100%'
 
-  # setInterval (->
-  #   $('#dynamic').load '/dashboard/unread_messages_count'
-  #   return
-  # ), 3000
-  # return
+  setInterval (->
+    $('#dynamic').load '/dashboard/unread_messages_count'
+    return
+  ), 3000
+  return

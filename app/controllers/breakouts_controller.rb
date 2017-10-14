@@ -59,7 +59,7 @@ class BreakoutsController < ApplicationController
   def destroy
     @breakout.destroy
     respond_to do |format|
-      format.html { redirect_to breakouts_url, notice: 'Breakout was successfully destroyed.' }
+      format.html { redirect_to breakouts_url, notice: 'Breakout was successfully deleted.' }
       format.json { head :no_content }
     end
   end
