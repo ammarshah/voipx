@@ -32,7 +32,7 @@ class RoutesController < ApplicationController
   def destroy
     @route.destroy
     respond_to do |format|
-      format.html { redirect_to dashboard_path, notice: 'Route was successfully destroyed.' }
+      format.html { redirect_to dashboard_path, notice: 'Route was successfully deleted.' }
     end
   end
 

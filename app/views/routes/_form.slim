@@ -17,7 +17,7 @@
     label.sr-only for="route_price"  Route Price
     .input-group.mb-2.mr-sm-2.mb-sm-0
       .input-group-addon $
-      = f.input :price, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.01'}, label: false, wrapper: false, error: false
+      = f.input :price, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false, error: false
             
     = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Select Route Type"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
     

@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   
   def destroy
     @report.destroy
-    redirect_to edit_company_path(@company), notice: "D&B Report was successfully destroyed."
+    redirect_to edit_company_path(@company), notice: "D&B Report was successfully deleted."
   end
 
 
