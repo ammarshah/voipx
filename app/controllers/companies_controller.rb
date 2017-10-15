@@ -42,7 +42,7 @@ class CompaniesController < ApplicationController
 
     def verify_company_admin
       unless current_user.is_company_admin_of(@company)
-        redirect_to root_path, notice: "You are not authorized to access this page."
+        redirect_to root_path, alert: "You are not authorized to access this page."
       end
     end
 end

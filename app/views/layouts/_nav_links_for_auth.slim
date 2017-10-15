@@ -14,5 +14,8 @@ nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse
       <a class="nav-link dropdown-toggle sub-nav-color-voipx" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="#{current_user.photo.url(:thumb)}" width="25%" height="25%"></a>
       .dropdown-menu
         = link_to "Profile", user_path(current_user), class: 'dropdown-item sub-nav-color-voipx'
+        - if current_user.company.present?
+          .dropdown-divider
+          = link_to "Company Profile", company_path(current_user.company), class: 'dropdown-item sub-nav-color-voipx'
         .dropdown-divider
         = link_to "Sign out", destroy_user_session_path, method: 'delete', class: 'dropdown-item sub-nav-color-red'

@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     end
 
     def verify_user
-      redirect_to root_path, notice: "You are not authorized to access this page." unless current_user == @user
+      redirect_to root_path, alert: "You are not authorized to access this page." unless current_user == @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
