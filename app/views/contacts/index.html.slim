@@ -1,0 +1,24 @@
+#center-content
+  h2 Contacts
+
+br
+br
+.row
+  .col-md-12
+    table.table.table-sm.table-bordered.table-hover
+      thead.thead-inverse
+        tr
+          th Name
+          th Email
+          th Phone
+      tbody
+        - if @contacts.any?
+          - @contacts.each do |contact|
+            tr
+              td
+                = link_to contact.user.name, user_path(contact.user)
+              td #{contact.user.email}
+              td #{contact.user.phone}
+        - else
+          tr
+            td colspan="3" No contacts added yet
