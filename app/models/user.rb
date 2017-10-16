@@ -37,6 +37,7 @@ class User < ApplicationRecord
   belongs_to :company, optional: true
   has_many :routes, dependent: :destroy
   has_many :contacts, foreign_key: 'owner_id', dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   # Nested Attributes for company
   accepts_nested_attributes_for :company,

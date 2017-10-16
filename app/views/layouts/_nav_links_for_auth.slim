@@ -9,7 +9,7 @@ nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse
     li.nav-item#unread-messages-count
       = link_to "MESSAGES (#{unread_messages_count})", mailbox_inbox_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item
-      = link_to 'FAVORITES', "javascript:void(0)", class: 'nav-link sub-nav-color-voipx'
+      = link_to 'FAVORITES', favorites_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item.dropdown
       <a class="nav-link dropdown-toggle sub-nav-color-voipx" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="#{current_user.photo.url(:thumb)}" width="25%" height="25%"></a>
       .dropdown-menu

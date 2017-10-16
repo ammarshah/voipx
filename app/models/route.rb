@@ -3,6 +3,7 @@ class Route < ApplicationRecord
   belongs_to :breakout, optional: true # This `optional: true` parameter is just to avoid default belongs_to association error message 'must exist' from rails.
                                        # Because we have specified our own validation for presence of breakout below and skipped all attribute names from validation error messages in en.yml locale file.
   belongs_to :user
+  has_many :favorites, dependent: :destroy
 
   # Validations
   validates :purchase_type, presence: {message: 'Please specify if you are buying or selling this route'}
