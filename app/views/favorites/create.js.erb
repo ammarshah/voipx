@@ -1,0 +1,17 @@
+<% if @favorite.errors.any? %>
+  toastr.error('\
+                <ul>\
+                  <% @favorite.errors.full_messages.each do |msg| %>\
+                    <li><%= msg %></li>\
+                  <% end %>\
+                </ul>\
+              ')
+
+<% else %>
+  $("#favorite_<%= @favorite.route.id %>").html('\
+                                                <%= link_to @favorite, method: :delete, title: "Remove from favorites", remote: true do %>\
+                                                  <i class="fa fa-star"></i>\
+                                                <% end %>\
+                                                ');
+  toastr.success('Route added in Favorites.');
+<% end %>
