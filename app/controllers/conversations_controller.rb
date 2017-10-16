@@ -7,6 +7,9 @@ class ConversationsController < ApplicationController
   def create
     recipient = User.where(id: conversation_params[:recipient])
     conversation = current_user.send_message(recipient, conversation_params[:body], conversation_params[:subject]).conversation
+    unless current_user.contacts.pluck(:user_id).include?(recipient.first.id)
+      Contact.create(owner: current_user, user: recipient.first) # Add recipient to current_user contact list if not already added
+    end
     flash[:notice] = "Your message was successfully sent!"
     redirect_to conversation_path(conversation)
   end
@@ -20,6 +23,10 @@ class ConversationsController < ApplicationController
 
   def reply
     current_user.reply_to_conversation(conversation, message_params[:body])
+    recipient = conversation.participants.reject {|p| p.id == current_user.id}.last
+    unless current_user.contacts.pluck(:user_id).include?(recipient.id)
+      Contact.create(owner: current_user, user: recipient) # Add recipient to current_user contact list if not already added
+    end
     flash[:notice] = "Your reply message was successfully sent!"
     redirect_to conversation_path(conversation)
   end

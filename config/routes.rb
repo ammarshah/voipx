@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   end
 
   get 'search', to: 'search#index'
+
+  resources :contacts, only: [:index]
 end

@@ -5,7 +5,7 @@ nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse
     li.nav-item
       = link_to 'SEARCH', search_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item
-      = link_to 'CONTACTS', "javascript:void(0)", class: 'nav-link sub-nav-color-voipx'
+      = link_to 'CONTACTS', contacts_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item#unread-messages-count
       = link_to "MESSAGES (#{unread_messages_count})", mailbox_inbox_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item
