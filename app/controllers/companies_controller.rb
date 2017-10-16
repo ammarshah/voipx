@@ -4,9 +4,12 @@ class CompaniesController < ApplicationController
   before_action :verify_company_admin, only: [:edit, :update]
 
   def index
-    @companies = Company.all
+    @companies = Company.search(params[:search])
 
-    render json: @companies
+    respond_to do |format|
+      format.html
+      format.json { render json: @companies }
+    end
   end
 
   def show

@@ -36,6 +36,14 @@ class Company < ApplicationRecord
   accepts_nested_attributes_for :references, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :other_products, reject_if: :all_blank, allow_destroy: true
 
+  def self.search(search)
+    if search
+      where('name ILIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
+
   def website_with_protocol
     "http://#{self[:website]}"
   end
