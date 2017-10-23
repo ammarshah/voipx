@@ -53,6 +53,20 @@ class User < ApplicationRecord
     self.first_name + " " + self.last_name if self.first_name and self.last_name
   end
 
+  def profile_completed?
+    !(first_name.blank? or
+      last_name.blank? or
+      position.blank? or
+      about.blank? or
+      photo.blank? or
+      skype.blank? or
+      phone.blank? or
+      country_code.blank? or
+      facebook_url.blank? or
+      twitter_url.blank? or
+      linkedin_url.blank?)
+  end
+
   def mailboxer_name
     self.name
   end
