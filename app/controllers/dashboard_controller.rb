@@ -13,7 +13,7 @@ class DashboardController < ApplicationController
   end
 
   def unread_messages_count
-    render partial: "layouts/nav_links_for_auth"
+    render partial: "layouts/unread_messages_count"
   end
 
   private

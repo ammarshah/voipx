@@ -6,7 +6,7 @@ $ ->
     width: '100%'
 
   setInterval (->
-    $('#dynamic').load '/dashboard/unread_messages_count'
+    $('#unread-messages-count').load '/dashboard/unread_messages_count'
     return
   ), 3000
   return

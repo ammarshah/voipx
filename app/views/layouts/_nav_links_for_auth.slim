@@ -7,7 +7,7 @@ nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse
     li.nav-item
       = link_to 'CONTACTS', contacts_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item#unread-messages-count
-      = link_to "MESSAGES (#{unread_messages_count})", mailbox_inbox_path, class: 'nav-link sub-nav-color-voipx'
+      = render partial: 'layouts/unread_messages_count'
     li.nav-item
       = link_to 'FAVORITES', favorites_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item.dropdown
