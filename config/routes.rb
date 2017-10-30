@@ -39,4 +39,6 @@ Rails.application.routes.draw do
 
   resources :contacts, only: [:index]
   resources :favorites, only: [:index, :create, :destroy]
+
+  get 'pricing', to: 'visitors#pricing'
 end
