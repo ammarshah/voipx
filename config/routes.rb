@@ -41,4 +41,12 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index, :create, :destroy]
 
   get 'pricing', to: 'visitors#pricing'
+
+  resources :subscriptions do
+    member do
+      get :make_recurring
+    end
+  end
+
+  post 'paypal/ipn_listener' => 'paypal#ipn_listener'
 end

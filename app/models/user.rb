@@ -38,6 +38,7 @@ class User < ApplicationRecord
   has_many :routes, dependent: :destroy
   has_many :contacts, foreign_key: 'owner_id', dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_one :subscription, dependent: :destroy
 
   # Nested Attributes for company
   accepts_nested_attributes_for :company,
@@ -51,6 +52,16 @@ class User < ApplicationRecord
 
   def name
     self.first_name + " " + self.last_name if self.first_name and self.last_name
+  end
+
+  def has_subscribed_to_basic_plan?
+    return true if subscription.nil?
+    subscription.plan.name == "Basic"
+  end
+
+  def has_subscribed_to_pro_plan?
+    return false if subscription.nil?
+    subscription.plan.name == "Pro"
   end
 
   def profile_completed?

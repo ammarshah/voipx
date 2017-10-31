@@ -18,8 +18,8 @@
           td
           td
           td
-          td.font-weight-bold.text-center  Basic
-          td.font-weight-bold.text-center  Pro
+          - @plans.all.each do |plan|
+            td.font-weight-bold.text-center  #{plan.name}
       tbody
         tr
           td Price
@@ -77,6 +77,13 @@
           td
           td.text-center No
           td.text-center Yes
+        tr
+          td
+          td
+          td
+          td
+          td.text-center #{basic_plan_subscription(Plan.find_by_name("Basic").id)}
+          td.text-center #{pro_plan_subscription(Plan.find_by_name("Pro").id)}
 
 
 .spacer
