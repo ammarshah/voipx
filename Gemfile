@@ -29,6 +29,9 @@ gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem 'mailboxer'
 gem 'sendinblue'
+gem 'paypal-recurring',
+    github: 'samuelsimoes/paypal-recurring',
+    ref: '7dd39ffc001e2027ce5be1b908d419a312099006'
 group :development, :test do
   gem 'byebug', platform: :mri
 end

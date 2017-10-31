@@ -9,3 +9,7 @@ puts 'CREATED PRODUCTS: ' << products.join(', ')
 ## Add Countries
 countries = CreateCountriesService.new.call
 puts 'CREATED Countries: ' << countries.join(', ')
+
+## Add Plans
+plans = CreatePlansService.new.call
+puts 'CREATED Plans: ' << plans.join(', ')

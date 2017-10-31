@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016163724) do
+ActiveRecord::Schema.define(version: 20171031001712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,13 @@ ActiveRecord::Schema.define(version: 20171016163724) do
     t.index ["company_id"], name: "index_other_products_on_company_id", using: :btree
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string "name",               null: false
+    t.float  "price",              null: false
+    t.string "paypal_description"
+    t.text   "description"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -210,6 +217,18 @@ ActiveRecord::Schema.define(version: 20171016163724) do
     t.integer "country_id", null: false
     t.integer "company_id", null: false
     t.index ["country_id", "company_id"], name: "index_selling_countries_on_country_id_and_company_id", using: :btree
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "paypal_payer_id"
+    t.string   "paypal_profile_id"
+    t.datetime "paid_until"
+    t.integer  "plan_id"
+    t.integer  "user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
+    t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -278,4 +297,6 @@ ActiveRecord::Schema.define(version: 20171016163724) do
   add_foreign_key "references", "companies"
   add_foreign_key "routes", "breakouts"
   add_foreign_key "routes", "users"
+  add_foreign_key "subscriptions", "plans"
+  add_foreign_key "subscriptions", "users"
 end

@@ -10,6 +10,10 @@ development:
   AWS_ACCESS_KEY: ---
   AWS_SECRET_KEY: ---
   AWS_REGION: ---
+  PAYPAL_SANDBOX: ---
+  PAYPAL_USERNAME: ---
+  PAYPAL_PASSWORD: ---
+  PAYPAL_SIGNATURE: ---
 
 test:
   GMAIL_USERNAME: ---
@@ -28,6 +32,10 @@ staging:
   AWS_SECRET_KEY: ---
   AWS_REGION: ---
   RAILS_LOG_TO_STDOUT: ---
+  PAYPAL_SANDBOX: ---
+  PAYPAL_USERNAME: ---
+  PAYPAL_PASSWORD: ---
+  PAYPAL_SIGNATURE: ---
 
 production:
   GMAIL_USERNAME: ---
@@ -40,3 +48,7 @@ production:
   AWS_SECRET_KEY: ---
   AWS_REGION: ---
   RAILS_LOG_TO_STDOUT: ---
+  PAYPAL_SANDBOX: ---
+  PAYPAL_USERNAME: ---
+  PAYPAL_PASSWORD: ---
+  PAYPAL_SIGNATURE: ---

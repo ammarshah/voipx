@@ -3,6 +3,7 @@ class VisitorsController < ApplicationController
   before_action :redirect_if_logged_in, except: [:pricing]
 
   def pricing
+    @plans = Plan.all
   end
 
   private
