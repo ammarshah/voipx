@@ -83,7 +83,7 @@
           td
           td
           td.text-center #{basic_plan_subscription(Plan.find_by_name("Basic").id)}
-          td.text-center #{pro_plan_subscription(Plan.find_by_name("Pro").id)}
+          td.text-center #{pro_plan_subscription(Plan.find_by_name("Pro").id)} #{pro_plan_subscription_cancel_url}
 
 
 .spacer

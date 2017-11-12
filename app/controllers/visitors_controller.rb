@@ -4,6 +4,9 @@ class VisitorsController < ApplicationController
 
   def pricing
     @plans = Plan.all
+    if params[:aborting_operation]
+      Subscription.where(paypal_payer_id: nil, user_id: current_user.id).destroy_all
+    end
   end
 
   private

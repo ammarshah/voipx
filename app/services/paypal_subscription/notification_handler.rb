@@ -9,7 +9,7 @@ class PaypalSubscription::NotificationHandler
 
   def resolve!
     if canceling_profile?
-      @subscription.cancel!
+      @subscription.destroy
     elsif update_profile?
       @subscription.update(paid_until: @notification.next_payment_date)
     end

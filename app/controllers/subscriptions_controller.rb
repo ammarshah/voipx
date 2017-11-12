@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
           token: params[:token]
         })
       )
-      redirect_to dashboard_path(),
+      redirect_to pricing_path(),
         notice: I18n.t('flashes.subscription.successfully_created')
     end
   end
@@ -30,7 +30,7 @@ class SubscriptionsController < ApplicationController
     PaypalSubscription::ResourceFacade.checkout_url(
       paypal_options.merge({
         return_url: make_recurring_subscription_url(subscription),
-        cancel_url: subscription_url(subscription, aborting_operation: true)
+        cancel_url: pricing_url(aborting_operation: true)
       })
     )
   end
