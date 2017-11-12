@@ -20,7 +20,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     PaypalSubscription::ResourceFacade.cancel(paypal_options)
 
-    redirect_to subscription_path(subscription),
+    redirect_to pricing_path(),
       notice: I18n.t('flashes.subscription.cancellation_asked')
   end
 
