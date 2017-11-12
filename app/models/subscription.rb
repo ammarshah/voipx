@@ -6,10 +6,6 @@ class Subscription < ApplicationRecord
 
   delegate :price, :paypal_description, to: :plan
 
-  def cancel!
-    update(canceled: true)
-  end
-
   def paid?
     return false if paid_until.blank?
     paid_until >= Time.current
@@ -20,8 +16,6 @@ class Subscription < ApplicationRecord
       status = "running"
     elsif paid_until.to_date == created_at.to_date
       status = "payment_pending"
-    elsif canceled
-      status = "canceled"
     elsif paid?
       status = "paid"
     else
