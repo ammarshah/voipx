@@ -6,12 +6,17 @@ class ConversationsController < ApplicationController
 
   def create
     recipient = User.where(id: conversation_params[:recipient])
-    conversation = current_user.send_message(recipient, conversation_params[:body], conversation_params[:subject]).conversation
-    unless current_user.contacts.pluck(:user_id).include?(recipient.first.id)
+
+    if current_user.contacts.pluck(:user_id).include?(recipient.first.id)
+      conversation = current_user.send_message(recipient, conversation_params[:body], conversation_params[:subject]).conversation
+      redirect_to conversation_path(conversation), notice: "Your message was successfully sent!"
+    elsif current_user.allowed_to_send_message?
       Contact.create(owner: current_user, user: recipient.first) # Add recipient to current_user contact list if not already added
+      conversation = current_user.send_message(recipient, conversation_params[:body], conversation_params[:subject]).conversation
+      redirect_to conversation_path(conversation), notice: "Your message was successfully sent!"
+    else
+      redirect_to root_path, alert: "You have 0 contact request left. You cannot send this message without upgrading your membership plan."
     end
-    flash[:notice] = "Your message was successfully sent!"
-    redirect_to conversation_path(conversation)
   end
 
   def show
@@ -22,13 +27,18 @@ class ConversationsController < ApplicationController
 
 
   def reply
-    current_user.reply_to_conversation(conversation, message_params[:body])
     recipient = conversation.participants.reject {|p| p.id == current_user.id}.last
-    unless current_user.contacts.pluck(:user_id).include?(recipient.id)
+    
+    if current_user.contacts.pluck(:user_id).include?(recipient.id)
+      current_user.reply_to_conversation(conversation, message_params[:body])
+      redirect_to conversation_path(conversation), notice: "Your reply message was successfully sent!"
+    elsif current_user.allowed_to_send_message?
       Contact.create(owner: current_user, user: recipient) # Add recipient to current_user contact list if not already added
+      current_user.reply_to_conversation(conversation, message_params[:body])
+      redirect_to conversation_path(conversation), notice: "Your reply message was successfully sent!"
+    else
+      redirect_to root_path, alert: "You have 0 contact request left. You cannot reply to this message without upgrading your membership plan."
     end
-    flash[:notice] = "Your reply message was successfully sent!"
-    redirect_to conversation_path(conversation)
   end
 
   def trash
