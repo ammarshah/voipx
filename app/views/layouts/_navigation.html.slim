@@ -67,5 +67,8 @@
   </div>
 </nav>
 
+- if current_user.has_subscribed_to_basic_plan?
+  .alert.alert-info.text-center role="alert" You can message upto #{current_user.contacts_left} more contacts. Please upgrade your membership for unlimited access. #{link_to "(Click here to upgrade)", pricing_path()}
+
 - if user_signed_in?
   = render 'layouts/navigation_links'

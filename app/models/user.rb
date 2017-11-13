@@ -64,6 +64,14 @@ class User < ApplicationRecord
     subscription.plan.name == "Pro"
   end
 
+  def allowed_to_send_message?
+    has_subscribed_to_pro_plan? || (has_subscribed_to_basic_plan? && contacts.size < 5)
+  end
+
+  def contacts_left
+    5 - contacts.size
+  end
+
   def profile_completed?
     !(first_name.blank? or
       last_name.blank? or
