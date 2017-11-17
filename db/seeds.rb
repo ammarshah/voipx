@@ -2,6 +2,10 @@
 roles = CreateRolesService.new.call
 puts 'CREATED ROLES: ' << roles.join(', ')
 
+## Add Admin
+admin = CreateAdminService.new.call
+puts 'CREATED ADMIN: ' << admin.email
+
 ## Add Products
 products = CreateProductsService.new.call
 puts 'CREATED PRODUCTS: ' << products.join(', ')
