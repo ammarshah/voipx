@@ -11,7 +11,7 @@ class PaypalSubscription::NotificationHandler
     if canceling_profile?
       @subscription.destroy
     elsif update_profile?
-      @subscription.update(paid_until: @notification.next_payment_date)
+      @subscription.update(paid_until: @notification.next_payment_date, paypal_payer_email: @notification.payer_email)
     end
   end
 
