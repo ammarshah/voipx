@@ -49,4 +49,10 @@ Rails.application.routes.draw do
   end
 
   post 'paypal/ipn_listener' => 'paypal#ipn_listener'
+
+  # Admin routes
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#index'
+    resources :subscriptions, only: [:index]
+  end
 end

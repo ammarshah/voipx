@@ -23,10 +23,14 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   def after_sign_in_path_for(resource)
-    if resource.sign_in_count == 1
-      edit_user_path(resource, is_first_login: "yes")
+    if resource.has_role?(:admin)
+      admin_dashboard_path
     else
-      dashboard_path
+      if resource.sign_in_count == 1
+        edit_user_path(resource, is_first_login: "yes")
+      else
+        dashboard_path
+      end
     end
   end
 end

@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    title
+      = content_for?(:title) ? yield(:title) : 'VoIPx - Admin'
+    meta name="description" content="#{content_for?(:description) ? yield(:description) : 'VoIPx - Main'}"
+    link rel="icon" type="image/png" href="#{asset_path('favicon.png')}"
+    == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
+    == stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    == csrf_meta_tags
+  body
+    header
+      == render 'layouts/admin/navigation'
+      == render 'layouts/messages'
+    main[role="main"]
+      == yield
+
+    = include_rails_script
