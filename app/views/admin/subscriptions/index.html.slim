@@ -23,7 +23,7 @@
               td #{subscription.paypal_payer_email}
               td $#{subscription.paypal_payer_id}
               td #{subscription.paypal_profile_id}
-              td #{subscription.paid_until.to_date}
+              td #{subscription.paid_until.try(:to_date)}
 
         - else
           tr
