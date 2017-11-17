@@ -1,9 +1,30 @@
-h2.text-center Subscriptions
-br
-br
-br
-br
-br
-br
-br
-p.text-center In progress...
+#center-content
+  h2 Subscriptions
+  br
+  br
+
+.row
+  .col-md-12
+    table.table.table-sm.table-bordered.table-hover
+      thead.thead-inverse
+        tr
+          th Plan
+          th VoIPx User Email
+          th Paypal Payer Email
+          th Paypal Payer ID
+          th Paypal Profile ID
+          th Paid Until
+      tbody
+        - if @subscriptions.any?
+          - @subscriptions.each do |subscription|
+            tr
+              td #{subscription.plan.name + " - " + subscription.plan.paypal_description + " - " + number_to_currency(subscription.plan.price)}
+              td #{link_to subscription.user.email, user_path(subscription.user), target: '_blank'}
+              td #{subscription.paypal_payer_email}
+              td $#{subscription.paypal_payer_id}
+              td #{subscription.paypal_profile_id}
+              td #{subscription.paid_until.to_date}
+
+        - else
+          tr
+            td colspan="6" No subscriptions found
