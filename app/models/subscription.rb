@@ -13,9 +13,9 @@ class Subscription < ApplicationRecord
 
   def status
     if paid_until.nil?
-      status = "running"
+      status = "in_progress"
     elsif paid_until.to_date == created_at.to_date
-      status = "payment_pending"
+      status = "payment_processing"
     elsif paid?
       status = "paid"
     else
