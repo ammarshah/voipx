@@ -1,7 +1,8 @@
 class Admin::SubscriptionsController < AdminController
 
   def index
-    @subscriptions = Subscription.all
+    @q = Subscription.ransack(params[:q])
+    @subscriptions = @q.result.includes(:plan, :user)
   end
 
 end

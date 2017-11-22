@@ -5,6 +5,12 @@
 
 .row
   .col-md-12
+    = search_form_for [:admin, @q], class: 'text-right' do |f|
+      = f.search_field :plan_name_or_user_email_or_paypal_payer_email_or_paypal_payer_id_or_paypal_profile_id_cont
+      = f.submit
+    
+    .spacer
+
     table.table.table-sm.table-bordered.table-hover
       thead.thead-inverse
         tr
@@ -13,7 +19,7 @@
           th Paypal Payer Email
           th Paypal Payer ID
           th Paypal Profile ID
-          th Paid Until
+          th = sort_link(@q, :paid_until)
       tbody
         - if @subscriptions.any?
           - @subscriptions.each do |subscription|
@@ -21,7 +27,7 @@
               td #{subscription.plan.name + " - " + subscription.plan.paypal_description + " - " + number_to_currency(subscription.plan.price)}
               td #{link_to subscription.user.email, user_path(subscription.user), target: '_blank'}
               td #{subscription.paypal_payer_email}
-              td $#{subscription.paypal_payer_id}
+              td #{subscription.paypal_payer_id}
               td #{subscription.paypal_profile_id}
               td #{subscription.paid_until.try(:to_date)}
 
