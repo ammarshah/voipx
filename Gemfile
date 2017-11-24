@@ -33,6 +33,8 @@ gem 'paypal-recurring',
     github: 'samuelsimoes/paypal-recurring',
     ref: '7dd39ffc001e2027ce5be1b908d419a312099006'
 gem 'ransack'
+gem 'thredded', '~> 0.13.8'
+gem 'rails-ujs'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
