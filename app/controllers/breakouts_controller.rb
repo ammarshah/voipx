@@ -5,7 +5,11 @@ class BreakoutsController < ApplicationController
   # GET /breakouts
   # GET /breakouts.json
   def index
-    @breakouts = Breakout.order(:id).page params[:page]
+    if params[:starts_from]
+      @breakouts = Breakout.where('id >= ?', params[:starts_from]).order(:id).page(params[:page]).per(params[:limit])
+    else
+      @breakouts = Breakout.order(:id).page(params[:page]).per(params[:limit])
+    end
   end
 
   # GET /breakouts/1
