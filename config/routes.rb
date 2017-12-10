@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   resources :contacts, only: [:index]
   resources :favorites, only: [:index, :create, :destroy]
 
-  get 'pricing', to: 'visitors#pricing'
+  # get 'pricing', to: 'visitors#pricing'
 
   resources :subscriptions do
     member do
