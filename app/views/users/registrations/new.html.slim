@@ -1,0 +1,64 @@
+section.sign-up.signup-bg
+  .sign-up-left
+    .signup-headiing.text-center
+      h2 What You’ll Get by Joining Us ?
+      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium sapien sem, nec laoreet ex.Donec pretium sapien sem, nec laoreet ex.
+    .clearfix
+    .signup-img
+      = image_tag "sign-up.png"
+  .sign-up-right
+    .signup-form
+      h2 Sign Up
+      .signup-form-inner
+        .form-group
+          label First Name
+          input.form-control placeholder=("Enter Your First Name") type="text"
+        .form-group
+          label Last Name
+          input.form-control placeholder=("Enter Your Last Name") type="text"
+        .form-group
+          label Email address
+          input.form-control placeholder=("Enter Your Email Address") type="email"
+        .form-group
+          label Password
+          input.form-control placeholder=("Enter Your Password") type="password"
+        .form-group
+          label Confirm Password
+          input.form-control placeholder=("Enter Your Confirm Password") type="password"
+        .forgot-link.form-button
+          .row
+            .col-sm-6
+              div
+                button.btn.btn-primary type="submit"  Sign Up
+            .col-sm-6
+              a.member-link href="/users/sign_in"  I’m already a member
+.clearfix
+
+
+/ <div class="authform">
+/   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form' }) do |f| %>
+/     <h3>Sign up</h3>
+/     <%= devise_error_messages! %>
+/     <div class="form-group">
+/       <%= f.label :first_name %>
+/       <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
+/     </div>
+/     <div class="form-group">
+/       <%= f.label :last_name %>
+/       <%= f.text_field :last_name, class: 'form-control' %>
+/     </div>
+/     <div class="form-group">
+/       <%= f.label :email %>
+/       <%= f.email_field :email, class: 'form-control' %>
+/     </div>
+/     <div class="form-group">
+/       <%= f.label :password %>
+/       <%= f.password_field :password, class: 'form-control' %>
+/     </div>
+/     <div class="form-group">
+/       <%= f.label :password_confirmation %>
+/       <%= f.password_field :password_confirmation, class: 'form-control' %>
+/     </div>
+/      <%= f.submit 'Sign up', class: 'button right' %>
+/   <% end %>
+/ </div>
