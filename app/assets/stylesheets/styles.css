@@ -645,6 +645,80 @@ max-width:700px;
 			opacity: 1;
 			background:#0482d2;
 		}
+
+.search-route-section{
+	background: #f8f8f8;
+    padding: 60px 0px;
+
+}
+.search-route-section .search-form {
+    margin: 0 auto;
+    width: 50%;
+}
+.search-routes-table{ 
+    padding: 60px 0px;
+
+}
+.search-routes-table .search-routes-tab-inner{
+	margin-top: 30px;
+}
+.search-routes-table .search-routes-tab-inner .srt-head{
+	font-size:20px;
+	color: #000;
+	background: #f0f0f0;
+	padding: 10px 0px;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+.search-routes-table .search-routes-tab-inner .srt-body .tab-row{
+	padding: 10px 0px;
+	border-bottom: #9dc8e4 solid 1px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.search-routes-table .search-routes-tab-inner .srt-body .tab-row .route-name{
+	font-size:24px;
+	color: #0582d2;
+	padding-top: 5px;
+	display: inline-block;
+}
+.search-routes-table .search-routes-tab-inner .srt-body .tab-row  .route-info{
+	padding-top: 8px;
+}
+.search-routes-table .search-routes-tab-inner .srt-body .tab-row  .route-info span{
+	color: #888888;
+	font-size: 16px;
+	font-weight: 600;
+	margin-right: 10px;
+
+}
+.search-routes-table .search-routes-tab-inner .srt-body .tab-row  .route-info span span{
+	color: #0481d1;
+	font-size: 15px;
+	font-weight: 400;
+	margin-right: 10px;
+
+}
+.search-routes-table .search-routes-tab-inner .srt-body .tab-row .buyer-name{
+color: #0582d2;
+	font-size: 18px;
+		padding-top: 8px;
+}
+
+.company-search-field{
+	position: relative;
+}
+.company-search-field span{
+	color: #2174aa;
+	font-size: 18px;
+	border-right: #c1c1c1 solid 1px;
+	position: absolute;
+	    padding: 9px 20px;
+}
+.company-search-field input{
+	padding-left: 70px;
+}
+
 @media only screen and (max-width: 992px) {
 	.testimonials,.statistics-section, .routes-section, .voipx-features, .voipx-features .voipx-feature-inner,.how-it-works, #search-routes ,.slider{
 		height:auto;
@@ -661,6 +735,17 @@ max-width:700px;
 }
 
 @media only screen and (max-width: 650px) {
+		.search-routes-tab-inner{
+		width: 100%;
+		overflow-y:auto;
+	}
+	.search-routes-tab-inner .srt-body,.search-routes-tab-inner .srt-head{
+		width: 900px;
+	}
+	.search-route-section .search-form {
+    margin: 0 auto;
+    width: 90%;
+}
 	.header .search-drop-header{
 	background: #f5f5f5;
 padding: 20px 10px;
