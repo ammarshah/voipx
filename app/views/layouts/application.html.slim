@@ -1,20 +1,21 @@
 doctype html
-html
+html lang="en" 
   head
-    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    meta charset="utf-8"
     title
       = content_for?(:title) ? yield(:title) : 'VoIPx - Main'
-    meta name="description" content="#{content_for?(:description) ? yield(:description) : 'VoIPx - Main'}"
+    meta content="width=device-width, initial-scale=1" name="viewport"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
     link rel="icon" type="image/png" href="#{asset_path('favicon.png')}"
     == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
     == stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     == csrf_meta_tags
   body
-    header
-      == render 'layouts/navigation'
-      == render 'layouts/messages'
-    main[role="main"]
-      == yield
-
+    / == render 'layouts/navigation'
+    / == render 'layouts/messages'
+    == render 'layouts/topbar'
+    == render 'layouts/header'
+    == yield
+    == render 'layouts/footer'
     = include_rails_script

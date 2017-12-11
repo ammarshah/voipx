@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
-//= require tether
-//= require bootstrap-sprockets
 //= require intlTelInput
 //= require libphonenumber/utils
 //= require chosen-jquery
