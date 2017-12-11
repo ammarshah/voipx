@@ -1,26 +1,26 @@
 @font-face {
 	font-family: 'OpenSans-Light';
-	src: url("OpenSans-Light.ttf") format("truetype");
+	src: url(<%= asset_path "OpenSans-Light.ttf" %>) format("truetype");
 	font-weight: 300;
 }
 @font-face {
 	font-family: 'OpenSans-Regular';
-	src: url("OpenSans-Regular.ttf") format("truetype");
+	src: url(<%= asset_path "OpenSans-Regular.ttf" %>) format("truetype");
 	font-weight: 400;
 }
 @font-face {
 	font-family: 'OpenSans-Semibold';
-	src: url("OpenSans-Semibold.ttf") format("truetype");
+	src: url(<%= asset_path "OpenSans-Semibold.ttf" %>) format("truetype");
 	font-weight: 600;
 }
 @font-face {
 	font-family: 'OpenSans-Bold';
-	src: url("OpenSans-Bold.ttf") format("truetype");
+	src: url(<%= asset_path "OpenSans-Bold.ttf" %>) format("truetype");
 	font-weight: 700;
 }
 @font-face {
 	font-family: 'OpenSans-ExtraBold';
-	src: url("OpenSans-ExtraBold.ttf") format("truetype");
+	src: url(<%= asset_path "OpenSans-ExtraBold.ttf" %>) format("truetype");
 	font-weight: 800;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -136,7 +136,7 @@ display: none;
 .slider{
 	height:100vh;
 	position:relative;
-	background:url(slider.jpg) 50% 50% no-repeat;
+	background: url(<%= asset_path 'slider.jpg' %>) 50% 50% no-repeat;
 	background-size:cover;
 }
 .slider img{
@@ -229,7 +229,7 @@ display: none;
 }
  
 .how-it-works .how-work-inner .hiw-dottet-line{
-	background:url(how-it-work-border.jpg);
+	background:url(<%= asset_path 'how-it-work-border.jpg' %>);
 	width:775px;
 	height:118px;
 	display:inline-block;
@@ -289,17 +289,17 @@ display: none;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5aaac', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 .voipx-features .voipx-feature-inner .feature-box.blue-box{
-	background: url(blue-bg.jpg) right top no-repeat #1b7abb;
+	background: url(<%= asset_path 'blue-bg.jpg' %>) right top no-repeat #1b7abb;
 	color:#fff;
 	background-size:cover;
 }
 .voipx-features .voipx-feature-inner .feature-box.bg-box-1{
-	background:url(features-bg-1.jpg) no-repeat;
+	background:url(<%= asset_path 'features-bg-1.jpg' %>) no-repeat;
 	background-size:cover;
 	color:#fff;
 }
 .voipx-features .voipx-feature-inner .feature-box.bg-box-2{
-	background:url(features-bg-2.jpg) no-repeat;
+	background:url(<%= asset_path 'features-bg-2.jpg' %>) no-repeat;
 	background-size:cover;
 	color:#fff;
 }
@@ -612,10 +612,10 @@ max-width:700px;
 	max-width:100%;
 }
 .signup-bg{
-	background:url(signup-bg-left.png) left bottom no-repeat #4494da ;
+	background: url(<%= asset_path 'signup-bg-left.png' %>) left bottom no-repeat #4494da ;
 }
 .signup-bg  .sign-up-left{
-	background:url(signup-bg-right.png) right bottom no-repeat;
+	background: url(<%= asset_path 'signup-bg-right.png' %>) right bottom no-repeat;
 	padding-bottom:5px;
 }
 .signup-bg  .sign-up-left,.signup-bg{
