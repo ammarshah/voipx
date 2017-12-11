@@ -1,31 +1,103 @@
-#center-content
-  h2 Companies List
+section.search-route-section
+  .search-section
+    .container
+      .search-heading.voipx-heading
+        h2
+          | Search 
+          span Companies
+      .search-form
+        .col-md-12
+          .form-group.company-search-field
+            span
+              i.fa.fa-search aria-hidden="true" 
+            input.form-control placeholder=("Search by Name") type="text"
+        .sarch-btn.col-md-12
+          a.btn.btn-default href="#"  SEARCH
+section.search-routes-table
+  .container
+    .search-routes-tab-inner
+      .srt-head
+        .row
+          .col-xs-1
+          .col-xs-3 Company Name
+          .col-xs-5
+          .col-xs-3.text-center Website
+      .srt-body
+        .row.tab-row
+          .col-xs-1.text-center
+            = image_tag "company-icon.jpg"
+          .col-xs-3
+            span.route-name Aradiom
+          .col-xs-5.route-info.text-center
+            span
+              | Since: 
+              span 2017-09-22
+            span
+              | Rating: 
+              span -----
+          .col-xs-3.text-center.buyer-name
+            = image_tag "website-icon.jpg"
+            |  www.aradiom.com
+        .row.tab-row
+          .col-xs-1.text-center
+            = image_tag "company-icon.jpg"
+          .col-xs-3
+            span.route-name Aradiom
+          .col-xs-5.route-info.text-center
+            span
+              | Since: 
+              span 2017-09-22
+            span
+              | Rating: 
+              span -----
+          .col-xs-3.text-center.buyer-name
+            = image_tag "website-icon.jpg"
+            |  www.aradiom.com
+        .row.tab-row
+          .col-xs-1.text-center
+            = image_tag "company-icon.jpg"
+          .col-xs-3
+            span.route-name Aradiom
+          .col-xs-5.route-info.text-center
+            span
+              | Since: 
+              span 2017-09-22
+            span
+              | Rating: 
+              span -----
+          .col-xs-3.text-center.buyer-name
+            = image_tag "website-icon.jpg"
+            |  www.aradiom.com
 
-br
-br
-.row
-  .col-md-12
-    .pull-right
-      = form_tag companies_path, method: :get do
-        p
-          = text_field_tag :search, params[:search]
-          = submit_tag "Search", name: nil
-    table.table.table-sm.table-bordered.table-hover
-      thead.thead-inverse
-        tr
-          th Name
-          th Website
-          th Rating
-          th Since
-      tbody
-        - if @companies.any?
-          - @companies.each do |company|
-            tr
-              td
-                = link_to company.name, company_path(company)
-              td #{company.website}
-              td -
-              td #{company.since}
-        - else
-          tr
-            td colspan="4" No companies added yet
+
+/ #center-content
+/   h2 Companies List
+
+/ br
+/ br
+/ .row
+/   .col-md-12
+/     .pull-right
+/       = form_tag companies_path, method: :get do
+/         p
+/           = text_field_tag :search, params[:search]
+/           = submit_tag "Search", name: nil
+/     table.table.table-sm.table-bordered.table-hover
+/       thead.thead-inverse
+/         tr
+/           th Name
+/           th Website
+/           th Rating
+/           th Since
+/       tbody
+/         - if @companies.any?
+/           - @companies.each do |company|
+/             tr
+/               td
+/                 = link_to company.name, company_path(company)
+/               td #{company.website}
+/               td -
+/               td #{company.since}
+/         - else
+/           tr
+/             td colspan="4" No companies added yet
