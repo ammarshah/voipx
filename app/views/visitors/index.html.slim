@@ -3,10 +3,10 @@
     .slider-text
       h1.animated AUTOMATIC MATCHING
       p.animated
-        | Upload your routes and let our matching
-        | engine do the rest. Receive matched
+        | Upload your routes and let our matching 
+        | engine do the rest. Receive matched 
         | routes via email!
-      a.slider-btn.animated href="#"  Get Started
+      a.slider-btn.animated href="/users/sign_up"  Get Started
   section#search-routes.section
     .client-carosule
       #client-carousel.owl-carousel
@@ -42,37 +42,32 @@
       .container
         .search-heading.voipx-heading
           h2
-            | Search
+            | Search 
             span Route
         .search-form
-          .col-md-6
-            .form-group
-              select.form-control
-                option I Want to Buy
-                option I Want to Sell
-          .col-md-6
-            .form-group
-              input.form-control id=(" ") placeholder=("Route Name") type="text" /
-          .col-md-4
-            .form-group
-              input.form-control id=(" ") placeholder=("Break Out") type="text" /
-          .col-md-4
-            .form-group
-              input.form-control id=(" ") placeholder="Price" type="text" /
-          .col-md-4
-            .form-group
-              select.form-control
-                option CLI
-                option CLI
-                option CLI
-                option CLI
-          .sarch-btn.col-md-12
-            a.btn.btn-default href="#"  SEARCH
+          = simple_form_for :search, url: search_path, method: :get do |f|
+            .col-md-6
+              .form-group
+                = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control'}
+            .col-md-6
+              .form-group
+                = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_breakout'}, class: 'form-control', placeholder: 'Route Name'
+            .col-md-4
+              .form-group
+                = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_destination'}, class: 'form-control', placeholder: 'Breakout'
+            .col-md-4
+              .form-group
+                = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false
+            .col-md-4
+              .form-group
+                = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {}, {class: 'form-control'}
+            .sarch-btn.col-md-12
+              = f.submit "SEARCH", class: "btn btn-default"
   section#how-it-work.how-it-works.section
     .container
       .search-heading.voipx-heading
         h2
-          | How it
+          | How it 
           span Works
       .how-work-inner
         span.hiw-dottet-line
@@ -97,7 +92,7 @@
   section#vfeatures.voipx-features.section
     .search-heading.voipx-heading
       h2
-        | VOIPX
+        | VOIPX 
         span Features
     .voipx-feature-inner
       .feature-box.grey-box
@@ -127,7 +122,7 @@
         span.feature-icon
           = image_tag "matching-icon.png"
   .clearfix
-  section#routes-section.routes-section.section
+  /section#routes-section.routes-section.section
     .container
       .search-heading.voipx-heading
         h2
@@ -145,133 +140,133 @@
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
         .col-md-6
@@ -286,140 +281,140 @@
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
               .roue-row
                 .col-sm-8.col-xs-6
                   span.flag
                     = image_tag "afg-flag.jpg"
-                  | Afganistan all
+                  |  Afganistan all
                 .col-sm-2.col-xs-2.text-center CLI
                 .col-sm-2.col-xs-4.text-center $2.2500
-  section#testimonials.testimonials.section
+  /section#testimonials.testimonials.section
     .container
       .search-heading.voipx-heading
         h2
-          | What Our
+          | What Our 
           span Customers Say
       .testimonial-inner
         #testimonialst-carousel.owl-carousel
@@ -447,7 +442,7 @@
             p
               | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             .testi-name Jhon Piantino
-  section#statistics-section.statistics-section.section
+  /section#statistics-section.statistics-section.section
     .container
       .search-heading.voipx-heading
         h2
@@ -456,10 +451,10 @@
         .member-main
           .member-inner
             span.big-span.animated 3182
-            span.small-span.animated MEMBES
+            span.small-span.animated MEMBERS
           .member-inner
             span.big-span.animated 3182
-            span.small-span.animated MEMBES
+            span.small-span.animated MEMBERS
       .col-md-6
         .statistics-inner
           .statistics-block
@@ -660,14 +655,7 @@ javascript:
       window.onresize = resizeForm;
       resizeForm();
   });
-      
-  
-          $( ".header .logo-search .search-header a" ).click(function() {
-    $( this ).toggleClass( "active" );
-      $( ".search-drop-header" ).slideToggle( "slow", function() {
-      // Animation complete.
-    });
-  });
+
 nav#navigation-menu style="display:none;" 
   ul
     li
@@ -680,11 +668,11 @@ nav#navigation-menu style="display:none;"
       a.__mPS2id._mPS2id-h href="#how-it-work" rel="m_PageScroll2id"  How it Work
     li
       a.__mPS2id._mPS2id-h href="#vfeatures" rel="m_PageScroll2id"  Features
-    li
+    /li
       a.__mPS2id._mPS2id-h href="#routes-section" rel="m_PageScroll2id"  Routes
-    li
+    /li
       a.__mPS2id._mPS2id-h href="#testimonials" rel="m_PageScroll2id"  Testimonials
-    li
+    /li
       a.__mPS2id._mPS2id-h href="#statistics-section" rel="m_PageScroll2id"  Statistics
     li
       a.__mPS2id._mPS2id-h href="#footer" rel="m_PageScroll2id"  footer

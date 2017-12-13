@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:autocomplete_breakout_code, :autocomplete_breakout_destination]
   autocomplete :breakout, :code, extra_data: [:destination]
   autocomplete :breakout, :destination, extra_data: [:code]
   

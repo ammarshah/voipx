@@ -9,4 +9,11 @@ $ ->
     $('#unread-messages-count').load '/dashboard/unread_messages_count'
     return
   ), 3000
-  return
+
+  # Toggle event for Search Route form in the header
+  $('.header .logo-search .search-header a').click ->
+    $(this).toggleClass 'active'
+    $('.search-drop-header').slideToggle 'slow', ->
+      # Animation complete.
+      return
+    return
