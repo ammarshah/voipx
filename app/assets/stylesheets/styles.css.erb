@@ -670,6 +670,10 @@ max-width:700px;
 	text-transform: uppercase;
 	font-weight: 600;
 }
+.search-routes-table .search-routes-tab-inner .srt-head .row{
+	margin-left: 0px;
+	margin-right: 0px;
+}
 .search-routes-table .search-routes-tab-inner .srt-body .tab-row{
 	padding: 10px 0px;
 	border-bottom: #9dc8e4 solid 1px;
@@ -719,6 +723,106 @@ color: #0582d2;
 	padding-left: 70px;
 }
 
+.dashboard-header-section{
+	background: #f8f8f8;
+    padding: 60px 0px;
+}
+
+.dashboard-navigation ul{
+	list-style: none;
+	padding: 0px;
+	margin:0px;
+}
+.dashboard-navigation ul li{
+	float: left;
+	width: 33.33%;
+	padding: 10px;
+}
+.dashboard-navigation ul li a{
+	background: #fff;
+	border: #d7d7d7 solid 1px;
+	padding: 15px;
+	text-align:center;
+	width: 100%;
+	display: inline-block;
+	min-height: 105px;
+	border-radius: 6px;
+	color: #0582d2;
+	font-size:16px;
+}
+.dashboard-navigation ul li a:hover{
+	border-color:#0582d2;
+	} 
+.dashboard-navigation ul li a span{
+	display: block;
+	margin-top: 5px;
+}
+.dashboard-header-section .sarch-btn .btn-reset{
+	background: #818181;
+}
+.routes-select-dashboard{
+	margin-top: 30px;
+}
+.routes-select-dashboard .routes-select-dashboard-inner{
+	background: #0582d2;
+	padding: 15px;
+	display: inline-block;
+	width: 100%;
+}
+.routes-select-dashboard .routes-select-dashboard-inner h2{
+	color: #fff;
+	font-size:37px;
+	margin:0px;
+}
+
+.routes-select-dashboard .routes-select-dashboard-inner .routes-select-dashboard-row{
+	background: #fff;
+	padding: 5px;
+	margin:5px 0px;
+	display: inline-block;
+	width: 100%;
+	font-size: 14px;
+	color: #000;
+}
+.routes-select-dashboard .routes-select-dashboard-inner .routes-select-dashboard-row span{
+	font-size: 16px;
+	color: #000;
+	font-weight: 600;
+	display: block;
+}
+.routes-select-dashboard .routes-select-dashboard-inner .routes-select-dashboard-row .sd-border-right{
+	border-right: #b0afaf solid 1px;
+}
+
+.routes-select-dashboard .routes-select-dashboard-inner .routes-select-dashboard-row .select-dashboard-btn a{
+	    font-size: 32px;
+    line-height: 46px;
+    margin-left: 10px;
+}
+.routes-select-dashboard .routes-select-dashboard-inner .routes-select-dashboard-row .select-dashboard-btn a.sd-edit-btn{
+	color: #16459e;
+	}
+.routes-select-dashboard .routes-select-dashboard-inner .routes-select-dashboard-row .select-dashboard-btn a.sd-delet-btn{
+	color: #c22727;
+}
+
+
+.search-routes-table .search-routes-tab-inner.matched-routes-tab-inner .srt-head{
+	background: #0582d2;
+	color: #fff;
+	    font-size: 18px;
+}
+
+.search-routes-table .search-routes-tab-inner.matched-routes-tab-inner .srt-body .tab-row {
+    padding: 10px 0px;
+    border-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.search-routes-table .search-routes-tab-inner.matched-routes-tab-inner .srt-body .tab-row:nth-child(even){
+	background: #f2f2f5;
+}
+
 @media only screen and (max-width: 992px) {
 	.testimonials,.statistics-section, .routes-section, .voipx-features, .voipx-features .voipx-feature-inner,.how-it-works, #search-routes ,.slider{
 		height:auto;
@@ -732,9 +836,34 @@ color: #0582d2;
 	.header .logo-search .search-header {
 		right:15px;
 	}
+	.sd-xs-no-border{
+		border: 0px !important;
+	}
+	.text-xs-center{
+		text-align: center;
+	}
+	.dashboard-header-section .sarch-btn .btn-reset{
+		margin-bottom: 15px;
+	}
+	.routes-select-dashboard .routes-select-dashboard-inner h2{
+		font-size: 28px;
+	}
+	.search-heading.voipx-heading{
+		display: inline-block;
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 650px) {
+	.dashboard-navigation ul li a {
+ 
+    padding: 15px 10px;
+ 
+    font-size: 12px;
+}
+	.routes-select-dashboard .routes-select-dashboard-inner h2{
+		font-size: 20px;
+	}
 		.search-routes-tab-inner{
 		width: 100%;
 		overflow-y:auto;

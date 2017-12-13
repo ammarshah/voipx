@@ -1,56 +1,195 @@
-#center-content
-  h2 Route Dashboard
-  br
-  br
+section.dashboard-header-section
+  div
+    .container
+      .row
+        .col-md-6
+          .dashboard-navigation
+            ul
+              li
+                a href="#" 
+                  = image_tag "dashboard-icon.png"
+                  span DASHBOARD
+              li
+                a href="#" 
+                  = image_tag "search-dashboard-icon.png"
+                  span SEARCH
+              li
+                a href="#" 
+                  = image_tag "contact-dashboard-icon.png"
+                  span CONTACTS
+              li
+                a href="#" 
+                  = image_tag "message-dashboard-icon.png"
+                  span MESSAGES
+              li
+                a href="#" 
+                  = image_tag "star-dashboard-icon.png"
+                  span FAVOURITES
+              li
+                a href="#" 
+                  = image_tag "user-dashboard-icon.png"
+                  span PROFILE
+          .clearfix
+        .col-md-6
+          .search-heading.voipx-heading
+            h2
+              | Route 
+              span Dashboard
+          .search-form
+            .col-md-6
+              .form-group
+                input.form-control placeholder=("Enter Routes Names") type="text"
+            .col-md-6
+              .form-group
+                input.form-control placeholder=("Enter Break outs") type="text"
+            .col-md-4
+              .form-group
+                input.form-control placeholder=("Target Price ") type="text"
+            .col-md-4
+              .form-group
+                select.form-control
+                  option Route Type
+                  option CLI
+                  option CLI
+                  option CLI
+            .col-md-4
+              .form-group
+                input.form-control id=(" ") placeholder=("Buy / Sell") type="text"
+            .sarch-btn.col-md-6
+              a.btn.btn-default.btn-reset href="#"  RESET
+            .sarch-btn.col-md-6
+              a.btn.btn-default href="#"  ADD
+section.routes-select-dashboard
+  .container
+    .routes-select-dashboard-inner
+      h2 Select Routes
+      .routes-select-dashboard-row
+        .routes-select-dashboard-col
+          .col-md-4.col-xs-12.text-xs-center.sd-xs-no-border.sd-border-right
+            span Route
+            | Pakistan Cellular- Mobilink
+          .col-md-2.col-xs-6.sd-border-right.text-center
+            span Breakouts
+            | 93200
+          .col-md-1.col-xs-6.sd-border-right.text-center.sd-xs-no-border
+            span Price
+            | $ 56.33
+          .col-md-1.col-xs-6.sd-border-right.text-center
+            span Type
+            | CLI
+          .col-md-2.col-xs-6.sd-border-right.text-center.sd-xs-no-border
+            span Buy/Sell
+            | Buy
+          .col-md-2.col-xs-12.text-center.select-dashboard-btn
+            a.sd-edit-btn href="#" 
+              i.fa.fa-pencil-square-o aria-hidden="true" 
+            a.sd-delet-btn href="#" 
+              i.fa.fa-trash-o aria-hidden="true" 
+section.search-routes-table
+  .container
+    .search-heading.voipx-heading
+      h2 style=("margin-bottom: 0px;") 
+        | Matched 
+        span Routes
+      span
+        | Total matches found: 
+        strong 4
+    .search-routes-tab-inner.matched-routes-tab-inner
+      .srt-head
+        .row
+          .col-xs-5
+            span Matched Routes
+          .col-xs-2.text-center Price
+          .col-xs-2.text-center Buyer
+          .col-xs-3.text-center
+      .srt-body
+        .row.tab-row
+          .col-xs-5
+            span Matched Routes
+          .col-xs-2.text-center $469.52
+          .col-xs-2.text-center Imran Khan
+          .col-xs-3.text-center
+            = image_tag "star-icon.png"
+            = image_tag "message-icon.png"
+        .row.tab-row
+          .col-xs-5
+            span Matched Routes
+          .col-xs-2.text-center $469.52
+          .col-xs-2.text-center Imran Khan
+          .col-xs-3.text-center
+            = image_tag "star-icon.png"
+            = image_tag "message-icon.png"
+        .row.tab-row
+          .col-xs-5
+            span Matched Routes
+          .col-xs-2.text-center $469.52
+          .col-xs-2.text-center Imran Khan
+          .col-xs-3.text-center
+            = image_tag "star-icon.png"
+            = image_tag "message-icon.png"
+        .row.tab-row
+          .col-xs-5
+            span Matched Routes
+          .col-xs-2.text-center $469.52
+          .col-xs-2.text-center Imran Khan
+          .col-xs-3.text-center
+            = image_tag "star-icon.png"
+            = image_tag "message-icon.png"
 
-  = render partial: '/routes/form', locals: {route: @route}
-br
-br
-br
-br
-br
-br
-.row
-  .col-md-6
-    table.table.table-sm.table-bordered.table-hover
-      thead.thead-inverse
-        tr
-          th Routes
-          th Breakouts
-          th Price
-          th Type
-          th Buy/Sell
-          th Actions
-      tbody
-        - if @my_routes.any?
-          - @my_routes.each do |route|
-            tr.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
-              td #{route.breakout.destination}
-              td #{route.breakout.code}
-              td $#{route.price}
-              td #{route.quality_type.upcase}
-              td #{route.purchase_type.humanize}
-              td
-                = link_to edit_route_path(route) do
-                  i.fa.fa-pencil aria-hidden="true"
-                |
-                = link_to route, class: 'pull-right', data: { confirm: 'Are you sure?' }, method: :delete do
-                  i.fa.fa-trash aria-hidden="true"
-        - else
-          tr
-            td colspan="6" Please add routes to see matches
 
-  .col-md-6
-    table.table.table-sm.table-bordered.table-hover
-      thead.thead-inverse
-        tr
-          th Matched Routes
-          th Price
-          th#buyer_seller_type Buyer/Seller
-          th Actions
-      tbody#matched_routes
-        tr
-          td colspan="5" Please select any of your added route to see matches
+/ #center-content
+/   h2 Route Dashboard
+/   br
+/   br
+
+/   = render partial: '/routes/form', locals: {route: @route}
+/ br
+/ br
+/ br
+/ br
+/ br
+/ br
+/ .row
+/   .col-md-6
+/     table.table.table-sm.table-bordered.table-hover
+/       thead.thead-inverse
+/         tr
+/           th Routes
+/           th Breakouts
+/           th Price
+/           th Type
+/           th Buy/Sell
+/           th Actions
+/       tbody
+/         - if @my_routes.any?
+/           - @my_routes.each do |route|
+/             tr.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
+/               td #{route.breakout.destination}
+/               td #{route.breakout.code}
+/               td $#{route.price}
+/               td #{route.quality_type.upcase}
+/               td #{route.purchase_type.humanize}
+/               td
+/                 = link_to edit_route_path(route) do
+/                   i.fa.fa-pencil aria-hidden="true"
+/                 |
+/                 = link_to route, class: 'pull-right', data: { confirm: 'Are you sure?' }, method: :delete do
+/                   i.fa.fa-trash aria-hidden="true"
+/         - else
+/           tr
+/             td colspan="6" Please add routes to see matches
+
+/   .col-md-6
+/     table.table.table-sm.table-bordered.table-hover
+/       thead.thead-inverse
+/         tr
+/           th Matched Routes
+/           th Price
+/           th#buyer_seller_type Buyer/Seller
+/           th Actions
+/       tbody#matched_routes
+/         tr
+/           td colspan="5" Please select any of your added route to see matches
 
 
-== render "shared/message_modal"
+/ == render "shared/message_modal"
