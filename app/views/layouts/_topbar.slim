@@ -1,5 +1,8 @@
 #header.top-bar
   div
     .login-signup
-      a.signup-btn href="/users/sign_up" SIGNUP
-      a.login-btn href="/users/sign_in" LOGIN
+      - if user_signed_in?
+        = link_to "Sign out", destroy_user_session_path, method: 'delete'
+      - else
+        = link_to "SIGNUP", new_user_registration_path, class: "signup-btn"
+        = link_to "LOGIN", new_user_session_path, class: "login-btn"

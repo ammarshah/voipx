@@ -7,25 +7,29 @@ section.sign-up
         = image_tag "sign-in.png"
   .sign-up-right
     .signup-form
-      h2 Sign In
-      .signup-form-inner
-        .form-group
-          label Email address
-          input.form-control placeholder=("Enter Your Email Address") type="email"
-        .form-group
-          label Password
-          input.form-control placeholder=("Enter Your Password") type="password"
-        .forgot-link
-          .row
-            .col-sm-6
-              .form-check
-                label.form-check-label
-                  input.form-check-input type="checkbox"
-                  | Remember Me
-            .col-sm-6
-              a.forgot-pass-link href="#"  Forgot Password ?
-        .form-button
-          button.btn.btn-primary type="submit"  Sign In
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = devise_error_messages!
+        h2 Sign In
+        .signup-form-inner
+          .form-group
+            = f.label :email, "Email address"
+            = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Enter your Email Address"
+          .form-group
+            = f.label :password
+            = f.password_field :password, class: 'form-control', placeholder: "Enter your Password"
+          .forgot-link
+            .row
+              - if devise_mapping.rememberable?
+                .col-sm-6
+                  .form-check
+                    label.form-check-label
+                      = f.check_box :remember_me, class: "form-check-input"
+                      |  Remember Me
+              - if devise_mapping.recoverable?
+                .col-sm-6
+                  = link_to "Forgot Password?", new_password_path(resource_name), class: 'forgot-pass-link'
+          .form-button
+            = f.submit 'Sign In', class: 'btn btn-primary'
 .clearfix
 
 
@@ -36,24 +40,24 @@ section.sign-up
 /     <div class="form-group">
 /       <%- if devise_mapping.registerable? %>
 /         <%= link_to 'Sign up', new_registration_path(resource_name), class: 'right'  %>
-/       <% end -%>
+/       <% end %>
 /       <%= f.label :email %>
 /       <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
 /     </div>
 /     <div class="form-group">
 /       <%- if devise_mapping.recoverable? %>
 /         <%= link_to "Forgot password?", new_password_path(resource_name), class: 'right' %>
-/       <% end -%>
+/       <% end %>
 /       <%= f.label :password %>
 /       <%= f.password_field :password, class: 'form-control' %>
 /     </div>
 /       <%= f.submit 'Sign in', :class => 'button right' %>
-/       <% if devise_mapping.rememberable? -%>
+/       <%- if devise_mapping.rememberable? %>
 /         <div class="checkbox" style="width:150px">
 /           <label>
 /             <%= f.check_box :remember_me %> Remember me
 /           </label>
 /         </div>
-/       <% end -%>
+/       <% end %>
 /   <% end %>
 / </div>
