@@ -6,112 +6,76 @@ section.search-route-section
           | Search 
           span Route
       .search-form
-        .col-md-6
-          .form-group
-            select.form-control
-              option I Want to Buy
-              option I Want to Sell
-        .col-md-6
-          .form-group
-            input.form-control placeholder=("Route Name") type="text"
-        .col-md-4
-          .form-group
-            input.form-control placeholder=("Break Out") type="text"
-        .col-md-4
-          .form-group
-            input.form-control placeholder="Price" type="text"
-        .col-md-4
-          .form-group
-            select.form-control
-              option CLI
-              option CLI
-              option CLI
-              option CLI
-        .sarch-btn.col-md-12
-          a.btn.btn-default href="#"  SEARCH
+        = simple_form_for :search, url: search_path, method: :get do |f|
+          .col-md-6
+            .form-group
+              = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {selected: params[:search].try(:[], :purchase_type)}, {class: 'form-control'}
+          .col-md-6
+            .form-group
+              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_breakout'}, class: 'form-control', placeholder: 'Route Name'
+          .col-md-4
+            .form-group
+              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_destination'}, class: 'form-control', placeholder: 'Breakout'
+          .col-md-4
+            .form-group
+              = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001', value: params[:search].try(:[], :price)}, label: false, wrapper: false
+          .col-md-4
+            .form-group
+              = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {selected: params[:search].try(:[], :quality_type)}, {class: 'form-control'}
+          .sarch-btn.col-md-12
+            = f.submit "SHOW MATCHES", name: nil, class: "btn btn-default"
 
 section.search-routes-table
   .container
-    .search-heading.voipx-heading
-      h2 style=("margin-bottom: 0px;") 
-        | Search 
-        span Results
-      span
-        strong 20
-        | search results for 
-        strong "Afghanistan"
-    .search-routes-tab-inner
-      .srt-head
-        .row
-          .col-xs-1
-          .col-xs-3 Route Name
-          .col-xs-5
-          .col-xs-3.text-center Buyer/Seller
-      .srt-body
-        .row.tab-row
-          .col-xs-1.text-center
-            = image_tag "icon-magnifying-glass.png"
-          .col-xs-3
-            span.route-name Afghanistan All
-          .col-xs-5.route-info
-            span
-              | Break outs:
-              span 93
-            span
-              | Type:
-              span CLI
-            span
-              | Price:
-              apan $5.55
-            span
-              | Buy/Sell:
-              span SELL
-          .col-xs-3.text-center.buyer-name
-            i.fa.fa-user aria-hidden="true" 
-            | Ammar
-        .row.tab-row
-          .col-xs-1.text-center
-            = image_tag "icon-magnifying-glass.png"
-          .col-xs-3
-            span.route-name Afghanistan All
-          .col-xs-5.route-info
-            span
-              | Break outs:
-              span 93
-            span
-              | Type:
-              span CLI
-            span
-              | Price:
-              apan $5.55
-            span
-              | Buy/Sell:
-              span SELL
-          .col-xs-3.text-center.buyer-name
-            i.fa.fa-user aria-hidden="true" 
-            | Ammar
-        .row.tab-row
-          .col-xs-1.text-center
-            = image_tag "icon-magnifying-glass.png"
-          .col-xs-3
-            span.route-name Afghanistan All
-          .col-xs-5.route-info
-            span
-              | Break outs:
-              span 93
-            span
-              | Type:
-              span CLI
-            span
-              | Price:
-              apan $5.55
-            span
-              | Buy/Sell:
-              span SELL
-          .col-xs-3.text-center.buyer-name
-            i.fa.fa-user aria-hidden="true" 
-            | Ammar
-
+    - if defined?(@routes)
+      .search-heading.voipx-heading
+        h2 style=("margin-bottom: 0px;") 
+          | Search 
+          span Results
+        span
+          strong #{@routes.size.to_s} 
+          | search results 
+          - if params[:search].try(:[], :destination).present?
+            | for 
+            strong #{params[:search].try(:[], :destination)}
+      - if @routes.any?
+        .search-routes-tab-inner
+          .srt-head
+            .row
+              .col-xs-1
+              .col-xs-3 Route Name
+              .col-xs-5
+              .col-xs-3.text-center Buyer/Seller
+          .srt-body
+            - @routes.each do |route|
+              .row.tab-row
+                .col-xs-1.text-center
+                  = image_tag "icon-magnifying-glass.png"
+                .col-xs-3
+                  span.route-name #{route.breakout.destination}
+                .col-xs-5.route-info
+                  span
+                    | Breakout: 
+                    span #{route.breakout.code}
+                  span
+                    | Type: 
+                    span #{route.quality_type.upcase}
+                  span
+                    | Price: 
+                    span $#{route.price}
+                  span
+                    | Buy/Sell: 
+                    span #{route.purchase_type.humanize}
+                .col-xs-3.text-center.buyer-name
+                  = link_to user_path(route.user), target: "_blank" do
+                    i.fa.fa-user aria-hidden="true"
+                    |  #{route.user.name}
+    - else
+      .search-heading.voipx-heading
+        h2 style=("margin-bottom: 0px;") 
+          | Search 
+          span Results
+        span Please search to see matches
 
 
 / #center-content
