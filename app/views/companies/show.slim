@@ -5,8 +5,9 @@
     img.rounded-circle alt="Profile Photo" src="#{@company.logo.url(:square)}"
 
   br
-  = link_to "Edit Company Profile", edit_company_path, class: "btn btn-primary", style: "float: right" if current_user.is_company_admin_of(@company)
-  h2 #{ current_user.company == @company ? "My Company Profile" : "Company Profile" }
+  - if user_signed_in?
+    = link_to "Edit Company Profile", edit_company_path, class: "btn btn-primary", style: "float: right" if current_user.is_company_admin_of(@company)
+    h2 #{ current_user.company == @company ? "My Company Profile" : "Company Profile" }
 
 br
 hr

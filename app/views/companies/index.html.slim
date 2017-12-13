@@ -6,68 +6,43 @@ section.search-route-section
           | Search 
           span Companies
       .search-form
-        .col-md-12
-          .form-group.company-search-field
-            span
-              i.fa.fa-search aria-hidden="true" 
-            input.form-control placeholder=("Search by Name") type="text"
-        .sarch-btn.col-md-12
-          a.btn.btn-default href="#"  SEARCH
+        = form_tag companies_path, method: :get do
+          .col-md-12
+            .form-group.company-search-field
+              span
+                i.fa.fa-search aria-hidden="true"
+              = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search by Name"
+          .sarch-btn.col-md-12
+            = submit_tag "SEARCH", name: nil, class: "btn btn-default"
 section.search-routes-table
   .container
     .search-routes-tab-inner
-      .srt-head
-        .row
-          .col-xs-1
-          .col-xs-3 Company Name
-          .col-xs-5
-          .col-xs-3.text-center Website
-      .srt-body
-        .row.tab-row
-          .col-xs-1.text-center
-            = image_tag "company-icon.jpg"
-          .col-xs-3
-            span.route-name Aradiom
-          .col-xs-5.route-info.text-center
-            span
-              | Since: 
-              span 2017-09-22
-            span
-              | Rating: 
-              span -----
-          .col-xs-3.text-center.buyer-name
-            = image_tag "website-icon.jpg"
-            |  www.aradiom.com
-        .row.tab-row
-          .col-xs-1.text-center
-            = image_tag "company-icon.jpg"
-          .col-xs-3
-            span.route-name Aradiom
-          .col-xs-5.route-info.text-center
-            span
-              | Since: 
-              span 2017-09-22
-            span
-              | Rating: 
-              span -----
-          .col-xs-3.text-center.buyer-name
-            = image_tag "website-icon.jpg"
-            |  www.aradiom.com
-        .row.tab-row
-          .col-xs-1.text-center
-            = image_tag "company-icon.jpg"
-          .col-xs-3
-            span.route-name Aradiom
-          .col-xs-5.route-info.text-center
-            span
-              | Since: 
-              span 2017-09-22
-            span
-              | Rating: 
-              span -----
-          .col-xs-3.text-center.buyer-name
-            = image_tag "website-icon.jpg"
-            |  www.aradiom.com
+      - if @companies.any?
+        .srt-head
+          .row
+            .col-xs-1
+            .col-xs-3 Company Name
+            .col-xs-5
+            .col-xs-3.text-center Website
+        .srt-body
+          - @companies.each do |company|
+            .row.tab-row
+              .col-xs-1.text-center
+                = image_tag "company-icon.jpg"
+              .col-xs-3
+                span.route-name = link_to company.name, company_path(company)
+              .col-xs-5.route-info.text-center
+                span
+                  | Since: 
+                  span #{company.since}
+                span
+                  | Rating: 
+                  span ---
+              .col-xs-3.text-center.buyer-name
+                = image_tag "website-icon.jpg"
+                |  #{company.website}
+      - else
+        p.text-center No companies added yet
 
 
 / #center-content
