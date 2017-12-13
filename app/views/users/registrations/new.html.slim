@@ -1,7 +1,7 @@
 section.sign-up.signup-bg
   .sign-up-left
     .signup-headiing.text-center
-      h2 What You’ll Get by Joining Us ?
+      h2 What You’ll Get by Joining Us?
       p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium sapien sem, nec laoreet ex.Donec pretium sapien sem, nec laoreet ex.
     .clearfix
     .signup-img
@@ -10,28 +10,30 @@ section.sign-up.signup-bg
     .signup-form
       h2 Sign Up
       .signup-form-inner
-        .form-group
-          label First Name
-          input.form-control placeholder=("Enter Your First Name") type="text"
-        .form-group
-          label Last Name
-          input.form-control placeholder=("Enter Your Last Name") type="text"
-        .form-group
-          label Email address
-          input.form-control placeholder=("Enter Your Email Address") type="email"
-        .form-group
-          label Password
-          input.form-control placeholder=("Enter Your Password") type="password"
-        .form-group
-          label Confirm Password
-          input.form-control placeholder=("Enter Your Confirm Password") type="password"
-        .forgot-link.form-button
-          .row
-            .col-sm-6
-              div
-                button.btn.btn-primary type="submit"  Sign Up
-            .col-sm-6
-              a.member-link href="/users/sign_in"  I’m already a member
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          .form-group
+            = f.label :first_name
+            = f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: "Enter your First Name"
+          .form-group
+            = f.label :last_name
+            = f.text_field :last_name, class: 'form-control', placeholder: "Enter your Last Name"
+          .form-group
+            = f.label :email, "Email address"
+            = f.email_field :email, class: 'form-control', placeholder: "Enter your Email Address"
+          .form-group
+            = f.label :password
+            = f.password_field :password, class: 'form-control', placeholder: "Enter your Password"
+          .form-group
+            = f.label :password_confirmation, "Confirm Password"
+            = f.password_field :password_confirmation, class: 'form-control', placeholder: "Enter your Password Again"
+          .forgot-link.form-button
+            .row
+              .col-sm-6
+                div
+                  = f.submit 'Sign up', class: 'btn btn-primary'
+              .col-sm-6
+                = link_to "I’m already a Member", new_user_session_path, class: "member-link"
 .clearfix
 
 
@@ -45,7 +47,7 @@ section.sign-up.signup-bg
 /     </div>
 /     <div class="form-group">
 /       <%= f.label :last_name %>
-/       <%= f.text_field :last_name, class: 'form-control' %>
+/       <%= f.text_field :last_name, class: 'form-control', placeholder: "" %>
 /     </div>
 /     <div class="form-group">
 /       <%= f.label :email %>
