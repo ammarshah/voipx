@@ -1,1 +1,5 @@
-= link_to "MESSAGES (#{unread_messages_count})", mailbox_inbox_path, class: 'nav-link sub-nav-color-voipx'
+= link_to mailbox_inbox_path do
+  = image_tag "message-dashboard-icon.png"
+  span MESSAGES (#{unread_messages_count})
+
+/ = link_to "MESSAGES (#{unread_messages_count})", mailbox_inbox_path, class: 'nav-link sub-nav-color-voipx'

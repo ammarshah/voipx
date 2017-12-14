@@ -6,27 +6,25 @@ section.dashboard-header-section
           .dashboard-navigation
             ul
               li
-                a href="#" 
+                = link_to dashboard_path do
                   = image_tag "dashboard-icon.png"
                   span DASHBOARD
               li
-                a href="#" 
+                = link_to search_path do
                   = image_tag "search-dashboard-icon.png"
                   span SEARCH
               li
-                a href="#" 
+                = link_to contacts_path do
                   = image_tag "contact-dashboard-icon.png"
                   span CONTACTS
               li
-                a href="#" 
-                  = image_tag "message-dashboard-icon.png"
-                  span MESSAGES
+                = render partial: 'layouts/unread_messages_count'
               li
-                a href="#" 
+                = link_to favorites_path do
                   = image_tag "star-dashboard-icon.png"
                   span FAVOURITES
               li
-                a href="#" 
+                = link_to user_path(current_user) do
                   = image_tag "user-dashboard-icon.png"
                   span PROFILE
           .clearfix
@@ -36,29 +34,30 @@ section.dashboard-header-section
               | Route 
               span Dashboard
           .search-form
-            .col-md-6
-              .form-group
-                input.form-control placeholder=("Enter Routes Names") type="text"
-            .col-md-6
-              .form-group
-                input.form-control placeholder=("Enter Break outs") type="text"
-            .col-md-4
-              .form-group
-                input.form-control placeholder=("Target Price ") type="text"
-            .col-md-4
-              .form-group
-                select.form-control
-                  option Route Type
-                  option CLI
-                  option CLI
-                  option CLI
-            .col-md-4
-              .form-group
-                input.form-control id=(" ") placeholder=("Buy / Sell") type="text"
-            .sarch-btn.col-md-6
-              a.btn.btn-default.btn-reset href="#"  RESET
-            .sarch-btn.col-md-6
-              a.btn.btn-default href="#"  ADD
+            = simple_form_for @route do |f|
+              p.text-danger.text-center
+                = f.object.errors.full_messages.first
+              .col-md-6
+                .form-group
+                  = autocomplete_field_tag 'route[destination]', @route.breakout.try(:destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control', placeholder: 'Enter Route Name'
+              .col-md-6
+                .form-group
+                  = autocomplete_field_tag 'route[breakout]', @route.breakout.try(:code), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control', placeholder: 'Enter Breakout'
+                  = f.input :breakout_id, as: :hidden
+              .col-md-4
+                .form-group
+                  = f.input :price, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false, error: false
+              .col-md-4
+                .form-group
+                  = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Route Type"}, {class: 'form-control'}
+              .col-md-4
+                .form-group
+                  = f.select :purchase_type, Route.purchase_types.keys.map {|c| ["I want to #{c.humanize}", c]}, {include_blank: "Buy/Sell"}, {class: 'form-control'}
+              .sarch-btn.col-md-6
+                a#reset-btn.btn.btn-default.btn-reset href="javascript:void(0)" RESET
+              .sarch-btn.col-md-6
+                = f.submit "ADD", class: 'btn btn-default'
+                
 section.routes-select-dashboard
   .container
     .routes-select-dashboard-inner
