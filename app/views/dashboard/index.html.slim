@@ -57,83 +57,52 @@ section.dashboard-header-section
                 a#reset-btn.btn.btn-default.btn-reset href="javascript:void(0)" RESET
               .sarch-btn.col-md-6
                 = f.submit "ADD", class: 'btn btn-default'
-                
+
 section.routes-select-dashboard
   .container
-    .routes-select-dashboard-inner
-      h2 Select Routes
-      .routes-select-dashboard-row
-        .routes-select-dashboard-col
-          .col-md-4.col-xs-12.text-xs-center.sd-xs-no-border.sd-border-right
-            span Route
-            | Pakistan Cellular- Mobilink
-          .col-md-2.col-xs-6.sd-border-right.text-center
-            span Breakouts
-            | 93200
-          .col-md-1.col-xs-6.sd-border-right.text-center.sd-xs-no-border
-            span Price
-            | $ 56.33
-          .col-md-1.col-xs-6.sd-border-right.text-center
-            span Type
-            | CLI
-          .col-md-2.col-xs-6.sd-border-right.text-center.sd-xs-no-border
-            span Buy/Sell
-            | Buy
-          .col-md-2.col-xs-12.text-center.select-dashboard-btn
-            a.sd-edit-btn href="#" 
-              i.fa.fa-pencil-square-o aria-hidden="true" 
-            a.sd-delet-btn href="#" 
-              i.fa.fa-trash-o aria-hidden="true" 
+    - if @my_routes.any?
+      .routes-select-dashboard-inner
+        h2 My Routes
+        - @my_routes.each do |route|
+          .routes-select-dashboard-row.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
+            .routes-select-dashboard-col
+              .col-md-4.col-xs-12.text-xs-center.sd-xs-no-border.sd-border-right
+                span Route
+                | #{route.breakout.destination}
+              .col-md-2.col-xs-6.sd-border-right.text-center
+                span Breakout
+                | #{route.breakout.code}
+              .col-md-1.col-xs-6.sd-border-right.text-center.sd-xs-no-border
+                span Price
+                | $#{route.price}
+              .col-md-1.col-xs-6.sd-border-right.text-center
+                span Type
+                | #{route.quality_type.upcase}
+              .col-md-2.col-xs-6.sd-border-right.text-center.sd-xs-no-border
+                span Buy/Sell
+                | #{route.purchase_type.humanize}
+              .col-md-2.col-xs-12.text-center.select-dashboard-btn
+                = link_to edit_route_path(route), class: "sd-edit-btn" do
+                  i.fa.fa-pencil-square-o aria-hidden="true"
+                = link_to route, class: 'sd-delet-btn', data: { confirm: 'Are you sure?' }, method: :delete do
+                  i.fa.fa-trash-o aria-hidden="true"
+    - else
+      p.text-center Please add a route to see matches
+
 section.search-routes-table
   .container
-    .search-heading.voipx-heading
-      h2 style=("margin-bottom: 0px;") 
-        | Matched 
-        span Routes
-      span
-        | Total matches found: 
-        strong 4
-    .search-routes-tab-inner.matched-routes-tab-inner
-      .srt-head
-        .row
-          .col-xs-5
-            span Matched Routes
-          .col-xs-2.text-center Price
-          .col-xs-2.text-center Buyer
-          .col-xs-3.text-center
-      .srt-body
-        .row.tab-row
-          .col-xs-5
-            span Matched Routes
-          .col-xs-2.text-center $469.52
-          .col-xs-2.text-center Imran Khan
-          .col-xs-3.text-center
-            = image_tag "star-icon.png"
-            = image_tag "message-icon.png"
-        .row.tab-row
-          .col-xs-5
-            span Matched Routes
-          .col-xs-2.text-center $469.52
-          .col-xs-2.text-center Imran Khan
-          .col-xs-3.text-center
-            = image_tag "star-icon.png"
-            = image_tag "message-icon.png"
-        .row.tab-row
-          .col-xs-5
-            span Matched Routes
-          .col-xs-2.text-center $469.52
-          .col-xs-2.text-center Imran Khan
-          .col-xs-3.text-center
-            = image_tag "star-icon.png"
-            = image_tag "message-icon.png"
-        .row.tab-row
-          .col-xs-5
-            span Matched Routes
-          .col-xs-2.text-center $469.52
-          .col-xs-2.text-center Imran Khan
-          .col-xs-3.text-center
-            = image_tag "star-icon.png"
-            = image_tag "message-icon.png"
+    - if @my_routes.any?
+      .search-heading.voipx-heading
+        h2 style=("margin-bottom: 0px;") 
+          | Matched 
+          span Routes
+        span#total_matches.hidden
+          | Total matches found: 
+          strong#matches_count 0
+      .search-routes-tab-inner.matched-routes-tab-inner#matched_routes
+        p.text-center Please select a route from My Routes to see matches
+
+== render "shared/message_modal"
 
 
 / #center-content

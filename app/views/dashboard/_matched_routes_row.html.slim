@@ -1,0 +1,91 @@
+.srt-head
+  .row
+    .col-xs-5
+      span Routes
+    .col-xs-2.text-center Price
+    .col-xs-2.text-center #{routes.first.purchase_type.humanize}er
+    .col-xs-3.text-center
+
+.srt-body
+  - routes.each do |route|
+    .row.tab-row
+      .col-xs-5
+        span #{route.breakout.destination}
+      .col-xs-2.text-center #{route.purchase_type.humanize + 'ing at $' + route.price.to_s}
+      .col-xs-2.text-center #{link_to route.user.name, user_path(route.user), target: "_blank"}
+      .col-xs-3.text-center
+        span id="favorite_#{route.id}"
+          - if current_user.favorites.pluck(:route_id).include?(route.id)
+            = link_to current_user.favorites.where(route_id: route.id).first, method: :delete, title: "Remove from favorites", remote: true do
+              = image_tag "star-icon"
+          - else
+            = link_to favorites_path(route_id: route.id), method: :post, title: "Add to favorites", remote: true do
+              = image_tag "star-icon-unfilled"
+        
+        - purchase_sentence = route.purchase_type.humanize + 'ing at $' + route.price.to_s
+        - subject = route.breakout.destination + ' (' + route.breakout.code + ')' + ' - ' + route.quality_type.upcase + ' - ' + purchase_sentence
+
+        = link_to image_tag("message-icon.png"), "#", data: { toggle: 'modal', target: '#messageModal', recipient: "#{route.user.id}", subject: "#{subject}", profile_url: "#{url_for(route.user)}", photo_url: "#{route.user.photo.url(:thumb)}", name: "#{route.user.name}", purchase_sentence: "#{purchase_sentence}", destination: "#{route.breakout.destination}", breakout: "#{route.breakout.code}", price: "#{route.price}", quality_type: "#{route.quality_type.upcase}" }
+
+javascript:
+  $(function(){
+    $('#messageModal').on('shown.bs.modal', function(e) {
+      var button, breakout, destination, name, photo_url, price, profile_url, purchase_sentence, quality_type, recipient_id, subject;
+      button = $(e.relatedTarget);
+      profile_url = button.data('profile-url');
+      photo_url = button.data('photo-url');
+      name = button.data('name');
+      purchase_sentence = button.data('purchase-sentence');
+      destination = button.data('destination');
+      breakout = button.data('breakout');
+      price = button.data('price');
+      quality_type = button.data('quality-type');
+      recipient_id = button.data('recipient');
+      subject = button.data('subject');
+      $("#match_profile_url").attr("href", profile_url);
+      $("#match_photo_url").attr("src", photo_url);
+      $("#match_name").html(name);
+      $("#match_purchase_sentence").html(purchase_sentence);
+      $("#match_destination").html(destination);
+      $("#match_breakout").html(breakout);
+      $("#match_price").html(price);
+      $("#match_quality_type").html(quality_type);
+      $("#conversation_recipient").val(recipient_id);
+      $("#conversation_subject").val(subject);
+      return
+    });
+  });
+
+
+/ <% routes.each do |route| %>
+/   <tr>
+/     <td>
+/       <%= route.breakout.destination %>
+/     </td>
+/     <td>
+/       <%= route.purchase_type.humanize + 'ing at $' + route.price.to_s %>
+/     </td>
+/     <td>
+/       <%= link_to route.user.name, user_path(route.user), target: "_blank" %>
+/     </td>
+/     <td>
+/       <div id="favorite_<%= route.id %>" class="pull-left">
+/         <% if current_user.favorites.pluck(:route_id).include?(route.id) %>
+/           <%= link_to current_user.favorites.where(route_id: route.id).first, method: :delete, title: "Remove from favorites", remote: true do %>
+/             <i class="fa fa-star"></i>
+/           <% end %>
+/         <% else %>
+/           <%= link_to favorites_path(route_id: route.id), method: :post, title: 'Add to favorites', remote: true do %>
+/             <i class="fa fa-star-o"></i>
+/           <% end %>
+/         <% end %>
+/       </div>
+      
+/       <% purchase_sentence = route.purchase_type.humanize + 'ing at $' + route.price.to_s %>
+/       <% subject = route.breakout.destination + ' (' + route.breakout.code + ')' + ' - ' + route.quality_type.upcase + ' - ' + purchase_sentence %>
+/       <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#messageModal" data-recipient="<%= route.user.id%>" data-subject="<%= subject %>" data-profile-url="<%= url_for(route.user) %>" data-photo-url="<%= route.user.photo.url(:thumb) %>" data-name="<%= route.user.name %>" data-purchase-sentence="<%= purchase_sentence %>" data-destination="<%= route.breakout.destination %>" data-breakout="<%= route.breakout.code %>" data-price="<%= route.price %>" data-quality-type="<%= route.quality_type.upcase %>" >
+/         Message
+/       </button>
+/     </td>
+/   </tr>
+/ <% end %>
