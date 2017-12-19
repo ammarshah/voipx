@@ -8,3 +8,7 @@ $ ->
     $('#search_breakout').val ''
     $('#search_breakout_id').val ''
     return
+
+  $('.add_to_my_routes_input').on 'input propertychange', ->
+    $('#add_to_my_routes_link').remove()
+    return

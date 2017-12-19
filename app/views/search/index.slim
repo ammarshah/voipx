@@ -11,22 +11,28 @@ section.search-route-section
             = f.object.errors.first.try(:second)
           .col-md-6
             .form-group
-              = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control'}
+              = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control add_to_my_routes_input'}
           .col-md-6
             .form-group
-              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control', placeholder: 'Route Name'
+              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control add_to_my_routes_input', placeholder: 'Route Name'
           .col-md-4
             .form-group
-              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control', placeholder: 'Breakout'
+              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control add_to_my_routes_input', placeholder: 'Breakout'
           = f.input :breakout_id, as: :hidden
           .col-md-4
             .form-group
-              = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false, error: false
+              = f.input :price, as: :integer, placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001', class: 'form-control add_to_my_routes_input'}, label: false, wrapper: false, error: false
           .col-md-4
             .form-group
-              = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {}, {class: 'form-control'}
+              = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {}, {class: 'form-control add_to_my_routes_input'}
           .sarch-btn.col-md-12
             = f.submit "SHOW MATCHES", name: nil, class: "btn btn-default"
+        - if user_signed_in? && @search.valid?
+          div id='add_to_my_routes_link' class='pull-right'
+            = button_to "Add to My Routes", add_to_my_routes_path, method: :post, class: "btn btn-link", params: {  purchase_type: @search.purchase_type,
+                                                                                                                    quality_type: @search.quality_type,
+                                                                                                                    price: @search.price,
+                                                                                                                    breakout_id: @search.breakout_id }
 
 section.search-routes-table
   .container
