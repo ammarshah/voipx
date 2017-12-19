@@ -6,22 +6,25 @@ section.search-route-section
           | Search 
           span Route
       .search-form
-        = simple_form_for :search, url: search_path, method: :get do |f|
+        = simple_form_for @search, url: search_path, method: :get do |f|
+          p.text-danger.text-center
+            = f.object.errors.first.try(:second)
           .col-md-6
             .form-group
-              = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {selected: params[:search].try(:[], :purchase_type)}, {class: 'form-control'}
+              = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control'}
           .col-md-6
             .form-group
-              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_breakout'}, class: 'form-control', placeholder: 'Route Name'
+              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control', placeholder: 'Route Name'
           .col-md-4
             .form-group
-              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_destination'}, class: 'form-control', placeholder: 'Breakout'
+              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control', placeholder: 'Breakout'
+          = f.input :breakout_id, as: :hidden
           .col-md-4
             .form-group
-              = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001', value: params[:search].try(:[], :price)}, label: false, wrapper: false
+              = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false, error: false
           .col-md-4
             .form-group
-              = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {selected: params[:search].try(:[], :quality_type)}, {class: 'form-control'}
+              = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {}, {class: 'form-control'}
           .sarch-btn.col-md-12
             = f.submit "SHOW MATCHES", name: nil, class: "btn btn-default"
 

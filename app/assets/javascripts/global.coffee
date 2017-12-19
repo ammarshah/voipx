@@ -17,3 +17,13 @@ $ ->
       # Animation complete.
       return
     return
+
+  $('#search_navbar_breakout').on 'input propertychange', ->
+    $('#search_navbar_destination').val ''
+    $('#search_navbar_breakout_id').val ''
+    return
+  
+  $('#search_navbar_destination').on 'input propertychange', ->
+    $('#search_navbar_breakout').val ''
+    $('#search_navbar_breakout_id').val ''
+    return

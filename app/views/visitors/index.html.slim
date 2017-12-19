@@ -51,10 +51,11 @@
                 = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control'}
             .col-md-6
               .form-group
-                = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_breakout'}, class: 'form-control', placeholder: 'Route Name'
+                = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control', placeholder: 'Route Name'
             .col-md-4
               .form-group
-                = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_destination'}, class: 'form-control', placeholder: 'Breakout'
+                = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control', placeholder: 'Breakout'
+            = f.input :breakout_id, as: :hidden
             .col-md-4
               .form-group
                 = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false
