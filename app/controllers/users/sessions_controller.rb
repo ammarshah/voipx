@@ -22,15 +22,16 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  def after_sign_in_path_for(resource)
-    if resource.has_role?(:admin)
-      admin_dashboard_path
-    else
-      if resource.sign_in_count == 1
-        edit_user_path(resource, is_first_login: "yes")
+  protected
+    def after_sign_in_path_for(resource)
+      if resource.has_role?(:admin)
+        admin_dashboard_path
       else
-        dashboard_path
+        if resource.sign_in_count == 1
+          edit_user_path(resource, is_first_login: "yes")
+        else
+          request.env['omniauth.origin'] || stored_location_for(resource) || dashboard_path
+        end
       end
     end
-  end
 end
