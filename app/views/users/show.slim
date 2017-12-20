@@ -4,10 +4,9 @@
   .profile-photo
     img.rounded-circle alt="Profile Photo" src="#{@user.photo.url(:square)}"
   
-  - if user_signed_in?
-    - unless current_user.profile_completed?
-      .alert.alert-info
-        .text-center Your profile is not completed yet. #{link_to "Click here", edit_user_path} to complete it.
+  - if current_user == @user && !@user.profile_completed?
+    .alert.alert-info
+      .text-center Your profile is not completed yet. #{link_to "Click here", edit_user_path} to complete it.
 
   br
   = link_to "Edit Profile", edit_user_path, class: "btn btn-primary", style: "float: right" if current_user == @user
