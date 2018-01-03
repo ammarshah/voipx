@@ -10,7 +10,7 @@
 <% else %>
   $("#favorite_<%= @favorite.route.id %>").html('\
                                                 <%= link_to @favorite, method: :delete, title: "Remove from favorites", remote: true do %>\
-                                                  <%= image_tag "star-icon" %>\
+                                                  <%= image_tag "star-icon.png" %>\
                                                 <% end %>\
                                                 ');
   toastr.success('Route added in Favorites.');

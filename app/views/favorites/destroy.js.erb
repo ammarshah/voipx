@@ -1,6 +1,6 @@
 $("#favorite_<%= @favorite.route.id %>").html('\
                                               <%= link_to favorites_path(route_id: @favorite.route.id), method: :post, title: "Add to favorites", remote: true do %>\
-                                                <%= image_tag "star-icon-unfilled" %>\
+                                                <%= image_tag "star-icon-unfilled.png" %>\
                                               <% end %>\
                                               ');
 toastr.success('Route removed from Favorites.');
