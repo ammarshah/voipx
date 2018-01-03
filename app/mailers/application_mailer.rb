@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'no-reply@' + Rails.application.secrets.domain_name
   layout 'mailer'
 end

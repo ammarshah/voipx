@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123163359) do
+ActiveRecord::Schema.define(version: 20180102053051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,13 @@ ActiveRecord::Schema.define(version: 20171123163359) do
     t.string   "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
+  end
+
+  create_table "notified_matches", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "route_id"
+    t.integer "match_id"
+    t.index ["route_id", "match_id"], name: "index_notified_matches_on_route_id_and_match_id", unique: true, using: :btree
   end
 
   create_table "other_products", force: :cascade do |t|

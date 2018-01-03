@@ -4,6 +4,7 @@ class Route < ApplicationRecord
                                        # Because we have specified our own validation for presence of breakout below and skipped all attribute names from validation error messages in en.yml locale file.
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :notified_matches, foreign_key: 'match_id', dependent: :destroy
 
   # Validations
   validates :purchase_type, presence: {message: 'Please specify if you are buying or selling this route'}
@@ -87,5 +88,14 @@ class Route < ApplicationRecord
         .filter_purchase_type(purchase_type)
         .filter_quality_type(quality_type)
         .filter_price(price, purchase_type)
+  end
+
+  def get_unnotified_matches
+    route = self
+    user = User.find(route.user_id)
+    search_params = {destination: route.breakout.destination, breakout: route.breakout.code, price: route.price, purchase_type: route.purchase_type, quality_type: route.quality_type}
+    matches = Route.get_matches(search_params, user)
+    already_notified_matches = NotifiedMatch.where(route: route, match: matches).collect {|nm| nm.match}
+    matches - already_notified_matches
   end
 end

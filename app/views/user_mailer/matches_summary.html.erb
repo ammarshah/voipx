@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr.grey {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <p>Greeting, Ammar Shah!</p>
+    <p>Here is your daily matches summary:</p>
+    <table>
+        <tr>
+            <th>Buy/Sell</th>
+            <th>Destination</th>
+            <th>Breakout</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>User</th>
+        </tr>
+        <% @all_matches_hash.each do |route_id, matches| %>
+            <% route = Route.find(route_id) %>
+            <tr class="grey">
+                <th colspan="6" style="text-align:center;">Your Route</th>
+            </tr>
+            <tr>
+                <td><%= route.purchase_type.humanize %></td>
+                <td><%= route.breakout.destination %></td>
+                <td><%= route.breakout.code %></td>
+                <td>$<%= route.price %></td>
+                <td><%= route.quality_type.upcase %></td>
+            </tr>
+            
+            <tr class="grey">
+                <th colspan="6" style="text-align:center;">Matches</th>
+            </tr>
+            <% matches.each do |route_match| %>
+                <tr>
+                    <td><%= route_match.purchase_type.humanize %></td>
+                    <td><%= route_match.breakout.destination %></td>
+                    <td><%= route_match.breakout.code %></td>
+                    <td>$<%= route_match.price %></td>
+                    <td><%= route_match.quality_type.upcase %></td>
+                    <td><%= route_match.user.name %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+
+</body>
+</html>

@@ -34,6 +34,7 @@ gem 'paypal-recurring',
 gem 'ransack'
 gem 'thredded', '~> 0.13.8'
 gem 'rails-ujs'
+gem 'whenever', require: false
 group :development, :test do
   gem 'byebug', platform: :mri
 end
