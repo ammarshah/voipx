@@ -17,10 +17,10 @@
         span id="favorite_#{route.id}"
           - if current_user.favorites.pluck(:route_id).include?(route.id)
             = link_to current_user.favorites.where(route_id: route.id).first, method: :delete, title: "Remove from favorites", remote: true do
-              = image_tag "star-icon"
+              = image_tag "star-icon.png"
           - else
             = link_to favorites_path(route_id: route.id), method: :post, title: "Add to favorites", remote: true do
-              = image_tag "star-icon-unfilled"
+              = image_tag "star-icon-unfilled.png"
         
         - purchase_sentence = route.purchase_type.humanize + 'ing at $' + route.price.to_s
         - subject = route.breakout.destination + ' (' + route.breakout.code + ')' + ' - ' + route.quality_type.upcase + ' - ' + purchase_sentence
