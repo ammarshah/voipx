@@ -9,10 +9,6 @@ section.dashboard-header-section
                 = link_to dashboard_path do
                   = image_tag "dashboard-icon.png"
                   span DASHBOARD
-              /li
-                = link_to search_path do
-                  = image_tag "search-dashboard-icon.png"
-                  span SEARCH
               li
                 = link_to contacts_path do
                   = image_tag "contact-dashboard-icon.png"
@@ -63,29 +59,30 @@ section.routes-select-dashboard
     - if @my_routes.any?
       .routes-select-dashboard-inner
         h2 My Routes
-        - @my_routes.each do |route|
-          .routes-select-dashboard-row.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
-            .routes-select-dashboard-col
-              .col-md-4.col-xs-12.text-xs-center.sd-xs-no-border.sd-border-right
-                span Route
-                | #{route.breakout.destination}
-              .col-md-2.col-xs-6.sd-border-right.text-center
-                span Breakout
-                | #{route.breakout.code}
-              .col-md-1.col-xs-6.sd-border-right.text-center.sd-xs-no-border
-                span Price
-                | $#{route.price}
-              .col-md-1.col-xs-6.sd-border-right.text-center
-                span Type
-                | #{route.quality_type.upcase}
-              .col-md-2.col-xs-6.sd-border-right.text-center.sd-xs-no-border
-                span Buy/Sell
-                | #{route.purchase_type.humanize}
-              .col-md-2.col-xs-12.text-center.select-dashboard-btn
-                = link_to edit_route_path(route), class: "sd-edit-btn" do
-                  i.fa.fa-pencil-square-o aria-hidden="true"
-                = link_to route, class: 'sd-delet-btn', data: { confirm: 'Are you sure?' }, method: :delete do
-                  i.fa.fa-trash-o aria-hidden="true"
+        .responsive-table
+          - @my_routes.each do |route|
+            .routes-select-dashboard-row.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
+              .routes-select-dashboard-col
+                .col-md-4.col-xs-12.text-xs-center.sd-xs-no-border.sd-border-right
+                  span Route
+                  | #{route.breakout.destination}
+                .col-md-2.col-xs-6.sd-border-right.text-center
+                  span Breakout
+                  | #{route.breakout.code}
+                .col-md-1.col-xs-6.sd-border-right.text-center.sd-xs-no-border
+                  span Price
+                  | $#{route.price}
+                .col-md-1.col-xs-6.sd-border-right.text-center
+                  span Type
+                  | #{route.quality_type.upcase}
+                .col-md-2.col-xs-6.sd-border-right.text-center.sd-xs-no-border
+                  span Buy/Sell
+                  | #{route.purchase_type.humanize}
+                .col-md-2.col-xs-12.text-center.select-dashboard-btn
+                  = link_to edit_route_path(route), class: "sd-edit-btn" do
+                    i.fa.fa-pencil-square-o aria-hidden="true"
+                  = link_to route, class: 'sd-delet-btn', data: { confirm: 'Are you sure?' }, method: :delete do
+                    i.fa.fa-trash-o aria-hidden="true"
     - else
       p.text-center Please add a route to see matches
 
@@ -103,61 +100,3 @@ section.search-routes-table
         p.text-center Please select a route from My Routes to see matches
 
 == render "shared/message_modal"
-
-
-/ #center-content
-/   h2 Route Dashboard
-/   br
-/   br
-
-/   = render partial: '/routes/form', locals: {route: @route}
-/ br
-/ br
-/ br
-/ br
-/ br
-/ br
-/ .row
-/   .col-md-6
-/     table.table.table-sm.table-bordered.table-hover
-/       thead.thead-inverse
-/         tr
-/           th Routes
-/           th Breakouts
-/           th Price
-/           th Type
-/           th Buy/Sell
-/           th Actions
-/       tbody
-/         - if @my_routes.any?
-/           - @my_routes.each do |route|
-/             tr.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
-/               td #{route.breakout.destination}
-/               td #{route.breakout.code}
-/               td $#{route.price}
-/               td #{route.quality_type.upcase}
-/               td #{route.purchase_type.humanize}
-/               td
-/                 = link_to edit_route_path(route) do
-/                   i.fa.fa-pencil aria-hidden="true"
-/                 |
-/                 = link_to route, class: 'pull-right', data: { confirm: 'Are you sure?' }, method: :delete do
-/                   i.fa.fa-trash aria-hidden="true"
-/         - else
-/           tr
-/             td colspan="6" Please add routes to see matches
-
-/   .col-md-6
-/     table.table.table-sm.table-bordered.table-hover
-/       thead.thead-inverse
-/         tr
-/           th Matched Routes
-/           th Price
-/           th#buyer_seller_type Buyer/Seller
-/           th Actions
-/       tbody#matched_routes
-/         tr
-/           td colspan="5" Please select any of your added route to see matches
-
-
-/ == render "shared/message_modal"
