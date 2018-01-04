@@ -1,55 +1,41 @@
-<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <div class="modal-body">
-        <div class="media">
-          <a id="match_profile_url" href="">
-            <img id="match_photo_url" class="d-flex mr-3" src="" alt="..." height="64" width="64">
-          </a>
-          <div class="media-body">
-            <h5 id="match_name" class="mt-0"></h5>
-            <br>
-            <small class="text-muted"><i id="match_purchase_sentence"></i></small><br>
-            <div class="spacer"></div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Destination</th>
-                  <th>Breakout</th>
-                  <th>Price</th>
-                  <th>Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="match_destination"></td>
-                  <td id="match_breakout"></td>
-                  <td id="match_price"></td>
-                  <td id="match_quality_type"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
+#message-modal.modal.fade
+  .modal-dialog role="document" 
+    .modal-content
+      .modal-body
+        .media
+          .user-info-modal
+            .row
+              .col-md-3
+                a#match_profile_url href="" 
+                  img#match_photo_url.d-flex.mr-3 alt="..." height="96" src="" width="96"
+              .col-md-9
+                h5#match_name.mt-0
+                / a href="mailto:uzairqureshi@gmail.com"  uzairqureshi@gmail.com
+                / div
+                /   | 03242520647
+          .media-body
+            br
+            small.text-muted
+              i.match_purchase_sentence
+            br
+            .spacer
+            .search-routes-tab-inner.matched-routes-tab-inner
+              .srt-head
+                .row
+                  .col-xs-4 Route
+                  .col-xs-3.text-center Breakout
+                  .col-xs-3.text-center Price
+                  .col-xs-2.text-center Type
+              .srt-body
+                .row.tab-row
+                  .col-xs-4#match_destination Pakistan all
+                  .col-xs-3.text-center#match_breakout 92
+                  .col-xs-3.text-center.match_purchase_sentence
+                  .col-xs-2.text-center#match_quality_type
         = form_for :conversation, url: :conversations, html: {id: "new_message"} do |f|
           = f.hidden_field :recipient, value: 0
           = f.hidden_field :subject
           = f.text_area :body, class: 'form-control', placeholder: "Type your message here", rows: 4, required: true
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="send_message" class="btn btn-primary">Send</button>
-      </div>
-
-    </div>
-  </div>
-</div>
+      .modal-footer
+        button.btn.btn-primary#send_message type="button"  Send
+        button.btn.btn-secondary data-dismiss="modal" type="button"  Close

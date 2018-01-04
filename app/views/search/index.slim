@@ -92,7 +92,7 @@ section.search-routes-table
                   - purchase_sentence = route.purchase_type.humanize + 'ing at $' + route.price.to_s
                   - subject = route.breakout.destination + ' (' + route.breakout.code + ')' + ' - ' + route.quality_type.upcase + ' - ' + purchase_sentence
 
-                  = link_to image_tag("message-icon.png"), "#", data: { toggle: 'modal', target: '#messageModal', recipient: "#{route.user.id}", subject: "#{subject}", profile_url: "#{url_for(route.user)}", photo_url: "#{route.user.photo.url(:thumb)}", name: "#{route.user.name}", purchase_sentence: "#{purchase_sentence}", destination: "#{route.breakout.destination}", breakout: "#{route.breakout.code}", price: "#{route.price}", quality_type: "#{route.quality_type.upcase}" }
+                  = link_to image_tag("message-icon.png"), "#", data: { toggle: 'modal', target: '#message-modal', recipient: "#{route.user.id}", subject: "#{subject}", profile_url: "#{url_for(route.user)}", photo_url: "#{route.user.photo.url(:thumb)}", name: "#{route.user.name}", purchase_sentence: "#{purchase_sentence}", destination: "#{route.breakout.destination}", breakout: "#{route.breakout.code}", price: "#{route.price}", quality_type: "#{route.quality_type.upcase}" }
     - else
       .search-heading.voipx-heading
         h2 style=("margin-bottom: 0px;") 
@@ -105,7 +105,7 @@ section.search-routes-table
 
 javascript:
   $(function(){
-    $('#messageModal').on('shown.bs.modal', function(e) {
+    $('#message-modal').on('shown.bs.modal', function(e) {
       var button, breakout, destination, name, photo_url, price, profile_url, purchase_sentence, quality_type, recipient_id, subject;
       button = $(e.relatedTarget);
       profile_url = button.data('profile-url');
@@ -114,17 +114,15 @@ javascript:
       purchase_sentence = button.data('purchase-sentence');
       destination = button.data('destination');
       breakout = button.data('breakout');
-      price = button.data('price');
       quality_type = button.data('quality-type');
       recipient_id = button.data('recipient');
       subject = button.data('subject');
       $("#match_profile_url").attr("href", profile_url);
       $("#match_photo_url").attr("src", photo_url);
       $("#match_name").html(name);
-      $("#match_purchase_sentence").html(purchase_sentence);
+      $(".match_purchase_sentence").html(purchase_sentence);
       $("#match_destination").html(destination);
       $("#match_breakout").html(breakout);
-      $("#match_price").html(price);
       $("#match_quality_type").html(quality_type);
       $("#conversation_recipient").val(recipient_id);
       $("#conversation_subject").val(subject);

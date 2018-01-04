@@ -35,7 +35,7 @@ br
 
                 - purchase_sentence = favorite.route.purchase_type.humanize + 'ing at $' + favorite.route.price.to_s
                 - subject = favorite.route.breakout.destination + ' (' + favorite.route.breakout.code + ')' + ' - ' + favorite.route.quality_type.upcase + ' - ' + purchase_sentence
-                button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#messageModal" data-recipient="#{favorite.route.user.id}" data-subject="#{subject}" data-profile-url="#{url_for(favorite.route.user)}" data-photo-url="#{favorite.route.user.photo.url(:thumb)}" data-name="#{favorite.route.user.name}" data-purchase-sentence="#{purchase_sentence}" data-destination="#{favorite.route.breakout.destination}" data-breakout="#{favorite.route.breakout.code}" data-price="#{favorite.route.price}" data-quality-type="#{favorite.route.quality_type.upcase}" Message
+                button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#message-modal" data-recipient="#{favorite.route.user.id}" data-subject="#{subject}" data-profile-url="#{url_for(favorite.route.user)}" data-photo-url="#{favorite.route.user.photo.url(:thumb)}" data-name="#{favorite.route.user.name}" data-purchase-sentence="#{purchase_sentence}" data-destination="#{favorite.route.breakout.destination}" data-breakout="#{favorite.route.breakout.code}" data-price="#{favorite.route.price}" data-quality-type="#{favorite.route.quality_type.upcase}" Message
         - else
           tr
             td colspan="6" No favorites added yet
