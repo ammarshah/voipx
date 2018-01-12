@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   
   def index
     @route = current_user.routes.build
-    @my_routes = current_user.routes.includes(:breakout)
+    @my_routes = current_user.routes.includes(:breakout).order(created_at: :desc)
   end
 
   def match_route
