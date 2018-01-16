@@ -1,24 +1,23 @@
-#center-content
-  h2 Contacts
-
-br
-br
-.row
-  .col-md-12
-    table.table.table-sm.table-bordered.table-hover
-      thead.thead-inverse
-        tr
-          th Name
-          th Email
-          th Phone
-      tbody
+section.search-routes-table
+  .container
+    .search-heading.voipx-heading
+      h2 style=("margin-bottom: 0px;")  Contacts
+    .search-routes-tab-inner.matched-routes-tab-inner
+      .srt-head
+        .row
+          .col-xs-4
+            span Name
+          .col-xs-4.text-center Email
+          .col-xs-4.text-center Phone
+      .srt-body
         - if @contacts.any?
           - @contacts.each do |contact|
-            tr
-              td
-                = link_to contact.user.name, user_path(contact.user)
-              td #{contact.user.email}
-              td #{contact.user.phone}
+            .row.tab-row
+              .col-xs-4
+                span
+                  = link_to contact.user.name, user_path(contact.user)
+              .col-xs-4.text-center #{contact.user.email}
+              .col-xs-4.text-center #{contact.user.phone}
         - else
-          tr
-            td colspan="3" No contacts added yet
+          .row.tab-row
+            .col-xs-4 No contacts added yet
