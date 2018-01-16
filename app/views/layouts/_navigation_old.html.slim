@@ -1,0 +1,74 @@
+<nav class="navbar navbar-light bg-faded">
+  
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  / Brand Logo -- START
+  <ul class="nav navbar-nav mx-auto">
+    <li class="nav-item">
+      = link_to(image_tag("logo.png"), root_path)
+    </li>
+  </ul>
+  / Brand Logo -- END
+
+  / <span class="navbar-text">&nbsp;</span>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <div class="row">
+      <div class="spacer"></div>
+
+      / Nav links -- START
+      <div class="col-md-4">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="/">Home</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="/forum">Forum</a>
+          </li>
+          / <li class="list-inline-item">
+          /   <a class="nav-link btn btn-outline-primary" href="/pricing">Pricing</a>
+          / </li>
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="#">About</a>
+          </li>
+          </br>
+          </br>
+          <li class="list-inline-item">
+            <a class="nav-link btn btn-outline-primary" href="/companies">All Companies</a>
+          </li>
+        </ul>
+      </div>
+      / Nav links -- END
+
+      / Search form -- START
+      <div class="col-md-8">
+        = simple_form_for :search, url: search_path, method: :get, html: {class: 'form-inline pull-right'} do |f|
+          .form-group
+            = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control mr-sm-2', style: "width: 139px"}
+            
+            = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_navbar_breakout'}, id: 'search_navbar_destination', class: 'form-control mr-sm-2', placeholder: 'Route Name', style: "width: 115px"
+
+            = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_navbar_destination'}, id: 'search_navbar_breakout', class: 'form-control mr-sm-2', placeholder: 'Breakout', style: "width: 90px"
+
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon $
+              = f.input :price, as: :integer, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001', style: "width: 81px"}, label: false, wrapper: false
+            
+            = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {}, {class: 'form-control mr-sm-2', style: "width: 70px"}
+
+            = button_tag '', name: nil, class: 'btn btn-outline-secondary' do
+              i.fa.fa-search.fa-lg
+      </div>
+      / Search form -- END
+
+    </div>
+  </div>
+</nav>
+
+- if user_signed_in?
+  - if current_user.has_subscribed_to_basic_plan?
+    .alert.alert-info.text-center role="alert" You can message upto #{current_user.contacts_left} more contacts. Please upgrade your membership for unlimited access. #{link_to "(Click here to upgrade)", pricing_path()}
+
+  = render 'layouts/navigation_links'

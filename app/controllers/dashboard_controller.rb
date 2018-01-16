@@ -13,6 +13,7 @@ class DashboardController < ApplicationController
   end
 
   def unread_messages_count
+    @in_dashboard = request.referrer.sub(request.base_url, '').include?('dashboard') # we will use this flag to determine whether the request came from Dashboard page or not and then decide the appropriate html in the partial
     render partial: "layouts/unread_messages_count"
   end
 

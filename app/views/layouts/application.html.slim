@@ -13,10 +13,10 @@ html lang="en"
     == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     == csrf_meta_tags
   body
-    / == render 'layouts/navigation'
     == render 'layouts/messages'
     == render 'layouts/topbar'
     == render 'layouts/header'
+    == render 'layouts/navigation'
     == yield
     == render 'layouts/footer'
     = include_rails_script

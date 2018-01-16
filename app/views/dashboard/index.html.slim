@@ -13,7 +13,7 @@ section.dashboard-header-section
                 = link_to contacts_path do
                   = image_tag "contact-dashboard-icon.png"
                   span CONTACTS
-              li
+              li#unread-messages-count
                 = render partial: 'layouts/unread_messages_count'
               li
                 = link_to favorites_path do
