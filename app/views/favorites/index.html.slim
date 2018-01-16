@@ -1,44 +1,70 @@
-#center-content
-  h2 Favorites
-
-br
-br
-.row
-  .col-md-12
-    table.table.table-sm.table-bordered.table-hover
-      thead.thead-inverse
-        tr
-          th Name
-          th Route
-          th Breakout
-          th Price
-          th Type
-          th Actions
-      tbody
+section.search-routes-table
+  .container
+    .search-heading.voipx-heading
+      h2 style=("margin-bottom: 0px;")  Favorites
+    .search-routes-tab-inner.matched-routes-tab-inner
+      .srt-head
+        .row
+          .col-xs-2
+            span Name
+          .col-xs-2.text-center Route
+          .col-xs-2.text-center Breakout
+          .col-xs-2.text-center Price
+          .col-xs-2.text-center Type
+          .col-xs-2.text-center Actions
+      .srt-body
         - if @favorites.any?
           - @favorites.each do |favorite|
-            tr
-              td
-                = link_to favorite.route.user.name, user_path(favorite.route.user)
-              td #{favorite.route.breakout.destination}
-              td #{favorite.route.breakout.code}
-              td #{favorite.route.purchase_type.humanize + 'ing at $' + favorite.route.price.to_s}
-              td #{favorite.route.quality_type.upcase}
-              td
-                div id="favorite_#{favorite.route.id}" class="pull-left" 
+            .row.tab-row
+              .col-xs-2
+                span
+                  = link_to favorite.route.user.name, user_path(favorite.route.user)
+              .col-xs-2.text-center #{favorite.route.breakout.destination}
+              .col-xs-2.text-center #{favorite.route.breakout.code}
+              .col-xs-2.text-center #{favorite.route.purchase_type.humanize + 'ing at $' + favorite.route.price.to_s}
+              .col-xs-2.text-center #{favorite.route.quality_type.upcase}
+              .col-xs-2.text-center
+                span id="favorite_#{favorite.route.id}"
                   - if current_user.favorites.pluck(:route_id).include?(favorite.route.id)
                     = link_to current_user.favorites.where(route_id: favorite.route.id).first, method: :delete, title: "Remove from favorites", remote: true do
-                      i.fa.fa-star
+                      = image_tag "star-icon.png"
                   - else
-                    = link_to favorites_path(route_id: favorite.route.id), method: :post, title: 'Add to favorites', remote: true do
-                      i.fa.fa-star-o
-
+                    = link_to favorites_path(route_id: favorite.route.id), method: :post, title: "Add to favorites", remote: true do
+                      = image_tag "star-icon-unfilled.png"
+                
                 - purchase_sentence = favorite.route.purchase_type.humanize + 'ing at $' + favorite.route.price.to_s
                 - subject = favorite.route.breakout.destination + ' (' + favorite.route.breakout.code + ')' + ' - ' + favorite.route.quality_type.upcase + ' - ' + purchase_sentence
-                button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#message-modal" data-recipient="#{favorite.route.user.id}" data-subject="#{subject}" data-profile-url="#{url_for(favorite.route.user)}" data-photo-url="#{favorite.route.user.photo.url(:thumb)}" data-name="#{favorite.route.user.name}" data-purchase-sentence="#{purchase_sentence}" data-destination="#{favorite.route.breakout.destination}" data-breakout="#{favorite.route.breakout.code}" data-price="#{favorite.route.price}" data-quality-type="#{favorite.route.quality_type.upcase}" Message
-        - else
-          tr
-            td colspan="6" No favorites added yet
 
+                = link_to image_tag("message-icon.png"), "#", data: { toggle: 'modal', target: '#message-modal', recipient: "#{favorite.route.user.id}", subject: "#{subject}", profile_url: "#{url_for(favorite.route.user)}", photo_url: "#{favorite.route.user.photo.url(:thumb)}", name: "#{favorite.route.user.name}", purchase_sentence: "#{purchase_sentence}", destination: "#{favorite.route.breakout.destination}", breakout: "#{favorite.route.breakout.code}", price: "#{favorite.route.price}", quality_type: "#{favorite.route.quality_type.upcase}" }
+        - else
+          .row.tab-row
+            .col-xs-2 No favorites added yet
 
 == render "shared/message_modal"
+
+javascript:
+  $(function(){
+    $('#message-modal').on('shown.bs.modal', function(e) {
+      var button, breakout, destination, name, photo_url, price, profile_url, purchase_sentence, quality_type, recipient_id, subject;
+      button = $(e.relatedTarget);
+      profile_url = button.data('profile-url');
+      photo_url = button.data('photo-url');
+      name = button.data('name');
+      purchase_sentence = button.data('purchase-sentence');
+      destination = button.data('destination');
+      breakout = button.data('breakout');
+      quality_type = button.data('quality-type');
+      recipient_id = button.data('recipient');
+      subject = button.data('subject');
+      $("#match_profile_url").attr("href", profile_url);
+      $("#match_photo_url").attr("src", photo_url);
+      $("#match_name").html(name);
+      $(".match_purchase_sentence").html(purchase_sentence);
+      $("#match_destination").html(destination);
+      $("#match_breakout").html(breakout);
+      $("#match_quality_type").html(quality_type);
+      $("#conversation_recipient").val(recipient_id);
+      $("#conversation_subject").val(subject);
+      return
+    });
+  });

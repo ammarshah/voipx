@@ -2,7 +2,7 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @favorites = current_user.favorites
+    @favorites = current_user.favorites.includes(:route).order(created_at: :desc)
   end
 
   def create
