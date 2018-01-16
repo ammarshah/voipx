@@ -1,0 +1,12 @@
+<% if @contact.errors.any? %>
+  toastr.error('\
+                <ul>\
+                  <% @contact.errors.full_messages.each do |msg| %>\
+                    <li><%= msg %></li>\
+                  <% end %>\
+                </ul>\
+              ');
+<% else %>
+  $("#add_to_contacts_btn").remove();
+  toastr.success('Contact added successfully.');
+<% end %>

@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get 'search', to: 'search#index'
   post 'add_to_my_routes', to: 'search#add_to_my_routes'
 
-  resources :contacts, only: [:index]
+  resources :contacts, only: [:index, :create]
   resources :favorites, only: [:index, :create, :destroy]
 
   # get 'pricing', to: 'visitors#pricing'
