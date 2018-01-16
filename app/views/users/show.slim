@@ -1,100 +1,71 @@
-.col-lg-12
-  .cover-photo
-    img alt="Cover Photo" src="#{@user.cover.url}" 
-  .profile-photo
-    img.rounded-circle alt="Profile Photo" src="#{@user.photo.url(:square)}"
-  
-  - if current_user == @user && !@user.profile_completed?
-    .alert.alert-info
-      .text-center Your profile is not completed yet. #{link_to "Click here", edit_user_path} to complete it.
+section.profile-header-section
+  .profile-cover-pohoto
+    img src="#{@user.cover.url}" style=("width: 100%; object-fit: cover; height: 370px;") alt="Cover Photo"
+.profile-info
+  .container
+    .row
+      .col-md-3
+        .profile-info-left
+          .profile-img
+            img src="#{@user.photo.url(:square)}" alt="Profile Photo"
+          .profile-info-left-inner
+            .mobile-user-name
+              h2 #{@user.name}
+              = mail_to @user.email
+            .contact-info
+              h4 Contact Information
+              ul
+                li
+                  | Skype:
+                  span #{@user.try(:skype)}
+                li
+                  | Phone:
+                  span #{@user.try(:phone)}
+                li
+                  | Country:
+                  span #{@user.try(:country_name)}
+            .social-links
+              ul
+                li
+                  - if @user.facebook_url.present?
+                    = link_to @user.try(:facebook_url_with_protocol), class: 'facebook', target: '_blank' do
+                      i.fa.fa-facebook aria-hidden="true"
+                li
+                  - if @user.twitter_url.present?
+                    = link_to @user.try(:twitter_url_with_protocol), class: 'twitter', target: '_blank' do
+                      i.fa.fa-twitter aria-hidden="true"
+                li
+                  - if @user.linkedin_url.present?
+                    = link_to @user.try(:linkedin_url_with_protocol), class: 'linkedin', target: '_blank' do
+                      i.fa.fa-linkedin aria-hidden="true" 
+            .text-center
+              = link_to "Edit Profile", edit_user_path, class: "edit-profile-btn-mobile" if current_user == @user
 
-  br
-  = link_to "Edit Profile", edit_user_path, class: "btn btn-primary", style: "float: right" if current_user == @user
-  h2 #{ current_user == @user ? "My Profile" : "Profile" }
-
-br
-hr
-br
-
-.col-lg-12
-  .row
-    .col-lg-4
-      h4 Personal Details
-    .col-lg-8
-      p
-      | Name: 
-      b
-        = @user.try(:name)
-      
-      p
-      | Email: 
-      b
-        = @user.try(:email)
-      
-      p
-      | Position: 
-      b
-        = @user.try(:position)
-      
-      p
-      | About me: 
-      b
-        = @user.try(:about)
-      p
-      | Company: 
-      - if @user.company
-        b
-          = link_to @user.company.name, company_path(@user.company)
-      - else
-        - if current_user == @user
-          = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
-
-  br
-  hr
-  br
-
-  .row
-    .col-lg-4
-      h4 Contact Details
-    .col-lg-8
-      p
-      | Skype: 
-      b
-        = @user.try(:skype)
-
-      p
-      | Phone: 
-      b
-        = @user.try(:phone)
-
-      p
-      | Country: 
-      b
-        = @user.try(:country_name)
-
-  br
-  hr
-  br
-
-  .row
-    .col-lg-4
-      h4 Social Media Profile Links
-    .col-lg-8
-      p
-      | Facebook: 
-      b
-        = link_to nil, @user.try(:facebook_url_with_protocol), target: '_blank' if @user.facebook_url.present?
-      
-      p
-      | Twitter: 
-      b
-        = link_to nil, @user.try(:twitter_url_with_protocol), target: '_blank' if @user.twitter_url.present?
-      
-      p
-      | LinkedIn: 
-      b
-        = link_to nil, @user.try(:linkedin_url_with_protocol), target: '_blank' if @user.linkedin_url.present?
-
-br
-br
-br
+      .col-md-9
+        .profile-info-right
+          .user-name
+            h2 #{@user.name}
+            = mail_to @user.email
+            = link_to "Edit Profile", edit_user_path, class: "edit-profile-btn" if current_user == @user
+            - if current_user and current_user != @user
+              - if !current_user.contacts.any? or !current_user.contacts.pluck(:user_id).include?(@user.id)
+                = link_to "Add to Contacts", contacts_path(user_id: @user.id), id: "add_to_contacts_btn", class: "edit-profile-btn", method: :post, remote: true
+              = link_to "Send Message", new_conversation_path(recipient_id: @user.id), class: "edit-profile-btn active"
+          div
+            - if current_user == @user && !@user.profile_completed?
+              br
+              .text-center Your profile is not completed yet. #{link_to "Click here", edit_user_path} to complete it.
+            h3 About me
+            p = @user.try(:about)
+            
+            h3 Company Information
+            p
+              strong Company Name: 
+              - if @user.company
+                = link_to @user.company.name, company_path(@user.company)
+              - else
+                - if current_user == @user
+                  = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
+            p
+              strong Position: 
+              | #{@user.try(:position)}
