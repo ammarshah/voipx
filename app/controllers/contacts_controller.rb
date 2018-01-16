@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(owner_id: current_user.id, user_id: params[:user_id])
+    @contact = current_user.contacts.new(user_id: params[:user_id])
 
     respond_to do |format|
       if @contact.save
