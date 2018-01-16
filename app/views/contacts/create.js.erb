@@ -7,6 +7,6 @@
                 </ul>\
               ');
 <% else %>
-  $("#add_to_contacts_btn").remove();
+  $("#add_to_contacts_btn").replaceWith('<%= link_to "Send Message", new_conversation_path(recipient_id: @contact.user_id), class: "edit-profile-btn active" %>');
   toastr.success('Contact added successfully.');
 <% end %>
