@@ -1,4 +1,107 @@
-h1 Update Profile
-= link_to "Skip, I'll do this later", dashboard_path() if @first_login
+.edit-profile-info
+  .container
+    h1 Update Profile
+    = link_to "Skip, I'll do this later", dashboard_path() if @first_login
 
-== render 'form'
+    = simple_form_for(@user, html: { role: 'form' }) do |f|
+      = f.error_notification
+
+      h3 Personal Details
+      .form-inputs
+        .row
+          .col-md-4
+            = f.input :first_name
+          .col-md-4
+            = f.input :last_name
+          .col-md-4
+            = f.input :position
+
+        = f.input :about, label: "About me", input_html: {rows: 5}
+        
+        = image_tag @user.photo.url(:thumb) if @user.photo.present?
+        = f.input :photo, as: :file
+        
+        = image_tag @user.cover.url(:thumb) if @user.cover.present?
+        = f.input :cover, as: :file
+
+      br
+
+      - if @user.company_id.blank?
+        p.lead.text-center#add-company
+          strong Would you like to add your company?
+        div.text-center
+          .btn-group.add_company_bool data-toggle="buttons" 
+            = f.label :add_company_bool, class: "btn btn-primary #{ 'active' if @user.add_company_bool == true }" do |a|
+              | Yes
+              = f.radio_button :add_company_bool, true, class: 'form-control'
+            = f.label :add_company_bool, class: "btn btn-primary #{ 'active' if @user.add_company_bool == false }" do |a|
+              | No
+              = f.radio_button :add_company_bool, false, class: 'form-control'
+        div#company_fields class="#{ 'hide' if @user.add_company_bool == false }"
+          = f.simple_fields_for :company do |c|
+            h3 Add Company
+            p Leave these fields blank if you don't want to add a company.
+            .form-inputs
+              = c.input :name, required: false, label: "Company Name"
+              = f.input :selected_company_id, as: :hidden
+              - if @user.selected_company_id.present?
+                = c.input :country_code, label: "Country", required: false, disabled: true
+                = c.input :phone_no, label: "Phone", required: false, disabled: true
+                = c.input :website, required: false, wrapper: :horizontal_input_group do
+                  span.input-group-addon http://
+                  = c.input_field :website, placeholder: "www.yourcompany.com", disabled: true, class: "form-control"
+              - else
+                = c.input :country_code, label: "Country", required: false
+                = c.input :phone_no, label: "Phone", required: false
+                = c.input :website, required: false, wrapper: :horizontal_input_group do
+                  span.input-group-addon http://
+                  = c.input_field :website, placeholder: "www.yourcompany.com", class: "form-control"
+              = f.input :email, label: "Work email", hint: "Note: Your primary email will be replaced with your work email once it is confirmed."
+      - else
+        h3 Company Details
+        .form-inputs
+          p
+          | Name: 
+          b
+            = link_to @user.company.name, company_path(@user.company)
+          p
+          | Country: 
+          b
+            = @user.company.country_name
+          p
+          | Phone: 
+          b
+            = @user.company.phone_no
+          p
+          | Website: 
+          b
+            = link_to nil, @user.company.website_with_protocol, target: '_blank'
+      br
+      h3 Contact Details
+      .form-inputs
+        .row
+          .col-md-4
+            = f.input :skype
+          .col-md-4
+            = f.input :phone
+          .col-md-4
+            = f.input :country_code, label: "Country"
+      br
+      h3 Social Media Profile Links
+      .form-inputs
+        .row
+          .col-md-4
+            = f.input :facebook_url, label: false, wrapper: :horizontal_input_group do
+              span.input-group-addon https://facebook.com/
+              = f.input_field :facebook_url, placeholder: "Facebook Username", class: "form-control"
+          .col-md-4
+            = f.input :twitter_url, label: false, wrapper: :horizontal_input_group do
+              span.input-group-addon @
+              = f.input_field :twitter_url, placeholder: "Twitter Handle", class: "form-control"
+          .col-md-4
+            = f.input :linkedin_url, label: false, wrapper: :horizontal_input_group do
+              span.input-group-addon https://linkedin.com/in/
+              = f.input_field :linkedin_url, placeholder: "LinkedIn Username", class: "form-control"
+      
+      .form-actions
+        = f.button :submit, "Save", class: "btn btn-primary"
