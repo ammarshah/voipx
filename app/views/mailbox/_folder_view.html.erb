@@ -13,10 +13,12 @@
         <div class="col-md-12">
           <div class="clearfix"></div>
           
-          <div class="compose-btn">
-            <%= link_to "Compose", new_conversation_path, class: "btn btn-outline-primary btn-sm pull-right" %>
-            <div class="clearfix"></div>
-          </div>
+          <% if !is_conversation %>
+            <div class="compose-btn">
+              <%= link_to "Compose", new_conversation_path, class: "btn btn-outline-primary btn-sm pull-right" %>
+              <div class="clearfix"></div>
+            </div>
+          <% end %>
           
           <div class="clearfix"></div>
 

@@ -1,16 +1,18 @@
-<%= form_for :conversation, url: :conversations, html: { class: "" } do |f| %>
-    <div class="form-group">
-      <%= f.label :recipient %>
-      <%= f.select(:recipient, current_user.contacts.collect {|p| [ p.user.name, p.user.id ] }, {selected: params[:recipient_id]}, { class: "form-control" })%>
-    </div>
-    <div class="form-group">
-      <%= f.label :subject %>
-      <%= f.text_field :subject, placeholder: "Subject", class: "form-control", required: true %>
-    </div>
-    <div class="form-group">
-      <%= f.label :message %>
-      <%= f.text_area :body, class: 'form-control',placeholder: "Type your message here", rows: 4, required: true  %>
-    </div>
+<div class="viopx-message-composer-inner">
+  <%= form_for :conversation, url: :conversations do |f| %>
+      <div class="form-group">
+        <%= f.label :recipient %>
+        <%= f.select(:recipient, current_user.contacts.collect {|p| [ p.user.name, p.user.id ] }, {selected: params[:recipient_id]}, { class: "form-control" })%>
+      </div>
+      <div class="form-group">
+        <%= f.label :subject %>
+        <%= f.text_field :subject, placeholder: "Subject", class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :message %>
+        <%= f.text_area :body, class: 'form-control',placeholder: "Type your message here", rows: 4, required: true  %>
+      </div>
 
-    <%= f.submit "Send Message", class: "btn btn-success" %>
-<% end %>
+      <%= f.submit "Send Message", class: "btn btn-success" %>
+  <% end %>
+</div>
