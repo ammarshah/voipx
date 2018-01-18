@@ -1,32 +1,43 @@
-<div class="row">
-  <div class="spacer"></div>
-  <div class="col-md-12">
-    <%= link_to "Compose", new_conversation_path, class: "btn btn-success" %>
-    <div class="spacer"></div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-block">
-        <%= render 'mailbox/folders' %>
+<section class="messages">
+  <div class="container">
+    <div class="row">
+      <div class="spacer"></div>
+      
+      <div class="col-md-12">
+        <div class="messages-navigation">
+          <%= render 'mailbox/folders' %>
+        </div>
       </div>
+
+      <div class="viopx-inbox-message">
+        <div class="col-md-12">
+          <div class="clearfix"></div>
+          
+          <div class="compose-btn">
+            <%= link_to "Compose", new_conversation_path, class: "btn btn-outline-primary btn-sm pull-right" %>
+            <div class="clearfix"></div>
+          </div>
+          
+          <div class="clearfix"></div>
+
+          <div class="card messages-block">
+            <div class="card-block">
+
+              <% if is_conversation %>
+                <%= render 'conversations/form' %>
+              <% else %>
+                <% if messages.any? %>
+                  <%= render partial: 'conversations/conversation', collection: messages %>
+                <% else %>
+                  <p>No messages yet...</p>
+                <% end %>  
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <div class="col-md-8">
-    <div class="card">
-      <div class="card-block">
-        <% if is_conversation %>
-          <%= render 'conversations/form' %>
-        <% else %>
-          <% if messages.any? %>
-            <%= render partial: 'conversations/conversation', collection: messages %>
-          <% else %>
-            <p>No messages yet...</p>
-          <% end %>  
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-</div>
+</section>
