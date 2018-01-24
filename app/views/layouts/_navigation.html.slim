@@ -1,14 +1,31 @@
-- if user_signed_in? and !current_page?(dashboard_path)
+- if user_signed_in?
   .sub-navigation-grey
     .container
       ul
         li
-          = link_to 'Dashboard', dashboard_path
+          = link_to dashboard_path do
+            = image_tag "dashboard-icon.png", size: "24x24"
+            span style="padding-left:5px" DASHBOARD
+
         li
-          = link_to 'Contacts', contacts_path
+          = link_to contacts_path do
+            = image_tag "contact-dashboard-icon.png", size: "24x24"
+            span style="padding-left:5px" CONTACTS
+
         li#unread-messages-count
           = render partial: 'layouts/unread_messages_count'
         li
-          = link_to 'Favorites', favorites_path
+          = link_to favorites_path do
+            = image_tag "star-dashboard-icon.png", size: "24x24"
+            span style="padding-left:5px" FAVOURITES
         li
-          = link_to "Profile", user_path(current_user)
+          = link_to user_path(current_user) do
+            = image_tag "user-dashboard-icon.png", size: "24x24"
+            span  style="padding-left:5px" PROFILE 
+            - if !current_user.profile_completed?
+              i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Incomplete Profile"
+
+              javascript:
+                $(function () {
+                  $('[data-toggle="tooltip"]').tooltip();
+                });

@@ -56,7 +56,7 @@
                 = c.input :website, required: false, wrapper: :horizontal_input_group do
                   span.input-group-addon http://
                   = c.input_field :website, placeholder: "www.yourcompany.com", class: "form-control"
-              = f.input :email, label: "Work email", hint: "Note: Your primary email will be replaced with your work email once it is confirmed."
+              = f.input :email, label: "Work email", hint: "Please enter your company email address matching the above website."
       - else
         h3 Company Details
         .form-inputs

@@ -5,21 +5,21 @@
       = f.object.errors.full_messages.first
 
   .form-group
-    = f.select :purchase_type, Route.purchase_types.keys.map {|c| ["I want to #{c.humanize}", c]}, {include_blank: "Buy/Sell"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
-    
     label.sr-only for="route_destination"  Route Name
     = autocomplete_field_tag 'route[destination]', @route.breakout.try(:destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Route Name'
-
+    
     label.sr-only for="route_breakout"  Breakout
-    = autocomplete_field_tag 'route[breakout]', @route.breakout.try(:code), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Breakout'
+    = autocomplete_field_tag 'route[breakout]', @route.breakout.try(:code), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Enter Breakout', 'min-length': 1
     = f.input :breakout_id, as: :hidden
 
     label.sr-only for="route_price"  Route Price
     .input-group.mb-2.mr-sm-2.mb-sm-0
       .input-group-addon $
       = f.input :price, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false, error: false
-            
+
     = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Select Route Type"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
+            
+    = f.select :purchase_type, Route.purchase_types.keys.map {|c| [c.humanize, c]}, {include_blank: "Buy/Sell"}, {class: 'form-control mb-2 mr-sm-2 mb-sm-0'}
     
     - if @route.persisted?
       = f.submit "UPDATE", class: 'btn btn-primary mb-2 mr-sm-2 mb-sm-0'

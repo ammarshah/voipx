@@ -42,7 +42,7 @@
                 <td><%= route.breakout.destination %></td>
                 <td><%= route.breakout.code %></td>
                 <td>$<%= route.price %></td>
-                <td><%= route.quality_type.upcase %></td>
+                <td><%= route.quality_type.upcase.tr('_', '-') %></td>
             </tr>
             
             <tr class="grey">
@@ -54,7 +54,7 @@
                     <td><%= route_match.breakout.destination %></td>
                     <td><%= route_match.breakout.code %></td>
                     <td>$<%= route_match.price %></td>
-                    <td><%= route_match.quality_type.upcase %></td>
+                    <td><%= route_match.quality_type.upcase.tr('_', '-') %></td>
                     <td><%= route_match.user.name %></td>
                 </tr>
             <% end %>

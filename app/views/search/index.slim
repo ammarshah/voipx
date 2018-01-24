@@ -11,13 +11,10 @@ section.search-route-section
             = f.object.errors.first.try(:second)
           .col-md-6
             .form-group
-              = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control add_to_my_routes_input'}
+              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control add_to_my_routes_input', placeholder: 'Route Name'
           .col-md-6
             .form-group
-              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control add_to_my_routes_input', placeholder: 'Route Name'
-          .col-md-4
-            .form-group
-              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control add_to_my_routes_input', placeholder: 'Breakout'
+              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control add_to_my_routes_input', placeholder: 'Breakout', 'min-length': 1
           = f.input :breakout_id, as: :hidden
           .col-md-4
             .form-group
@@ -25,6 +22,9 @@ section.search-route-section
           .col-md-4
             .form-group
               = f.select :quality_type, [['CLI', 'cli'], ['NON-CLI', 'non_cli'], ['Any', 'any']], {}, {class: 'form-control add_to_my_routes_input'}
+          .col-md-4
+            .form-group
+              = f.select :purchase_type, [['Buy', 'buy'], ['Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control add_to_my_routes_input'}
           .sarch-btn.col-md-12
             = f.submit "SHOW MATCHES", name: nil, class: "btn btn-default"
         - if user_signed_in? && @search.valid?
@@ -69,7 +69,7 @@ section.search-routes-table
                     span #{route.breakout.code}
                   span
                     | Type: 
-                    span #{route.quality_type.upcase}
+                    span #{route.quality_type.upcase.tr('_', '-')}
                   span
                     | Price: 
                     span $#{route.price}

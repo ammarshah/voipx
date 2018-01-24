@@ -14,8 +14,9 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       added_company = params[:user][:company_attributes].present? && @user.company_id.present?
-      flash[:notice] = added_company ? I18n.t("devise.registrations.update_needs_confirmation") : "Your profile has been updated, please #{view_context.link_to('click here', dashboard_path)} to continue"
-      redirect_to @user
+      # flash[:notice] = added_company ? I18n.t("devise.registrations.update_needs_confirmation") : "Your profile has been updated, please #{view_context.link_to('click here', dashboard_path)} to continue"
+      flash[:notice] = added_company ? I18n.t("devise.registrations.update_needs_confirmation") : "Your profile has been updated"
+      redirect_to dashboard_path()
     else
       # retain company fields values on validation fail
       if @user.selected_company_id.present? && @user.company.nil?
