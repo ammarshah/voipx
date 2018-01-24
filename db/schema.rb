@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102053051) do
+ActiveRecord::Schema.define(version: 20180124180622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20180102053051) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "logo"
     t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
   end
 
@@ -207,6 +208,7 @@ ActiveRecord::Schema.define(version: 20180102053051) do
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
     t.integer  "company_id"
+    t.string   "document"
     t.index ["company_id"], name: "index_reports_on_company_id", using: :btree
   end
 
@@ -519,6 +521,8 @@ ActiveRecord::Schema.define(version: 20180102053051) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "admin",                  default: false
+    t.string   "photo"
+    t.string   "cover"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree

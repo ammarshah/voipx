@@ -12,27 +12,16 @@ class User < ApplicationRecord
   # Mailboxer
   acts_as_messageable
 
-  # Paperclip
-  has_attached_file :photo, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
-  }, default_url: "/missing-images/:style/missing-profile.png"
-
-  has_attached_file :cover, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
-  }, default_url: "/missing-images/:style/missing-cover.jpg"
+  # CarrierWave
+  mount_uploader :photo, PhotoUploader
+  mount_uploader :cover, CoverUploader
 
   # Validations
   validates_presence_of :first_name, :last_name
   # validates_presence_of :country_code, on: :update
   # validates             :facebook_url, :twitter_url, :linkedin_url, url: { allow_blank: true }
   validate              :email_with_company_website, if: :adding_company?
-  validates_attachment  :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
-  validates_attachment  :cover, content_type: { content_type: /\Aimage\/.*\Z/ }
-
+  
   # Associations
   belongs_to :company, optional: true
   has_many :routes, dependent: :destroy

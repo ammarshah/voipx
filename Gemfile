@@ -19,7 +19,9 @@ gem 'rails_script', '~> 2.0'
 gem "rolify"
 gem "validate_url"
 gem 'simple_form'
-gem "paperclip", "~> 5.0.0"
+# gem "paperclip", "~> 5.0.0"
+gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
 gem 'chosen-rails'
 gem "roo", "~> 2.7.0"
 gem 'toastr-rails'
