@@ -64,7 +64,26 @@
               = f.input_field :linkedin_url, placeholder: "LinkedIn Username", class: "form-control"
       
       br
-      - if @user.company_id.blank?
+      - if @user.has_company?
+        h3 Company Details
+        .form-inputs
+          p
+          | Name: 
+          b
+            = link_to @user.company.name, company_path(@user.company)
+          p
+          | Country: 
+          b
+            = @user.company.country_name
+          p
+          | Phone: 
+          b
+            = @user.company.phone_no
+          p
+          | Website: 
+          b
+            = link_to nil, @user.company.website_with_protocol, target: '_blank'
+      - else
         p.lead.text-center#add-company
           strong Would you like to add your company?
         div.text-center
@@ -95,25 +114,6 @@
                   span.input-group-addon http://
                   = c.input_field :website, placeholder: "www.yourcompany.com", class: "form-control"
               = f.input :email, label: "Work email", hint: "Please enter your company email address matching the above website."
-      - else
-        h3 Company Details
-        .form-inputs
-          p
-          | Name: 
-          b
-            = link_to @user.company.name, company_path(@user.company)
-          p
-          | Country: 
-          b
-            = @user.company.country_name
-          p
-          | Phone: 
-          b
-            = @user.company.phone_no
-          p
-          | Website: 
-          b
-            = link_to nil, @user.company.website_with_protocol, target: '_blank'
 
       br
       .form-actions

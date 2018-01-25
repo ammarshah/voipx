@@ -49,7 +49,7 @@ section.profile-header-section
         .profile-info-right
           .user-name
             h2 #{@user.name}
-            = mail_to @user.email
+            / = mail_to @user.email
             = link_to "Edit Profile", edit_user_path, class: "edit-profile-btn" if current_user == @user
             - if current_user and current_user != @user
               - if current_user.contacts.any? && current_user.contacts.pluck(:user_id).include?(@user.id)
@@ -61,7 +61,15 @@ section.profile-header-section
             - if current_user == @user && !@user.profile_completed?
               br
               .text-center Your profile is not completed yet. #{link_to "Click here", edit_user_path} to complete it.
-            
+            br
+            p
+             strong Email: 
+             | #{mail_to @user.email}
+            - if @user.unconfirmed_email.present?
+              p
+                strong Work Email: 
+                | #{mail_to @user.unconfirmed_email} (unverified)
+            br
             h3 About me
             = link_to "Edit", edit_user_path(current_user, anchor: "about-me"), class: "pull-right"
             p = @user.try(:about)
@@ -76,6 +84,8 @@ section.profile-header-section
               - else
                 - if current_user == @user
                   = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
+            br
+            br
             p
               = link_to "Edit", edit_user_path(current_user, anchor: "personal-details"), class: "pull-right"
               strong Position: 

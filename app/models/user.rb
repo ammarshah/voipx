@@ -87,6 +87,11 @@ class User < ApplicationRecord
     !linkedin_url.blank?
   end
 
+  def has_company?
+    user = User.find self.id
+    !user.company_id.blank?
+  end
+
   def mailboxer_name
     self.name
   end
