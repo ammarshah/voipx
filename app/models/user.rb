@@ -81,6 +81,12 @@ class User < ApplicationRecord
       linkedin_url.blank?)
   end
 
+  def social_links_present?
+    !facebook_url.blank? or
+    !twitter_url.blank? or
+    !linkedin_url.blank?
+  end
+
   def mailboxer_name
     self.name
   end

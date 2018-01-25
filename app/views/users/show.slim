@@ -26,7 +26,8 @@ section.profile-header-section
                   | Country:
                   span #{@user.try(:country_name)}
             
-            = link_to "Edit", edit_user_path(current_user, anchor: "social-media-links"), class: "pull-right"
+            - if @user.social_links_present?
+              = link_to "Edit", edit_user_path(current_user, anchor: "social-media-links"), class: "pull-right"
             .social-links
               ul
                 li
