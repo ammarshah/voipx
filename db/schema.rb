@@ -36,18 +36,14 @@ ActiveRecord::Schema.define(version: 20180124180622) do
     t.string   "country_code"
     t.string   "website"
     t.string   "phone_no"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "slug"
     t.string   "street_address"
     t.string   "state"
     t.string   "postal_code"
     t.text     "overview"
     t.date     "since"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
     t.string   "logo"
     t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
   end
@@ -201,14 +197,10 @@ ActiveRecord::Schema.define(version: 20180124180622) do
 
   create_table "reports", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
-    t.integer  "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "document"
+    t.integer  "company_id"
     t.index ["company_id"], name: "index_reports_on_company_id", using: :btree
   end
 
@@ -510,14 +502,6 @@ ActiveRecord::Schema.define(version: 20180124180622) do
     t.string   "facebook_url"
     t.string   "twitter_url"
     t.string   "linkedin_url"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.string   "cover_file_name"
-    t.string   "cover_content_type"
-    t.integer  "cover_file_size"
-    t.datetime "cover_updated_at"
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "admin",                  default: false
