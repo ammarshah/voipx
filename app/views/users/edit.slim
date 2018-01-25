@@ -6,6 +6,8 @@
     = simple_form_for(@user, html: { role: 'form' }) do |f|
       = f.error_notification
 
+      #personal-details
+      br
       h3 Personal Details
       .form-inputs
         .row
@@ -15,7 +17,9 @@
             = f.input :last_name
           .col-md-4
             = f.input :position
-
+        
+        #about-me
+        br
         = f.input :about, label: "About me", input_html: {rows: 5}
         
         = image_tag @user.photo.url(:thumb) if @user.photo.present?
@@ -27,6 +31,8 @@
         = f.hidden_field :cover_cache
 
       br
+      #contact-details
+      br
       h3 Contact Details
       .form-inputs
         .row
@@ -37,6 +43,9 @@
           .col-md-4
             = f.input :country_code, label: "Country"
 
+      br
+
+      #social-media-links
       br
       h3 Social Media Profile Links
       .form-inputs

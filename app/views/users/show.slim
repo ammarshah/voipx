@@ -14,6 +14,7 @@ section.profile-header-section
               = mail_to @user.email
             .contact-info
               h4 Contact Information
+              = link_to "Edit", edit_user_path(current_user, anchor: "contact-details"), class: "pull-right"
               ul
                 li
                   | Skype:
@@ -24,6 +25,8 @@ section.profile-header-section
                 li
                   | Country:
                   span #{@user.try(:country_name)}
+            
+            = link_to "Edit", edit_user_path(current_user, anchor: "social-media-links"), class: "pull-right"
             .social-links
               ul
                 li
@@ -57,9 +60,13 @@ section.profile-header-section
             - if current_user == @user && !@user.profile_completed?
               br
               .text-center Your profile is not completed yet. #{link_to "Click here", edit_user_path} to complete it.
+            
             h3 About me
+            = link_to "Edit", edit_user_path(current_user, anchor: "about-me"), class: "pull-right"
             p = @user.try(:about)
             
+            br
+            br
             h3 Company Information
             p
               strong Company Name: 
@@ -69,5 +76,6 @@ section.profile-header-section
                 - if current_user == @user
                   = link_to "Add company", edit_user_path(current_user, anchor: "add-company")
             p
+              = link_to "Edit", edit_user_path(current_user, anchor: "personal-details"), class: "pull-right"
               strong Position: 
               | #{@user.try(:position)}
