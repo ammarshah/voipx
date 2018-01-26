@@ -1,12 +1,36 @@
 #fullpage
   section#slider.slider.section
-    .slider-text
-      h1.animated AUTOMATIC MATCHING
-      p.animated
-        | Simply upload your buy/sell routes and our intelligent matching system does the rest.
-        | Live updates and matched routes displayed on your personal dashboard and delivered to your inbox. No transaction fees.
-
-      a.slider-btn.animated href="/users/sign_up"  Get Started
+    .container style="width: 100%;"
+      #myCarousel.carousel.slide data-ride="carousel" 
+        /! Indicators
+        ol.carousel-indicators
+          li.active data-slide-to="0" data-target="#myCarousel" 
+          li data-slide-to="1" data-target="#myCarousel" 
+          li data-slide-to="2" data-target="#myCarousel" 
+        /! Wrapper for slides
+        .carousel-inner
+          .item.active
+            img alt=("Los Angeles") src="assets/slider.jpg" style="width:100%;height: 100vh;" /
+            .carousel-caption style="padding-bottom: 16%;  width: 40%; margin: 0 auto; color: #fff; text-align: center;"
+              h1.animated style="font-size: 78px;" AUTOMATIC MATCHING
+              p.animated style="font-size: 20px; padding: 0px 30px;"
+                | Upload your routes and let our matching engine do the rest. Receive matched routes via email!
+              a.slider-btn.animated href="/users/sign_up" style="background: #FFF;border-radius: 30px;padding: 15px 40px;margin-top: 20px;font-size: 18px;color: #000000;text-transform: uppercase;display: inline-block;" Get Started
+          
+          .item
+            img alt="Chicago" src="assets/automatic_matching.jpg" style="width:100%;height: 100vh;" /
+            .carousel-caption style="padding-bottom: 16%;  width: 40%; margin: 0 auto; color: #fff; text-align: center;"
+              h1.animated style="font-size: 78px;" AUTOMATIC MATCHING
+              p.animated style="font-size: 20px; padding: 0px 30px;"
+                | Upload your routes and let our matching engine do the rest. Receive matched routes via email!
+              a.slider-btn.animated href="/users/sign_up" style="background: #FFF;border-radius: 30px;padding: 15px 40px;margin-top: 20px;font-size: 18px;color: #000000;text-transform: uppercase;display: inline-block;" Get Started
+          .item
+            img alt=("New York") src="assets/automatic_matching2.jpg" style="width:100%;height: 100vh;" /
+            .carousel-caption style="padding-bottom: 16%;  width: 40%; margin: 0 auto; color: #fff; text-align: center;"
+              h1.animated style="font-size: 78px;" AUTOMATIC MATCHING
+              p.animated style="font-size: 20px; padding: 0px 30px;"
+                | Upload your routes and let our matching engine do the rest. Receive matched routes via email!
+              a.slider-btn.animated href="/users/sign_up" style="background: #FFF;border-radius: 30px;padding: 15px 40px;margin-top: 20px;font-size: 18px;color: #000000;text-transform: uppercase;display: inline-block;" Get Started
 
   section#how-it-work.how-it-works.section
     .container
