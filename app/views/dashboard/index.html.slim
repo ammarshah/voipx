@@ -9,8 +9,6 @@ section.dashboard-header-section
               span Dashboard
           .search-form
             = simple_form_for @route do |f|
-              p.text-danger.text-center
-                = f.object.errors.full_messages.first
               .col-md-2
                 .form-group
                   = autocomplete_field_tag 'route[destination]', @route.breakout.try(:destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control', placeholder: 'Enter Route Name'
@@ -35,6 +33,9 @@ section.dashboard-header-section
                 a#reset-btn.btn-2 href="javascript:void(0)" RESET
               .sarch-btn.col-md-2
                 = f.submit "Find Matches", class: 'btn btn-default'
+              .clearfix
+              p.text-danger.text-center
+                = f.object.errors.full_messages.first
 div
   section.col-sm-2.col-md-6.show-search-routes-table
     .col-sm-2.col-md-12.container
