@@ -3,7 +3,11 @@ class SearchController < ApplicationController
     @search = Search.new(search_params)
     respond_to do |format|
       if @search.valid?
-        @routes = Route.get_matches(search_params, current_user)
+        if user_signed_in?
+          @routes = Route.get_matches(search_params, current_user)
+        else
+          @routes = Route.get_matches(search_params, current_user).limit(5)
+        end
         format.html
       else           
         format.html { render :index }
