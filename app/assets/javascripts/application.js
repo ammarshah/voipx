@@ -19,4 +19,5 @@
 //= require chosen-jquery
 //= require toastr
 //= require rails_script
+//= require announcements
 //= require_tree .

@@ -37,6 +37,7 @@ gem 'ransack'
 gem 'thredded', '~> 0.13.8'
 gem 'rails-ujs'
 gem 'whenever', require: false
+gem "paul_revere"
 group :development, :test do
   gem 'byebug', platform: :mri
 end

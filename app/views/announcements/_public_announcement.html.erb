@@ -1,0 +1,6 @@
+<% if announcement_visible?(current_announcement) %>
+  <div id="announcement" class="alert alert-warning">
+    <%= button_tag "×", type: 'button', class: "close", onclick: "hideAnnouncement('#{current_announcement.to_cookie_key}')" %>
+    <div class="text-center"><%= current_announcement.body.html_safe %></div>
+  </div>
+<% end %>
