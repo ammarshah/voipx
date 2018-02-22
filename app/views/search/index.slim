@@ -7,7 +7,7 @@ section.search-route-section
           span Route
       .search-form
         = simple_form_for @search, url: search_path, method: :get do |f|
-          p.text-danger.text-center
+          p.text-danger.text-center style="font-size: 18px;"
             = f.object.errors.first.try(:second)
           .col-md-6
             .form-group
