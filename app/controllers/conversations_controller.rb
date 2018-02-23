@@ -9,13 +9,17 @@ class ConversationsController < ApplicationController
 
     if current_user.contacts.pluck(:user_id).include?(recipient.first.id)
       conversation = current_user.send_message(recipient, conversation_params[:body], conversation_params[:subject]).conversation
-      redirect_to dashboard_path, notice: "Your message was successfully sent!"
+      @message = {text: "Your message was successfully sent!", type: "success"}
     elsif current_user.allowed_to_send_message?
       Contact.create(owner: current_user, user: recipient.first) # Add recipient to current_user contact list if not already added
       conversation = current_user.send_message(recipient, conversation_params[:body], conversation_params[:subject]).conversation
-      redirect_to dashboard_path, notice: "Your message was successfully sent!"
+      @message = {text: "Your message was successfully sent!", type: "success"}
     else
-      redirect_to root_path, alert: "You have 0 contact request left. You cannot send this message without upgrading your membership plan."
+      @message_sent = false
+      @message = {text: "You have 0 contact request left. You cannot send this message without upgrading your membership plan.", type: "error"}
+    end
+    respond_to do |format|
+      format.js
     end
   end
 

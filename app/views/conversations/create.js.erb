@@ -1,0 +1,10 @@
+$("#conversation_body").val('');
+$('#send_message').removeClass('hide');
+$('#modal_loader').addClass('hide');
+$('#message-modal').modal('hide');
+
+<% if @message[:type] == "success" %>
+    toastr.success('<%= @message[:text] %>');
+<% else %>
+    toastr.error('<%= @message[:text] %>');
+<% end %>

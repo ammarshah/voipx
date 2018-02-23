@@ -32,10 +32,11 @@
                   .col-xs-3.text-center#match_breakout 92
                   .col-xs-3.text-center.match_purchase_sentence
                   .col-xs-2.text-center#match_quality_type
-        = form_for :conversation, url: :conversations, html: {id: "new_message"} do |f|
+        = form_for :conversation, url: :conversations, html: {id: "new_message"}, remote: true do |f|
           = f.hidden_field :recipient, value: 0
           = f.hidden_field :subject
           = f.text_area :body, class: 'form-control', placeholder: "Type your message here", rows: 4, required: true
       .modal-footer
+        = image_tag "loader.gif", id: "modal_loader", class: "hide"
         button.btn.btn-primary#send_message type="button"  Send
         button.btn.btn-secondary data-dismiss="modal" type="button"  Close

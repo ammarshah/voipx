@@ -40,7 +40,12 @@ Utility.DashboardControls = (function() {
     });
 
     $('#send_message').click(function() {
-      return $("#new_message").submit();
+      var message_body = document.getElementById("conversation_body");
+      if (message_body && message_body.value) {
+        $('#send_message').addClass('hide');
+        $('#modal_loader').removeClass('hide');
+        $('#new_message').submit();
+      }
     });
 
     return this;
