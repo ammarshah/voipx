@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   mount Thredded::Engine => '/forum'
   
   root to: 'visitors#index'
-
+  
+  as :user do
+    patch '/user/confirmation' => 'users/confirmations#update', via: :patch, as: :update_user_confirmation
+  end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
