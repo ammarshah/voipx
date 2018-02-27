@@ -32,13 +32,3 @@
                 = f.select :purchase_type, [['Buy', 'buy'], ['Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control'}
             .sarch-btn.col-md-12
               = f.submit "SEARCH", class: "btn btn-default"
-
-  / - if !user_signed_in?
-  /   .main-navigation
-  /     ul.nav
-  /       li
-  /         a href="javascript:void(0)"  Features
-  /       li
-  /         a href="javascript:void(0)"  How it Works
-  /       li
-  /         a href="javascript:void(0)"  Tour

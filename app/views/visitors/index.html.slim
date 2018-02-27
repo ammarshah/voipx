@@ -1,3 +1,12 @@
+- if !user_signed_in?
+  .main-navigation
+    ul.nav
+      li
+        a href="#vfeatures"  Features
+      li
+        a href="#how-it-work"  How it works
+      li
+        a href="javascript:void(0)"  Product Tour
 #fullpage
   section#slider.slider.section
     .container style="width: 100%;"
@@ -12,22 +21,22 @@
           .item.active
             = image_tag "slider.jpg", style: "width:100%;height: 100vh;"
             .carousel-caption style="padding-bottom: 16%;  width: 40%; margin: 0 auto; color: #fff; text-align: center;"
-              h1.animated style="font-size: 78px;" AUTOMATIC MATCHING
+              h1.animated style="font-size: 55px;" A global networking platform for VOIP operators
               p.animated style="font-size: 22px; padding: 0px 30px;"
-                | Upload your routes and let our matching engine do the rest. Receive matched routes via email
+                | Your ideal destination to find all the best routes and traffic
               a.slider-btn.animated href="/users/sign_up" style="background: #FFF;border-radius: 30px;padding: 15px 40px;margin-top: 20px;font-size: 18px;color: #000000;text-transform: uppercase;display: inline-block;" Get Started
           
           .item
             = image_tag "automatic_matching.jpg", style: "width:100%;height: 100vh;"
             .carousel-caption style="padding-bottom: 16%;  width: 40%; margin: 0 auto; color: #fff; text-align: center;"
-              h1.animated style="font-size: 78px;" AUTOMATIC MATCHING
+              h1.animated style="font-size: 55px;" Automatic Matching
               p.animated style="font-size: 22px; padding: 0px 30px;"
-                | Upload your buy and sell targets by destination and price. InterRoute will intelligently match your routes and alert you via email
+                | Upload your buy and sell targets by destination and price. InterRoute will intelligently match your routes and alert you via email!
               a.slider-btn.animated href="/users/sign_up" style="background: #FFF;border-radius: 30px;padding: 15px 40px;margin-top: 20px;font-size: 18px;color: #000000;text-transform: uppercase;display: inline-block;" Get Started
           .item
             = image_tag "automatic_matching2.jpg", style: "width:100%;height: 100vh;"
             .carousel-caption style="padding-bottom: 16%;  width: 40%; margin: 0 auto; color: #fff; text-align: center;"
-              h1.animated style="font-size: 78px;" AUTOMATIC MATCHING
+              h1.animated style="font-size: 55px;" Network with Peers
               p.animated style="font-size: 22px; padding: 0px 30px;"
                 | Connect with other operators directly to transact profitable VOIP exchanges. We do not charge any transactional fees
               a.slider-btn.animated href="/users/sign_up" style="background: #FFF;border-radius: 30px;padding: 15px 40px;margin-top: 20px;font-size: 18px;color: #000000;text-transform: uppercase;display: inline-block;" Get Started
@@ -45,23 +54,24 @@
             .icon.animated
               = image_tag "hiw-icon-1.jpg"
             h3.animated SEARCH 
-            p.animated style="font-size: 22px;" Simply search for the buy or sell route of your choice and get automatic matches.
+            p.animated style="font-size: 22px;" Search for buy or sell routes.
         .col-md-4
           .hiw-box.text-center
             .icon.animated
               = image_tag "hiw-icon-2.jpg"
-            h3.animated SIGN UP
-            p.animated style="font-size: 22px;" Limited offer to become a free FREE member today and get full platform access.
+            h3.animated MATCH
+            p.animated style="font-size: 22px;" View the intelligent matches for your routes on your personalized dashboard.
         .col-md-4
           .hiw-box.text-center
             .icon.animated
               = image_tag "hiw-icon-3.jpg"
-            h3.animated CONNECT
-            p.animated style="font-size: 22px;" Communicate and transact trade routes independently with operators worldwide.
+            h3.animated MESSAGE
+            p.animated style="font-size: 22px;" Message other members to finalize the routes.
   section#search-routes.section style="background: #f8f8f8;"
     .search-section
       .container
         .search-heading.voipx-heading
+          / p.animated style="font-size: 22px;" Upload your buy and sell targets by destination or import your buy/sell target rate sheets directly into our system. Once this information is updated, our system will intelligently match and alert you via email about operators who fulfill your requirements and enable you to contact them directly to transact profitable VOIP exchanges.
           h2
             | Search 
             span Route
@@ -92,16 +102,16 @@
         //span ss
     .voipx-feature-inner
       .feature-box.grey-box
-        h2.animated Route Calculate
-        p.animated style="font-size: 20px;" Search - Identify Search for new and better priced routes, based on price, location and CLI / Non-CLI.
+        h2.animated Route Calculator
+        p.animated style="font-size: 20px;" Search and identify new and better priced routes, based on price, location and CLI/Non-CLI.
         span.feature-icon
           = image_tag "calculate-icon.png"
       .feature-box.bg-box-1
         h2.animated Route Matches
-        p.animated style="font-size: 20px;" Intelligent realtime matching to provide Quality routes and traffic opportunities.
+        p.animated style="font-size: 20px;" Intelligent realtime matching to provide quality routes and traffic opportunities.
       .feature-box.blue-box
         h2.animated Networking
-        p.animated style="font-size: 20px;" Connect and Collaboration Collaborate prospects with industry peers.
+        p.animated style="font-size: 20px;" Connect and collaborate for prospects with industry peers.
         span.feature-icon
           = image_tag "sell-buy-icon.png"
       .feature-box.blue-box
@@ -118,357 +128,6 @@
         span.feature-icon
           = image_tag "matching-icon.png"
   .clearfix
-  /section#routes-section.routes-section.section
-    .container
-      .search-heading.voipx-heading
-        h2
-          span Routes
-      .routes-table
-        .col-md-6
-          h3.text-center Carriers want to buy
-          .routes-table-inner
-            .routes-table-head
-              .col-sm-8.col-xs-6 Route
-              .col-sm-2.col-xs-2.text-center Type
-              .col-sm-2.col-xs-4.text-center Price
-            .routes-table-body
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-        .col-md-6
-          h3.text-center Carriers want to buy
-          .routes-table-inner
-            .routes-table-head
-              .col-sm-8.col-xs-6 Route
-              .col-sm-2.col-xs-2.text-center Type
-              .col-sm-2.col-xs-4.text-center Price
-            .routes-table-body
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-              .roue-row
-                .col-sm-8.col-xs-6
-                  span.flag
-                    = image_tag "afg-flag.jpg"
-                  |  Afganistan all
-                .col-sm-2.col-xs-2.text-center CLI
-                .col-sm-2.col-xs-4.text-center $2.2500
-  /section#testimonials.testimonials.section
-    .container
-      .search-heading.voipx-heading
-        h2
-          | What Our 
-          span Customers Say
-      .testimonial-inner
-        #testimonialst-carousel.owl-carousel
-          div
-            .testimonial-img
-              = image_tag "testi-user.jpg"
-            p
-              | Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum is simply dummy text of the printing and typesetting industry ipsum is simply dummy text of the printing and typesetting industry.
-            .testi-name Jhon Piantino
-          div
-            .testimonial-img
-              = image_tag "testi-user.jpg"
-            p
-              | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            .testi-name Jhon Piantino
-          div
-            .testimonial-img
-              = image_tag "testi-user.jpg"
-            p
-              | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            .testi-name Jhon Piantino
-          div
-            .testimonial-img
-              = image_tag "testi-user.jpg"
-            p
-              | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            .testi-name Jhon Piantino
-  /section#statistics-section.statistics-section.section
-    .container
-      .search-heading.voipx-heading
-        h2
-          span Statistics
-      .col-md-6
-        .member-main
-          .member-inner
-            span.big-span.animated 3182
-            span.small-span.animated MEMBERS
-          .member-inner
-            span.big-span.animated 3182
-            span.small-span.animated MEMBERS
-      .col-md-6
-        .statistics-inner
-          .statistics-block
-            h4 MATCHED ROUTES
-            .routes-line
-              span.routes-fill-line style="width:50%;" 
-              span.route-count style="left:50%;"  325
-          .statistics-block
-            h4 SELL ROUTES
-            .routes-line
-              span.routes-fill-line style="width:40%;" 
-              span.route-count style="left:40%;"  207
-          .statistics-block
-            h4 BUY ROUTES
-            .routes-line
-              span.routes-fill-line style="width:75%;" 
-              span.route-count style="left:75%;"  409
-
 
 javascript:
   $('#client-carousel').owlCarousel({
