@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+    <p>Hello, <%= @user.first_name %></p>
+    <%= link_to 'Set your password', confirmation_url(@user, confirmation_token: @user.confirmation_token) %>
+</body>
+</html>

@@ -13,14 +13,15 @@ namespace :old_users_and_breakouts_data do
         user = User.find_by_email(row_hash['user_email'])
         unless user
           puts "Adding a new user: #{row_hash['user_email']}"
-          random_password = [*('a'..'z'),*('0'..'9')].shuffle[0,10].join
-          user = User.new(first_name: row_hash['user_fname'], last_name: row_hash['user_lname'], email: row_hash['user_email'], password: random_password, password_confirmation: random_password)
-          user.confirm
-          user.save!
-          users_counter += 1
-          
-          puts "Sending welcome email to #{user.email}..."
-          # send campaign email here
+          # random_password = [*('a'..'z'),*('0'..'9')].shuffle[0,10].join
+          user = User.new(first_name: row_hash['user_fname'], last_name: row_hash['user_lname'], email: row_hash['user_email'])
+          user.skip_confirmation_notification!
+          if user.save
+            users_counter += 1
+            puts "Sending welcome email to #{user.email}..."
+            UserMailer.onboard_email(user).deliver_now
+            print "--- SENT! ---"
+          end        
         end
         
         breakout = Breakout.find_by_code(row_hash['code'])
