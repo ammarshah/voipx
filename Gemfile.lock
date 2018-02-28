@@ -293,6 +293,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    ruby-ole (1.2.12.1)
     rubyzip (1.2.1)
     sanitize (4.5.0)
       crass (~> 1.0.2)
@@ -326,6 +327,8 @@ GEM
     slop (3.6.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
+    spreadsheet (1.1.5)
+      ruby-ole (>= 1.0)
     spring (2.0.1)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
@@ -447,6 +450,7 @@ DEPENDENCIES
   sendinblue
   simple_form
   slim-rails
+  spreadsheet
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)

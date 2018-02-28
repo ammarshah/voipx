@@ -38,6 +38,7 @@ gem 'thredded', '~> 0.13.8'
 gem 'rails-ujs'
 gem 'whenever', require: false
 gem "paul_revere"
+gem "spreadsheet"
 group :development, :test do
   gem 'byebug', platform: :mri
 end

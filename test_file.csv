@@ -1,3 +1,5 @@
 user_fname,user_lname,user_displayname,user_email,cname,ctype,address,city,payment,curl,service_id,targetrate,cli,countryname,code
 Ammar,Shah,Openskies Communications LTD,ammarshah123@gmail.com,Openskies Communications LTD,private limited company,85 Westbourne Terrace,London,negotiable,http://www.openskiesnet.com,2,0.19,1,Slovenia Mobile,38630
-Ammar,Shah,Openskies Communications LTD,ammarshah123@gmail.com,Openskies Communications LTD,private limited company,85 Westbourne Terrace,London,negotiable,http://www.openskiesnet.com,1,0.85,2,Pakistan Mobile,92
+Ammar,Shah,Openskies Communications LTD,ammarshah123@gmail.com,Openskies Communications LTD,private limited company,85 Westbourne Terrace,London,negotiable,http://www.openskiesnet.com,1,0.85,2,Pakistan Mobile,123
+Ammar,Ahmed,Openskies Communications LTD,testammar@gmail.com,Openskies Communications LTD,private limited company,85 Westbourne Terrace,London,negotiable,http://www.openskiesnet.com,1,0.85,2,Pakistan Mobile,123
+Ammar,Sheikh,Openskies Communications LTD,testammarsheikh@gmail.com,Openskies Communications LTD,private limited company,85 Westbourne Terrace,London,negotiable,http://www.openskiesnet.com,1,0.85,2,Pakistan Mobile,123
