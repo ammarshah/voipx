@@ -39,6 +39,7 @@ gem 'rails-ujs'
 gem 'whenever', require: false
 gem "paul_revere"
 gem "spreadsheet"
+gem 'paper_trail'
 group :development, :test do
   gem 'byebug', platform: :mri
 end

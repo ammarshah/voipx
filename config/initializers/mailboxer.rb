@@ -19,3 +19,8 @@ Mailboxer.setup do |config|
   config.subject_max_length = 255
   config.body_max_length = 32000
 end
+
+# Extending Mailboxer conversation class
+Mailboxer::Conversation.class_eval do
+  has_paper_trail on: [:create]
+end

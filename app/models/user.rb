@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   rolify
+  has_paper_trail only: [:sign_in_count]
 
   attr_accessor :selected_company_id  # Just a virtual attribute to temporary store/retrieve company id and then assign it to actual company_id column in before_create callback
   attribute :add_company_bool, :boolean, default: false # Just a virtual attribute to persist 'would you like to add your company' boolean attr value on edit user profile page.
