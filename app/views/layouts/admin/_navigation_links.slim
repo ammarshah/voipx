@@ -6,6 +6,8 @@ nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse
       = link_to 'SUBSCRIPTIONS', admin_subscriptions_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item
       = link_to 'FORUM', thredded_path, class: 'nav-link sub-nav-color-voipx'
+    li.nav-item
+      = link_to 'ACTIVITIES', admin_activities_path, class: 'nav-link sub-nav-color-voipx'
     li.nav-item.dropdown
       <a class="nav-link dropdown-toggle sub-nav-color-voipx" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="#{current_user.photo.url(:thumb)}" width="25%" height="25%"></a>
       .dropdown-menu

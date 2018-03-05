@@ -1,0 +1,85 @@
+#center-content
+  h2 User Activities
+  br
+  br
+
+.col-md-6
+    span Sign Ins
+    .jumbotron style="height: 400px; overflow-y: auto;"
+        .container
+            - if @sign_ins.any?
+                - @sign_ins.each do |activity|
+                    - user = User.find_by_id(activity.item_id)
+                    .activity
+                        b
+                            = link_to user.name, user_path(user), target: "_blank"
+                        = " logged in "
+                        = time_ago_in_words(activity.created_at) + " ago."
+            - else
+                .activity
+                    span No activity yet
+
+.col-md-6
+    span Routes
+    .jumbotron style="height: 400px; overflow-y: auto;"
+        .container
+            - if @routes.any?
+                - @routes.each do |activity|
+                    - user = User.find_by_id(activity.whodunnit)
+                    .activity
+                        b
+                            = link_to user.name, user_path(user), target: "_blank"
+                        = " " + activity.event + "d a "
+                        - route = Route.find_by_id(activity.item_id)
+                        span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="#{route.as_json}" route 
+                        = time_ago_in_words(activity.created_at) + " ago."
+            - else
+                .activity
+                    span No activity yet
+
+.col-md-6
+    span Messages
+    .jumbotron style="height: 400px; overflow-y: auto;"
+        .container
+            - if @messages.any?
+                - @messages.each do |activity|
+                    - user = User.find_by_id(activity.whodunnit)
+                    .activity
+                        b
+                            = link_to user.name, user_path(user), target: "_blank"
+                        = " started a new conversation with "
+                        b
+                            - conversation = Mailboxer::Conversation.find_by_id(activity.item_id)
+                            - participant = conversation.recipients.reject {|p| p.id == user.id}.last
+                            = link_to participant.name, user_path(participant), target: "_blank"
+                        = " with a "
+                        span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="#{conversation.subject}" subject 
+                        = time_ago_in_words(activity.created_at) + " ago."
+            - else
+                .activity
+                    span No activity yet
+
+.col-md-6
+    span Searches
+    .jumbotron style="height: 400px; overflow-y: auto;"
+        .container
+            - if @searches.any?
+                - @searches.each do |activity|
+                    - user = User.find_by_id(activity.whodunnit)
+                    .activity
+                        b
+                            - if user
+                                = link_to user.name, user_path(user), target: "_blank"
+                            - else
+                                = "Anonymous"
+                        = " searched for a "
+                        span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="#{activity.object}" route 
+                        = time_ago_in_words(activity.created_at) + " ago."
+            - else
+                .activity
+                    span No activity yet
+
+javascript:
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
