@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @all_matches_hash = all_matches_hash
     
-    mail(to: @user.email, subject: 'Your daily matches summary')
+    mail(to: @user.email, subject: 'Daily VoIP Matches from Interroute.io')
   end
 
   def onboard_email(user)

@@ -15,14 +15,18 @@
             padding: 8px;
         }
 
+        tr.green {
+            background-color: #73bf43;
+        }
+        
         tr.grey {
-            background-color: #dddddd;
+            background-color: #6d6e71;
         }
     </style>
 </head>
 <body>
-    <p>Greeting, <%= @user.name %>!</p>
-    <p>Here is your daily matches summary:</p>
+    <p>Hi <%= @user.first_name %>,</p>
+    <p>Following are today's matches for voip routes you have listed on interroute.io:</p>
     <table>
         <tr>
             <th>Buy/Sell</th>
@@ -34,7 +38,7 @@
         </tr>
         <% @all_matches_hash.each do |route_id, matches| %>
             <% route = Route.find(route_id) %>
-            <tr class="grey">
+            <tr class="green">
                 <th colspan="6" style="text-align:center;">Your Route</th>
             </tr>
             <tr>
@@ -55,11 +59,17 @@
                     <td><%= route_match.breakout.code %></td>
                     <td>$<%= route_match.price %></td>
                     <td><%= route_match.quality_type.upcase.tr('_', '-') %></td>
-                    <td><%= route_match.user.name %></td>
+                    <td><%= link_to route_match.user.name, user_url(route_match.user) %></td>
                 </tr>
             <% end %>
         <% end %>
     </table>
 
+    <p>To contact your matches <%= link_to "login to interroute.io", new_user_session_url %>
+    <p>Please keep your routes updated from your main dashboard to ensure you get the most useful daily updates!</p>
+    <p>Thank you,
+        <br>
+        InterRoute Support
+    </p>
 </body>
 </html>

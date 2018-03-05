@@ -1,16 +1,10 @@
-<p>Hey <%= @resource.first_name %>,</p>
+<p>Hi <%= @resource.first_name %>,</p>
 
-<p>Thank you for joining InterRoute - the easiest way to find interconnection partners for your routes and traffic.</p>
-
-<p>Please verify your email by clicking the link below:</p>
+<p>Thank you for signing up at InterRoute.io. To start using our service you need to verify your email address, by clicking on the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
 
-<p>If you have any questions or need any assistance please feel free to email us at <%= mail_to "support@interroute.io" %></p>
-
-<p>Thank you!</p>
-
-<p>Regards, 
+<p>Thank you,
     <br>
-    Team InterRoute
+    InterRoute Support
 </p>

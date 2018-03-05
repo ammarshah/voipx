@@ -4,17 +4,12 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>You have a new reply: <%= @subject %></h1>
     <p>
-      You have received a new reply:
+      You have received a new reply on InterRoute. Please <%= link_to "click here", conversation_url(@message.conversation) %> to view the message.
     </p>
-    <blockquote>
-      <p>
-        <%= raw @message.body %>
-      </p>
-    </blockquote>
-    <p>
-      Visit <%= link_to root_url, root_url %> and go to your inbox for more info.
+    <p>Thanks,
+      <br>
+      InterRoute Support
     </p>
   </body>
 </html>

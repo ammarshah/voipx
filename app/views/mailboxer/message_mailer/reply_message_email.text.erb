@@ -1,10 +1,4 @@
-You have a new reply: <%= @subject %>
-===============================================
+You have received a new reply on InterRoute. Please <%= link_to "click here", conversation_url(@message.conversation) %> to view the message.
 
-You have received a new reply:
-
------------------------------------------------
-<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
------------------------------------------------
-
-Visit <%= root_url %> and go to your inbox for more info.
+Thanks,
+InterRoute Support
