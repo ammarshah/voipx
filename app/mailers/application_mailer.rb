@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'no-reply@' + Rails.application.secrets.domain_name
+  default from: 'InterRoute.io <' + Rails.application.secrets.email_provider_username + '>'
   layout 'mailer'
 end

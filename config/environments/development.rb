@@ -43,7 +43,7 @@ Rails.application.configure do
   config.assets.debug = true
 
   config.action_mailer.smtp_settings = {
-    address: "smtp-relay.sendinblue.com",
+    address: "smtp.zoho.com",
     port: 587,
     domain: Rails.application.secrets.domain_name,
     authentication: "login",

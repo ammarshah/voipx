@@ -2,8 +2,8 @@
 #  you should simply copy and paste the content of this file into application.yml and change values of each env var.
 
 development:
-  GMAIL_USERNAME: ---
-  GMAIL_PASSWORD: ---
+  ZOHO_USERNAME: ---
+  ZOHO_PASSWORD: ---
   DOMAIN_NAME: ---
   SECRET_KEY_BASE: ---
   AWS_BUCKET: ---
@@ -16,14 +16,14 @@ development:
   PAYPAL_SIGNATURE: ---
 
 test:
-  GMAIL_USERNAME: ---
-  GMAIL_PASSWORD: ---
+  ZOHO_USERNAME: ---
+  ZOHO_PASSWORD: ---
   DOMAIN_NAME: ---
   SECRET_KEY_BASE: ---
 
 staging:
-  GMAIL_USERNAME: ---
-  GMAIL_PASSWORD: ---
+  ZOHO_USERNAME: ---
+  ZOHO_PASSWORD: ---
   DOMAIN_NAME: ---
   SECRET_KEY_BASE: ---
   RAILS_SERVE_STATIC_FILES: ---
@@ -38,8 +38,8 @@ staging:
   PAYPAL_SIGNATURE: ---
 
 production:
-  GMAIL_USERNAME: ---
-  GMAIL_PASSWORD: ---
+  ZOHO_USERNAME: ---
+  ZOHO_PASSWORD: ---
   DOMAIN_NAME: ---
   SECRET_KEY_BASE: ---
   RAILS_SERVE_STATIC_FILES: ---
