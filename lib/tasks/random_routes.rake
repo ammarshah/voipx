@@ -8,7 +8,7 @@ namespace :random_routes do
     export_routes_sheet.row(0).push 'Route ID', 'Destination', 'Breakout', 'Price', 'Quality Type', 'Purchase Type', 'User ID', 'User Name' # add header on the first row
 
     counter = 0 # a counter just for logging after done exporting
-    Route.all.limit(500).each do |route|
+    Route.order("RANDOM()").limit(500).each do |route|
       begin
         puts "\n"
         user = User.find(route.user)
