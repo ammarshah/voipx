@@ -11,10 +11,10 @@ section.search-route-section
             = f.object.errors.first.try(:second)
           .col-md-6
             .form-group
-              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control add_to_my_routes_input', placeholder: 'Route Name'
+              = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#search_breakout_id', code: '#search_breakout'}, class: 'form-control add_to_my_routes_input', placeholder: 'Route Name'
           .col-md-6
             .form-group
-              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control add_to_my_routes_input', placeholder: 'Breakout', 'min-length': 1
+              = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#search_breakout_id', destination: '#search_destination'}, class: 'form-control add_to_my_routes_input', placeholder: 'Breakout', 'min-length': 1
           = f.input :breakout_id, as: :hidden
           .col-md-4
             .form-group
@@ -141,9 +141,9 @@ javascript:
 /     .form-group
 /       = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {selected: params[:search].try(:[], :purchase_type)}, {class: 'form-control mr-sm-2'}
       
-/       = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_breakout'}, class: 'form-control mr-sm-2', placeholder: 'Route Name'
+/       = autocomplete_field_tag 'search[destination]', params[:search].try(:[], :destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {code: '#search_breakout'}, class: 'form-control mr-sm-2', placeholder: 'Route Name'
 
-/       = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_destination'}, class: 'form-control mr-sm-2', placeholder: 'Breakout'
+/       = autocomplete_field_tag 'search[breakout]', params[:search].try(:[], :breakout), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {destination: '#search_destination'}, class: 'form-control mr-sm-2', placeholder: 'Breakout'
 
 /       .input-group.mb-2.mr-sm-2.mb-sm-0
 /         .input-group-addon $

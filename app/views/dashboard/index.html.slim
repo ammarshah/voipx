@@ -12,12 +12,12 @@ section.dashboard-header-section
             = simple_form_for @route do |f|
               .col-md-2
                 .form-group
-                  = autocomplete_field_tag 'route[destination]', @route.breakout.try(:destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control', placeholder: 'Enter Route Name'
+                  = autocomplete_field_tag 'route[destination]', @route.breakout.try(:destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control', placeholder: 'Enter Route Name'
               .col-md-2
                 .form-group
                   .input-group
                     span.input-group-addon +
-                    = autocomplete_field_tag 'route[breakout]', @route.breakout.try(:code), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control', placeholder: 'Enter Breakout', 'min-length': 1
+                    = autocomplete_field_tag 'route[breakout]', @route.breakout.try(:code), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control', placeholder: 'Enter Breakout', 'min-length': 1
                   = f.input :breakout_id, as: :hidden
               .col-md-2
                 .form-group

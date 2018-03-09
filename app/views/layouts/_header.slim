@@ -16,10 +16,10 @@
           = simple_form_for :search, url: search_path, method: :get do |f|
             .col-md-6
               .form-group
-                = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_navbar_breakout_id', code: '#search_navbar_breakout'}, id: 'search_navbar_destination', class: 'form-control', placeholder: 'Route Name'
+                = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#search_navbar_breakout_id', code: '#search_navbar_breakout'}, id: 'search_navbar_destination', class: 'form-control', placeholder: 'Route Name'
             .col-md-6
               .form-group
-                = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {id: '#search_navbar_breakout_id', destination: '#search_navbar_destination'}, id: 'search_navbar_breakout', class: 'form-control', placeholder: 'Breakout', 'min-length': 1
+                = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#search_navbar_breakout_id', destination: '#search_navbar_destination'}, id: 'search_navbar_breakout', class: 'form-control', placeholder: 'Breakout', 'min-length': 1
             = f.input :breakout_id, as: :hidden, input_html: {id: 'search_navbar_breakout_id'}
             .col-md-4
               .form-group

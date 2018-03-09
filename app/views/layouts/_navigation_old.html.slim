@@ -48,9 +48,9 @@
           .form-group
             = f.select :purchase_type, [['I want to Buy', 'buy'], ['I want to Sell', 'sell'], ['Any', 'any']], {}, {class: 'form-control mr-sm-2', style: "width: 139px"}
             
-            = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false}, update_elements: {code: '#search_navbar_breakout'}, id: 'search_navbar_destination', class: 'form-control mr-sm-2', placeholder: 'Route Name', style: "width: 115px"
+            = autocomplete_field_tag 'search[destination]', '', autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {code: '#search_navbar_breakout'}, id: 'search_navbar_destination', class: 'form-control mr-sm-2', placeholder: 'Route Name', style: "width: 115px"
 
-            = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false}, update_elements: {destination: '#search_navbar_destination'}, id: 'search_navbar_breakout', class: 'form-control mr-sm-2', placeholder: 'Breakout', style: "width: 90px"
+            = autocomplete_field_tag 'search[breakout]', '', autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {destination: '#search_navbar_destination'}, id: 'search_navbar_breakout', class: 'form-control mr-sm-2', placeholder: 'Breakout', style: "width: 90px"
 
             .input-group.mb-2.mr-sm-2.mb-sm-0
               .input-group-addon $
