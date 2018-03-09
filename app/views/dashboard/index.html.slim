@@ -27,13 +27,13 @@ section.dashboard-header-section
               .col-md-2
                 .form-group
                   = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Route Type"}, {class: 'form-control'}
-              .col-md-1
+              .col-md-2
                 .form-group
                   = f.select :purchase_type, Route.purchase_types.keys.map {|c| [c.humanize, c]}, {include_blank: "Buy/Sell"}, {class: 'form-control'}
-              .col-md-1.text-center
-                a#reset-btn.btn-2 href="javascript:void(0)" RESET
               .sarch-btn.col-md-2
                 = f.submit "Find Matches", class: 'btn btn-default'
+              .text-center
+                a#reset-btn.btn-2 href="javascript:void(0)" RESET
               .clearfix
               p.text-danger.text-center style="font-size: 18px;"
                 = f.object.errors.full_messages.first
