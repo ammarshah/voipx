@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
   end
 
   def match_route
-    @routes = Route.get_matches(search_params, current_user)
+    @routes = Route.get_matches(search_params, current_user).order(price: :asc)
   end
 
   def unread_messages_count
