@@ -10,6 +10,10 @@ class Breakout < ApplicationRecord
   # Associations
   has_many :routes, dependent: :destroy
 
+  def destination_autocomplete
+    "#{self.destination} (#{self.code})"
+  end
+
   def me_and_my_parents
     me_and_my_parents = []
     me_and_my_parents << self # include myself

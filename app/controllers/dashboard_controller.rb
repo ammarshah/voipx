@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!, except: [:autocomplete_breakout_code, :autocomplete_breakout_destination]
   autocomplete :breakout, :code, extra_data: [:destination]
-  autocomplete :breakout, :destination, extra_data: [:code]
+  autocomplete :breakout, :destination, extra_data: [:code], display_value: :destination_autocomplete
   
   def index
     @route = current_user.routes.build
@@ -16,6 +16,11 @@ class DashboardController < ApplicationController
     @in_dashboard = request.referrer.sub(request.base_url, '').include?('dashboard') # we will use this flag to determine whether the request came from Dashboard page or not and then decide the appropriate html in the partial
     render partial: "layouts/unread_messages_count"
   end
+
+  # Override this method to alter autocomplete search results
+  # def get_autocomplete_items(parameters)
+  #   items = active_record_get_autocomplete_items(parameters)
+  # end
 
   private
     def search_params
