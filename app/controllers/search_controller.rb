@@ -6,7 +6,9 @@ class SearchController < ApplicationController
         if user_signed_in?
           @routes = Route.get_matches(search_params, current_user).order(price: :asc)
         else
-          @routes = Route.get_matches(search_params, current_user).limit(5).order(price: :asc)
+          matches = Route.get_matches(search_params, current_user)
+          @more_matches = matches.size > 5 ? true : false
+          @routes = matches.limit(5).order(price: :asc)
         end
         Search.create_paper_trail_version(search_params) # Manually create a paper trail version to track searches
         format.html

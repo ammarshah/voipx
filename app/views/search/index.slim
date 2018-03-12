@@ -94,6 +94,9 @@ section.search-routes-table
                     - subject = route.breakout.destination + ' (' + route.breakout.code + ')' + ' - ' + route.quality_type.upcase + ' - ' + purchase_sentence
 
                     = link_to image_tag("message-icon.png"), "#", data: { toggle: 'modal', target: '#message-modal', recipient: "#{route.user.id}", subject: "#{subject}", profile_url: "#{url_for(route.user)}", photo_url: "#{route.user.photo.url(:thumb)}", name: "#{route.user.name}", purchase_sentence: "#{purchase_sentence}", destination: "#{route.breakout.destination}", breakout: "#{route.breakout.code}", price: "#{route.price}", quality_type: "#{route.quality_type.upcase}" }
+          - if @more_matches
+            br
+            p Register and login to see more matches for this route.
     - else
       .search-heading.voipx-heading
         h2 style=("margin-bottom: 0px;") 
