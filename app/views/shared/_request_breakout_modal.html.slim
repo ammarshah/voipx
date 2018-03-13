@@ -1,0 +1,18 @@
+#request-breakout-modal.modal.fade
+  .modal-dialog role="document" 
+    .modal-content
+      .modal-body
+        .media
+          .user-info-modal
+            .row
+              .col-md-9
+                h5.mt-0 Request Destination/Breakout
+        br
+        = simple_form_for RequestedBreakout.new, remote: true do |f|
+          = f.input :destination, placeholder: "Enter Destination Name", label: false
+          = f.input :breakout, placeholder: "Enter Breakout Code", label: false
+          = f.input :user_id, input_html: { value: current_user.id }, as: :hidden
+      .modal-footer
+        = image_tag "loader.gif", id: "modal_loader_for_breakout_request", class: "hide"
+        button.btn.btn-primary#send_breakout_request type="button"  Send Request
+        button.btn.btn-secondary data-dismiss="modal" type="button"  Close

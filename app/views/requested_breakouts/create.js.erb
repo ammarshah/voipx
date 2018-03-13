@@ -1,0 +1,18 @@
+$("#requested_breakout_destination").val('');
+$("#requested_breakout_breakout").val('');
+$('#send_breakout_request').removeClass('hide');
+$('#modal_loader_for_breakout_request').addClass('hide');
+$('#request-breakout-modal').modal('hide');
+
+<% if @requested_breakout.errors.any? %>
+  toastr.error('\
+                <ul>\
+                  <% @requested_breakout.errors.full_messages.each do |msg| %>\
+                    <li><%= msg %></li>\
+                  <% end %>\
+                </ul>\
+              ')
+
+<% else %>
+  toastr.success('Breakout has been requested successfully.');
+<% end %>

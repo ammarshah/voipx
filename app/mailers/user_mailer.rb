@@ -12,4 +12,10 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Welcome onboard!')
   end
 
+  def request_breakout(breakout)
+    @user = breakout.user
+    @breakout = breakout
+    mail(to: 'support@interroute.io', subject: 'New breakout missing request')
+  end
+
 end

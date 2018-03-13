@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one :subscription, dependent: :destroy
   has_many :notified_matches, dependent: :destroy
+  has_many :requested_breakouts, dependent: :nullify
 
   # Nested Attributes for company
   accepts_nested_attributes_for :company,

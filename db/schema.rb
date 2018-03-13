@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180301164004) do
+ActiveRecord::Schema.define(version: 20180313115303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,15 @@ ActiveRecord::Schema.define(version: 20180301164004) do
     t.string   "document"
     t.integer  "company_id"
     t.index ["company_id"], name: "index_reports_on_company_id", using: :btree
+  end
+
+  create_table "requested_breakouts", force: :cascade do |t|
+    t.string   "destination", null: false
+    t.string   "breakout",    null: false
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_requested_breakouts_on_user_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -544,6 +553,7 @@ ActiveRecord::Schema.define(version: 20180301164004) do
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "other_products", "companies"
   add_foreign_key "references", "companies"
+  add_foreign_key "requested_breakouts", "users"
   add_foreign_key "routes", "breakouts"
   add_foreign_key "routes", "users"
   add_foreign_key "subscriptions", "plans"

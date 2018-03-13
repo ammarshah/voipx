@@ -63,4 +63,6 @@ Rails.application.routes.draw do
     resources :subscriptions, only: [:index]
     resources :activities, only: [:index]
   end
+
+  resources :requested_breakouts, only: [:create]
 end

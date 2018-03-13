@@ -50,6 +50,16 @@ Utility.DashboardControls = (function() {
       }
     });
 
+    $(document).on("click", "#send_breakout_request", function(){
+      var destination = document.getElementById("requested_breakout_destination");
+      var breakout = document.getElementById("requested_breakout_breakout");
+      if (destination && destination.value && breakout && breakout.value) {
+        $('#send_breakout_request').addClass('hide');
+        $('#modal_loader_for_breakout_request').removeClass('hide');
+        $('#new_requested_breakout').submit();
+      }
+    });
+
     return this;
   }
 

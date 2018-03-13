@@ -10,6 +10,10 @@ section.dashboard-header-section
               span Dashboard
           .search-form#new_route_form
             = render 'route_form', route: @route
+          p.text-center
+            | If a destination/breakout that you are interested in is not listed, please 
+            = link_to "click here ", "#", data: { toggle: 'modal', target: '#request-breakout-modal' }
+            | to add it.
 div
   section.col-sm-2.col-md-6.show-search-routes-table#my_routes
     = render 'my_routes', my_routes: @my_routes
@@ -28,3 +32,4 @@ div
   
 
 == render "shared/message_modal"
+== render "shared/request_breakout_modal"
