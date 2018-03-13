@@ -1,0 +1,54 @@
+.col-sm-2.col-md-12.container
+  .search-heading.voipx-heading
+    h2 style=("margin-bottom: 0px;")
+      | My 
+      span Routes
+    span Please click on your route to view matches
+  - if my_routes.any?
+    div.search-routes-tab-inner.matched-routes-tab-inner#matched_routes123
+      div.srt-head
+        div.row
+          div.col-xs-2
+            span Routes
+
+          div.col-xs-2
+            span Breakout
+          
+          div.col-xs-2.text-center
+            span Price
+          
+          div.col-xs-2.text-center
+            span Type
+          
+          div.col-xs-2.text-center
+            span Buy/Sell
+          
+
+          div.col-xs-2.text-center
+            span Action
+    
+      div.srt-body
+        - my_routes.each do |route|
+          div.row.tab-row.routes-select-dashboard-row.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
+            div.col-xs-2
+              span #{route.breakout.destination}
+            
+            div.col-xs-2.text-center
+              span #{route.breakout.code}
+
+            div.col-xs-2.text-center
+              span $#{route.price}
+
+            div.col-xs-2.text-center
+              span #{route.quality_type.upcase.tr('_', '-')}
+
+            div.col-xs-2.text-center
+              span #{route.purchase_type.humanize}
+
+
+            div.col-md-2.col-xs-12.text-center.select-dashboard-btn
+              = link_to edit_route_path(route), class: "sd-edit-btn" do
+                i.fa.fa-pencil-square-o aria-hidden="true"
+                span.sd-delet-btn
+              = link_to route, class: 'sd-delet-btn', style:'padding-left:5px', data: { confirm: 'Are you sure you want to delete this route?' }, method: :delete do
+                i.fa.fa-trash-o aria-hidden="true"

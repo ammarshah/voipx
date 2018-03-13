@@ -8,91 +8,11 @@ section.dashboard-header-section
             h2
               | Route 
               span Dashboard
-          .search-form
-            = simple_form_for @route do |f|
-              .col-md-2
-                .form-group
-                  = autocomplete_field_tag 'route[destination]', @route.breakout.try(:destination), autocomplete_breakout_destination_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#route_breakout_id', code: '#route_breakout'}, class: 'form-control', placeholder: 'Enter Route Name'
-              .col-md-2
-                .form-group
-                  .input-group
-                    span.input-group-addon +
-                    = autocomplete_field_tag 'route[breakout]', @route.breakout.try(:code), autocomplete_breakout_code_dashboard_index_path, data: {showNoMatches: false, 'auto-focus': true}, update_elements: {id: '#route_breakout_id', destination: '#route_destination'}, class: 'form-control', placeholder: 'Enter Breakout', 'min-length': 1
-                  = f.input :breakout_id, as: :hidden
-              .col-md-2
-                .form-group
-                  .input-group
-                    span.input-group-addon $
-                    = f.input :price, class: 'form-control', placeholder: '0.000', input_html: {min: '0.001', max: '9.999', step: '0.001'}, label: false, wrapper: false, error: false
-              .col-md-2
-                .form-group
-                  = f.select :quality_type, Route.quality_types.keys.map {|c| [c.titleize.upcase.tr(' ', '-'), c]}, {include_blank: "Route Type"}, {class: 'form-control'}
-              .col-md-2
-                .form-group
-                  = f.select :purchase_type, Route.purchase_types.keys.map {|c| [c.humanize, c]}, {include_blank: "Buy/Sell"}, {class: 'form-control'}
-              .sarch-btn.col-md-2
-                = f.submit "Find Matches", class: 'btn btn-default'
-              .text-center
-                a#reset-btn.btn-2 href="javascript:void(0)" RESET
-              .clearfix
-              p.text-danger.text-center style="font-size: 18px;"
-                = f.object.errors.full_messages.first
+          .search-form#new_route_form
+            = render 'route_form', route: @route
 div
-  section.col-sm-2.col-md-6.show-search-routes-table
-    .col-sm-2.col-md-12.container
-      .search-heading.voipx-heading
-        h2 style=("margin-bottom: 0px;")
-          | My 
-          span Routes
-        span Please click on your route to view matches
-      - if @my_routes.any?
-        div.search-routes-tab-inner.matched-routes-tab-inner#matched_routes123
-          div.srt-head
-            div.row
-              div.col-xs-2
-                span Routes
-
-              div.col-xs-2
-                span Breakout
-              
-              div.col-xs-2.text-center
-                span Price
-              
-              div.col-xs-2.text-center
-                span Type
-              
-              div.col-xs-2.text-center
-                span Buy/Sell
-              
-
-              div.col-xs-2.text-center
-                span Action
-        
-          div.srt-body
-            - @my_routes.each do |route|
-              div.row.tab-row.routes-select-dashboard-row.match_route data-destination="#{route.breakout.destination}" data-breakout="#{route.breakout.code}" data-price="#{route.price}" data-quality-type="#{route.quality_type}" data-purchase-type="#{route.purchase_type}"
-                div.col-xs-2
-                  span #{route.breakout.destination}
-                
-                div.col-xs-2.text-center
-                  span #{route.breakout.code}
-
-                div.col-xs-2.text-center
-                  span $#{route.price}
-
-                div.col-xs-2.text-center
-                  span #{route.quality_type.upcase.tr('_', '-')}
-
-                div.col-xs-2.text-center
-                  span #{route.purchase_type.humanize}
-
-
-                div.col-md-2.col-xs-12.text-center.select-dashboard-btn
-                  = link_to edit_route_path(route), class: "sd-edit-btn" do
-                    i.fa.fa-pencil-square-o aria-hidden="true"
-                    span.sd-delet-btn
-                  = link_to route, class: 'sd-delet-btn', style:'padding-left:5px', data: { confirm: 'Are you sure you want to delete this route?' }, method: :delete do
-                    i.fa.fa-trash-o aria-hidden="true"
+  section.col-sm-2.col-md-6.show-search-routes-table#my_routes
+    = render 'my_routes', my_routes: @my_routes
 
   section.col-sm-2.col-md-6.search-routes-table
     .col-sm-2.col-md-12.container

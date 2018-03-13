@@ -1,7 +1,8 @@
 Utility.DashboardControls = (function() {
   function DashboardControls() {
 
-    $('#reset-btn').click(function() {
+    $(document).on("click", '#reset-btn', function(){
+      console.log('Clicked');
       $('#route_destination').val('');
       $('#route_breakout').val('');
       $('#route_price').val('');
@@ -11,19 +12,19 @@ Utility.DashboardControls = (function() {
       return
     });
 
-    $("#route_breakout").on("input propertychange",function(){
+    $(document).on("input propertychange", "#route_breakout", function(){
       $('#route_destination').val('');
       $('#route_breakout_id').val('');
       return
     });
 
-    $("#route_destination").on("input propertychange",function(){
+    $(document).on("input propertychange", "#route_destination", function(){
       $('#route_breakout').val('');
       $('#route_breakout_id').val('');
       return
     });
 
-    $('.match_route').click(function() {
+    $(document).on("click", ".match_route", function(){
       var data, dataset;
       dataset = this.dataset;
       data = {
@@ -35,11 +36,12 @@ Utility.DashboardControls = (function() {
           quality_type: dataset.qualityType
         }
       };
+      $("#matched_routes").html('<p class="text-center">Fetching results...</p>');
       $.post('/dashboard/match_route', data);
       return
     });
 
-    $('#send_message').click(function() {
+    $(document).on("click", "#send_message", function(){
       var message_body = document.getElementById("conversation_body");
       if (message_body && message_body.value) {
         $('#send_message').addClass('hide');

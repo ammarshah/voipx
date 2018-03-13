@@ -5,13 +5,14 @@ class RoutesController < ApplicationController
 
   def create
     @route = current_user.routes.new(route_params)
+    @my_routes = current_user.routes.includes(:breakout).order(created_at: :desc)
 
     respond_to do |format|
       if @route.save
-        format.html { redirect_to dashboard_path, notice: 'Route was successfully added.' }
+        @route = current_user.routes.build
+        format.js
       else
-        @my_routes = current_user.routes.includes(:breakout) # when rendering a different conrtroller's action, we need to pass all the required variable in that view
-        format.html { render 'dashboard/index' }
+        format.js
       end
     end
   end

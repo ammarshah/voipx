@@ -1,0 +1,6 @@
+$("#new_route_form").html("<%= escape_javascript render(partial: 'dashboard/route_form', locals: {route: @route}) %>");
+<% unless @route.errors.any? %>
+    toastr.success('New route added successfully.');
+    $("#my_routes").html("<%= escape_javascript render(partial: 'dashboard/my_routes', locals: {my_routes: @my_routes}) %>");
+    $(".srt-body .match_route")[0].click();
+<% end %>
