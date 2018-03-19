@@ -49,21 +49,30 @@ section.search-routes-table
             strong #{params[:search].try(:[], :destination)}
       - if @routes.any?
         .search-routes-tab-inner
-          .srt-head
+          .srt-head.hidden-xs
             .row
               .col-xs-1
               .col-xs-3 Route Name
               .col-xs-5
               .col-xs-2.text-center Buyer/Seller
               .col-xs-1.text-center
+          .srt-head.visible-xs
+            .row
+              .col-xs-12.text-center Route
           .srt-body
             - @routes.each do |route|
               .row.tab-row
-                .col-xs-1.text-center
-                  = image_tag "icon-magnifying-glass.png"
-                .col-xs-3
-                  span.route-name #{route.breakout.destination}
-                .col-xs-5.route-info
+                .col-xs-6.col-md-4
+                  .row
+                    .col-xs-3.text-center.no-padding
+                      = image_tag "icon-magnifying-glass.png"
+                    .col-xs-9
+                      span.route-name #{route.breakout.destination}
+                    .col-xs-12.visible-xs.margin-tp-10
+                      = link_to user_path(route.user), target: "_blank" do
+                        i.fa.fa-user.col-xs-3.text-center.no-padding aria-hidden="true"
+                        |  #{route.user.name}
+                .col-xs-6.col-md-5.route-info
                   span
                     | Breakout: 
                     span #{route.breakout.code}
@@ -76,7 +85,7 @@ section.search-routes-table
                   span
                     | Buy/Sell: 
                     span #{route.purchase_type.humanize}
-                .col-xs-2.text-center.buyer-name
+                .col-xs-2.text-center.buyer-name.hidden-xs
                   = link_to user_path(route.user), target: "_blank" do
                     i.fa.fa-user aria-hidden="true"
                     |  #{route.user.name}
