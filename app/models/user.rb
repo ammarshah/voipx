@@ -41,10 +41,10 @@ class User < ApplicationRecord
   after_create :assign_role
   before_update :assign_company, if: :company_already_exists?
   after_update :assign_company_admin_role, if: :company_id_changed?
-  after_create :subscribe_to_pro_plan # this offer is only for signups before 1st March, 2018
+  after_create :subscribe_to_pro_plan
 
   def subscribe_to_pro_plan
-    Subscription.create(user_id: self.id, plan_id: Plan.find_by_name('Pro').id) if Date.today < Date.new(2018,3,1) # i.e. 1st March, 2018
+    Subscription.create(user_id: self.id, plan_id: Plan.find_by_name('Pro').id)
   end
 
   def name
