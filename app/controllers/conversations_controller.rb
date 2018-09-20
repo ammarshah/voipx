@@ -19,6 +19,11 @@ class ConversationsController < ApplicationController
       @message = {text: "You have 0 contact request left. You cannot send this message without upgrading your membership plan.", type: "error"}
     end
     respond_to do |format|
+      if @message[:type] == "success"
+        format.html {redirect_to mailbox_sent_path, notice: @message[:text]}
+      else
+        format.html {redirect_back fallback_location: root_path, alert: @message[:text]}
+      end
       format.js
     end
   end
